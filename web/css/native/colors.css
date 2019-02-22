@@ -1,0 +1,35 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 22/02/2019, 12:41:06 PM
+    Author     : Daniel Flores
+*/
+
+/*Guinda*/
+.native-color1 {
+  background-color: #800040
+}
+
+/*Guinda escala de grises*/
+.native-color2 {
+  background-color: #404040
+}
+
+/*Guinda 25% más ligero*/
+.native-color3 {
+  background-color: #A00050
+}
+
+/*Guinda 25% más oscuro*/
+.native-color4 {
+  background-color: #660033
+}
+
+/*Gris background estandar*/
+.native-color5 {
+  background-color: #F7F7F7
+}
+

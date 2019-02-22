@@ -1,0 +1,38 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 22/02/2019, 12:41:25 PM
+    Author     : Daniel Flores
+*/
+
+/*todo rounded*/
+.w3-bar {
+  height: 3rem
+}
+
+.w3-bar-item {
+  height: 3rem
+}
+
+.w3-round-small{
+  border-radius:2px
+}
+
+.w3-round,.w3-round-medium{
+  border-radius:4px
+}
+
+.w3-round-large{
+  border-radius:8px
+}
+
+.w3-round-xlarge{
+  border-radius:16px
+}
+
+.w3-round-xxlarge{
+  border-radius:32px
+}
