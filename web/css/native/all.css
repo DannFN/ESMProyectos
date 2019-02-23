@@ -69,9 +69,8 @@ h6 {
 }
 
 /*elementos input*/
-iput {
+input {
   height: 3rem;
-  padding: 0.2rem;
 }
 
 input[type="number"]::-webkit-outer-spin-button,
@@ -110,6 +109,14 @@ textarea {
 }
 
 /*Adicionales*/
-.native-blur {
-  filter: blur(6px)
+.native-blur-min {
+  filter: blur(2px)
+}
+
+.native-blur, native-blur-medium {
+  filter: blur(4px)
+}
+
+.native-blur-max {
+  filter: blur(8px)
 }
