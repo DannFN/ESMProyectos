@@ -19,14 +19,16 @@
   </head>
   
   <body>
+    <!--image background-->
     <div class="w3-opacity
          native-background
          native-background-1
-         native-blur-min">
+         native-blur">
       <!--Empty-->
       &nbsp;
     </div>
     
+    <!--color background-->
     <div class="w3-opacity
          native-background
          w3-pink">
@@ -34,63 +36,12 @@
       &nbsp;
     </div>
     
+    <!--content-->
     <div>
-      <header class="w3-bar
-              w3-container
-              w3-text-white
-              native-color1">
-        <div class="w3-col
-             l2
-             w3-hide-medium
-             w3-hide-small">
-          <!--Empty-->
-          &nbsp;
-        </div>
-        
-        <div class="w3-col
-             l8
-             m12
-             s12
-             w3-center">
-          <div class="w3-bar">
-            <div class="w3-bar-item">
-              <div class="w3-circle
-                   w3-white
-                   w3-display-container
-                   native-img-container">
-                <img src="images/ipn-logo.png"
-                     class="w3-display-middle"
-                     alt="Escudo IPN">
-              </div> 
-            </div>
+      <!--header-->
+      <%@include file="header.jsp"%>
 
-            <div class="w3-bar-item">
-              <b>Instituto Politecnico Nacional</b> 
-              <span class="w3-hide-small">Escuela Superior de Medicina</span>
-            </div>
-
-            <div class="w3-bar-item">
-              <div class="w3-circle
-                   w3-white
-                   w3-display-container
-                   native-img-container">
-                <img src="images/esm-logo.png"
-                     class="w3-display-middle"
-                     alt="Escudo IPN">
-              </div> 
-            </div>
-          </div>
-        </div>
-        
-        <div class="w3-col
-             l2
-             w3-hide-medium
-             w3-hide-small">
-          <!--Empty-->
-          &nbsp;
-        </div>
-      </header>
-
+      <!--body content-->
       <div class="w3-container
            native-main">
         <div class="native-margin-adaptative">
@@ -131,8 +82,8 @@
               <form>
                 <div class="w3-row-padding">
                   <div class="w3-col
-                       l6
-                       m6">
+                       l4
+                       m4">
                     <input type="text"
                            class="w3-input
                            w3-round-small
@@ -149,8 +100,8 @@
                   </div>
 
                   <div class="w3-col
-                       l6
-                       m6">
+                       l4
+                       m4">
                     <input type="password"
                            class="w3-input
                            w3-round-small
@@ -159,8 +110,25 @@
                            name="password"
                            placeholder="Contraseña"
                            required>
+                    
+                    <div class="w3-hide-large
+                         w3-hide-medium">
+                      <br>
+                    </div>
                   </div>
-                </div>
+                  
+                  <div class="w3-col 
+                       l4
+                       m4">
+                    <button class="w3-btn
+                            w3-round-small
+                            w3-black
+                            w3-medium
+                            w3-hover-text-white
+                            native-hover-color1"
+                            style="width:100%">Entrar</button>
+                  </div>
+                </div>                               
               </form>
             </div>
           </div>
@@ -173,12 +141,8 @@
         </div>
       </div>
 
-      <footer class="w3-container
-              w3-text-white
-              w3-padding-16
-              native-color2">
-        Aviso de Priacidad 
-      </footer>
+      <!--footer-->
+      <%@include file="footer.jsp"%>
     </div>
   </body>
 </html>

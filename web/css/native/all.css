@@ -13,14 +13,46 @@ and open the template in the editor.
   font-family: 'Microsoft YaHei', 'Helvetica', 'Sans Serif'
 }
 
-/*elementos H'*/
+/*tamaños*/
+.native-img-container-large {
+  height: 4rem;
+  width: 4rem;
+}
+
+.native-img-container-medium {
+  height: 3.5rem;
+  width: 3.5rem;
+}
+
+.native-img-container-small {
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.native-img-container-large img,
+.native-img-container-medium img,
+.native-img-container-small img {
+  height: 92%;
+}
+
+.native-main {
+  min-height: 40rem;
+  height: 94vh
+}
+
+footer {
+  min-height: 10rem;
+  height: 16vh;
+}
+
+/*elementos h*/
 h1 { 
   display: block;
   font-size: 3em;
   margin-top: 0.6em;
   margin-bottom: 0.6em;
   margin-left: 0;
-  margin-right: 0;
+  margin-right: 0
 }
 
 h2 {
@@ -29,7 +61,7 @@ h2 {
   margin-top: 0.6em;
   margin-bottom: 0.6em;
   margin-left: 0;
-  margin-right: 0;
+  margin-right: 0
 }
 
 h3 { 
@@ -38,7 +70,7 @@ h3 {
   margin-top: 0.6em;
   margin-bottom: 0.6em;
   margin-left: 0;
-  margin-right: 0;
+  margin-right: 0
 }
 
 h4 { 
@@ -47,7 +79,7 @@ h4 {
   margin-top: 0.6em;
   margin-bottom: 0.6em;
   margin-left: 0;
-  margin-right: 0;
+  margin-right: 0
 }
 
 h5 { 
@@ -56,7 +88,7 @@ h5 {
   margin-top: 0.6em;
   margin-bottom: 0.6em;
   margin-left: 0;
-  margin-right: 0;
+  margin-right: 0
 }
 
 h6 { 
@@ -65,33 +97,37 @@ h6 {
   margin-top: 0.6em;
   margin-bottom: 0.6em;
   margin-left: 0;
-  margin-right: 0;
+  margin-right: 0
 }
 
 /*elementos input*/
 input {
-  height: 3rem;
+  min-height: 3rem
 }
 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button,
 input[type="date"]::-webkit-outer-spin-button,
 input[type="date"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
+  -webkit-appearance: none
 }
 
 input[type="number"], 
 input[type="date"] {
-    -moz-appearance: textarea;
+    -moz-appearance: textarea
 }
 
 input[type="date"] {
-  padding: 0.14rem;
+  padding: 0.14rem
 }
 
 textarea {
   resize: none;
-  height: 5rem;
+  height: 5rem
+}
+
+button {
+  height: 3rem
 }
 
 /*Backgrounds*/
@@ -99,13 +135,13 @@ textarea {
   height: 100vh;
   width: 100vw;
   position: fixed;
-  z-index: -3;
+  z-index: -3
 }
 
 .native-background-1 {
   background: url('../../images/esm-background.jpg');
   background-size: auto 100%;
-  background-position: center;
+  background-position: center
 }
 
 /*Adicionales*/
