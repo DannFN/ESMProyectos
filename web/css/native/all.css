@@ -136,7 +136,7 @@ button {
 }
 
 /*botones*/
-.native-button-medium {
+.native-button-mediumcircle {
   height: 2.5rem;
   width: 2.5rem;
   font-size: 10px;
@@ -168,4 +168,14 @@ button {
 
 .native-blur-max {
   filter: blur(8px)
+}
+
+.native-sticky-header {
+  position: fixed;
+  top: 0;
+  width: 100%
+}
+
+.native-sticky-header + .general-content {
+  padding-top: 102px;
 }

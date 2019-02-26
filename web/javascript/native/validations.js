@@ -1,7 +1,7 @@
-document.oncontextmenu=function(){return false;};
-document.onselectstart=function(){return false;};
+document.oncontextmenu = function() { return false; };
+document.onselectstart = function() { return false; };
 
-function numYLet(e){
+function numYLet(e) {
 	tecla = (document.all) ? e.keyCode : e.which;
 	if (tecla === 8) return true;
 
@@ -10,7 +10,7 @@ function numYLet(e){
 	return patron.test(tec);
 }
 
-function let(e){
+function let(e) {
 	tecla = (document.all) ? e.keyCode : e.which;
 	if (tecla === 8) return true;
 
@@ -19,7 +19,7 @@ function let(e){
 	return patron.test(tec);
 }
 
-function numEnt(e){
+function numEnt(e) {
 	tecla = (document.all) ? e.keyCode : e.which;
 
 	patron=/[0-9]/;

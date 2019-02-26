@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="css/native/all.css">
     <link rel="stylesheet" type="text/css" href="css/native/colors.css">
     <link rel="stylesheet" type="text/css" href="css/native/index.css">
+    <script type="text/javascript" src="javascript/native/validations.js"></script>
   </head>
   
   <body>
