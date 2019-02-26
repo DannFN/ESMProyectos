@@ -51,10 +51,12 @@
       
       <div class="w3-bar-item
            w3-hide-large
-           w3-hide-medium">
+           w3-hide-medium
+           w3-display-container">
         <div class="w3-circle
              w3-white
              w3-display-container
+             w3-display-bottommiddle
              native-img-container-small">
           <img src="images/ipn-logo.png"
                class="w3-display-middle"
@@ -98,10 +100,12 @@
       
       <div class="w3-bar-item
            w3-hide-large
-           w3-hide-medium">
+           w3-hide-medium
+           w3-display-container">
         <div class="w3-circle
              w3-white
              w3-display-container
+             w3-display-bottommiddle
              native-img-container-small">
           <img src="images/esm-logo.png"
                class="w3-display-middle"

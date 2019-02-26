@@ -13,6 +13,11 @@ and open the template in the editor.
   font-family: 'Microsoft YaHei', 'Helvetica', 'Sans Serif'
 }
 
+/*fuentes*/
+.native-large-table-text b{
+ font-size: 20px;
+}
+
 /*tamaños*/
 .native-img-container-large {
   height: 4rem;
@@ -25,14 +30,14 @@ and open the template in the editor.
 }
 
 .native-img-container-small {
-  height: 2.5rem;
-  width: 2.5rem;
+  height: 2.1rem;
+  width: 2.1rem
 }
 
 .native-img-container-large img,
 .native-img-container-medium img,
 .native-img-container-small img {
-  height: 92%;
+  height: 92%
 }
 
 .native-main {
@@ -42,7 +47,7 @@ and open the template in the editor.
 
 footer {
   min-height: 10rem;
-  height: 16vh;
+  height: 16vh
 }
 
 /*elementos h*/
@@ -128,6 +133,14 @@ textarea {
 
 button {
   height: 3rem
+}
+
+/*botones*/
+.native-button-medium {
+  height: 2.5rem;
+  width: 2.5rem;
+  font-size: 10px;
+  border: none
 }
 
 /*Backgrounds*/

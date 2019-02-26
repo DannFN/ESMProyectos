@@ -4,6 +4,7 @@
     Author     : Daniel Flores
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -40,7 +41,14 @@
     <div>
       <!--header-->
       <%@include file="header.jsp"%>
-
+      <c:if test = "${msg != null}">
+          <div class="w3-container 
+               w3-red
+               native-text-white
+               w3-padding" 
+               role="alert">${msg}</div>
+      </c:if>
+      
       <!--body content-->
       <div class="w3-container
            native-main">
