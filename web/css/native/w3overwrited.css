@@ -16,8 +16,10 @@ and open the template in the editor.
 .w3-bar-item {
   min-height: 3rem;
   height: 100%;
+  vertical-align: middle
 }
 
+/*TODO rounds*/
 .w3-round-small{
   border-radius:2px
 }

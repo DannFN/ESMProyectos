@@ -22,10 +22,13 @@
     <script type="text/javascript" src="javascript/w3/w3.js"></script>
     <script type="text/javascript" src="javascript/native/scripts.js"></script>
     <script type="text/javascript" src="javascript/native/validations.js"></script>
+    <script>
+      window.onscroll = function() { stickyHeader('sticky-header', 'main-header'); };
+      window.onclick = function() { closeModalOutside(event, 'modal1'); };
+    </script>
   </head>
   
   <body class="native-color5"
-        ondrag="return false"
         ondrop="return false">
     <!--header-->
     <%@include file="header.jsp"%>
@@ -38,32 +41,33 @@
         <div class="w3-bar 
              w3-black
              w3-card">
-          <a href="#" 
-             class="w3-bar-item 
-             w3-button">vista General</a>
-          <a href="#" 
+          <button 
              class="w3-bar-item 
              w3-button
              w3-hide-medium
-             w3-hide-small">Ingresos</a>
-          <a href="#" 
+             w3-hide-small"
+             onclick="showCloseNavBlock('navbarblock')">vista General</button>
+          
+          <button
              class="w3-bar-item 
              w3-button
              w3-hide-medium
-             w3-hide-small">Egresos</a>
-          <a href="#" 
+             w3-hide-small"
+             onclick="showModal('modal1')">Añadir Proyecto</button>
+          
+          <button 
              class="w3-bar-item 
              w3-button
              w3-hide-medium
-             w3-hide-small">Reportes</a>
+             w3-hide-small">Reportes</button>
+          
           <input type="text"
                  id="searchbox"
                  class="w3-bar-item
-                 w3-input
-                 w3-hide-medium
-                 w3-hide-small"
+                 w3-input"
                  placeholder="Filtrar"
-                 onkeyup="filterTable('searchbox', 'div-not-found')">
+                 onkeyup="filterTable('searchbox', 'content-table', 'div-not-found')">
+          
           <form>
             <button class="w3-bar-item
                   w3-right
@@ -71,12 +75,13 @@
                   w3-hide-medium
                   w3-hide-small">Salir</button>
           </form>
+          
           <a href="javascript:void(0)" 
              class="w3-bar-item 
              w3-button 
              w3-right 
              w3-hide-large" 
-             onclick="shownavblock('navbarblock')">&#9776;</a>
+             onclick="showCloseNavBlock('navbarblock')">&#9776;</a>
         </div>
 
         <div id="navbarblock" 
@@ -84,24 +89,22 @@
              w3-black
              w3-hide 
              w3-hide-large">
-          <a href="#" 
-             class="w3-bar-item 
-             w3-button">Ingresos</a>
-          <a href="#" 
-             class="w3-bar-item 
-             w3-button">Egresos</a>
-          <a href="#" 
-             class="w3-bar-item 
-             w3-button">Reportes</a>
-          <input type="text"
-                 id="searchbox1"
-                 class="w3-bar-item
-                 w3-input"
-                 placeholder="Filtrar"
-                 onkeyup="filterTable('searchbox1', 'div-not-found')">
+          <button class="w3-bar-item 
+                  w3-button"
+                  onclick="showCloseNavBlock('navbarblock')">vista General</button>
+          
+          <button class="w3-bar-item 
+                  w3-button"
+                  onclick="showModal('modal1');
+                  showCloseNavBlock('navbarblock')">Añadir Proyecto</button>
+          
+          <button class="w3-bar-item 
+                  w3-button"
+                  onclick="showCloseNavBlock('navbarblock')">Reportes</button>
+          
           <form>
             <button class="w3-bar-item
-                  w3-button">Salir</button>
+                    w3-button">Salir</button>
           </form>
         </div>
 
@@ -134,120 +137,133 @@
                l1">
             <b>N° Proyecto</b>
           </div>
-          <div class="w3-col
-               l3">
-            <b>Titular del Proyecto</b>
-          </div>
+          
           <div class="w3-col
                l2">
-            <b>Operaciones Realizadas</b>
+            <b>Titular del Proyecto</b>
           </div>
+          
+          <div class="w3-col
+               l1">
+            <b>Fecha de Adición</b>
+          </div>
+          
           <div class="w3-col
                l2">
             <b>Saldo Actual</b>
           </div>
+          
           <div class="w3-col
                l4">
             <b>Acciones</b>
           </div>
         </div>
-        
-        <!--Mostrar para ingresos-->
-        <!--Mostrar para egresos-->
       </div> 
       
       <!--vista general tab-->
       <div id="General"
-           class="w3-padding-small
-           general-content">
-        <!--dentro de ciclo for de arraylist-->
+           class="general-content">       
+        <!--tabla-->
         <div class="w3-col
-             l12
-             w3-padding-16
-             w3-white
-             w3-round-small
-             w3-border
-             w3-border-light-grey
-             w3-hover-light-grey
-             proyect-content">
-          <div class="w3-col
-               l1
-               w3-center">
-            <b>6</b>
-          </div>
-
-          <div class="w3-col
-               l3
-               titular">
-            María Pérez
-          </div>
-
-          <div class="w3-col
-               l2
-               w3-center
-               w3-text-indigo
-               native-large-table-text">
-            <b>25</b>
-          </div>
-
-          <div class="w3-col
-               l2
-               w3-center
-               w3-text-green
-               native-large-table-text">
-            <b>$1,000,536.22</b>
-          </div>
-
-          <div class="w3-col
-               l4
-               w3-center">
-            <button class="w3-button
-                    w3-metro-dark-purple
-                    w3-hover-purple
-                    w3-round-small">
-              <i class="fas
-                 fa-eye"></i> Ver
-            </button>
-
-            <button class="w3-button
-                    w3-metro-dark-blue
-                    w3-hover-blue
-                    w3-round-small">
-              <i class="fas
-                 fa-edit"></i> Editar
-            </button>
-
-            <button class="w3-button
-                    w3-metro-dark-red
-                    w3-hover-red
-                    w3-round-small">
-              <i class="fas
-                 fa-trash-alt"></i> Eliminar
-            </button>
-          </div>
+             l2
+             m1
+             w3-hide-small">
+          <!--Empty-->
+          &nbsp;
         </div>
-                
+        
+        <div class="w3-col
+             l8
+             m10
+             s12
+             w3-responsive">
+          <table id="content-table"
+                 class="w3-table-all
+                 native-max-standard-width">          
+            
+          </table>
+        </div>
+          
+        <div class="w3-col
+             l2
+             m1
+             w3-hide-small">
+          <!--Empty-->
+          &nbsp;
+        </div>
+        
         <!--manejador de resultados no encontrados-->
         <div id="div-not-found"
              class="w3-text-gray
              w3-center
-             w3-padding-32
-             w3-hide
-             w3-card">
-          <b>No se Encontraron resultados coincidentes con el filtro</b>
+             w3-padding-64
+             w3-hide">
+          <b>No se encontraron resultados coincidentes con el filtro</b>
         </div>
       </div>
-      
-      <!--ingresos-->
-      <div id="incomes">
-      </div>
-      
-      <!--egresos-->
-      <div id="outcomes">
-      </div>
-      
+            
       <!--reportes-->
       <div id="reports"> 
+      </div>
+    </div>
+    
+    <!--ventana modal 1-->
+    <div id="modal1"
+         class="w3-modal
+         w3-padding-64">
+      <div class="w3-modal-content
+           w3-card
+           w3-animate-zoom">
+        <div class="w3-container
+             w3-padding-16
+             w3-text-white
+             native-color1">
+          <span class="w3-button
+                w3-display-topright"
+                onclick="closeModal('modal1')">&times;</span>
+          Añadir nuevo proyecto
+        </div>
+        <div class="w3-container
+             w3-padding
+             w3-white">
+          <form>
+            <label class="w3-text-grey">N° de proyecto</label>
+            <input type="number"
+                   class="w3-input
+                   w3-round-small
+                   w3-border"
+                   name="proyectnumber"
+                   required>
+            
+            <br>
+            
+            <label class="w3-text-grey">Titular del proyecto</label>
+            <input type="text"
+                   class="w3-input
+                   w3-round-small
+                   w3-border"
+                   name="titular"
+                   required>
+            
+            <br>
+            
+            <input type="submit"
+                   class="w3-button
+                   w3-round-small
+                   w3-black
+                   w3-medium
+                   w3-hover-green"
+                   value="Añadir">
+            
+            <button class="w3-button
+                    w3-metro-dark-red
+                    w3-hover-red
+                    w3-round-small
+                    w3-right"
+                    onclick="closeModal('modal1')">cancelar</button>
+            
+          </form>
+        </div>
       </div>
     </div>
     

@@ -69,8 +69,6 @@
                  w3-text-white
                  w3-hide-small">
                 <span class="native-giant-text">Proyectos de Investigación ESM</span>
-                <br>
-                Sistema De Gestión y Consulta de Recursos de Proyectos de Investigación de la Escula Superior de Medicina
                 <br><br>
                 <b>Iniciar Sesión</b>
               </p>
@@ -80,8 +78,6 @@
                  w3-hide-large
                  w3-hide-medium">
                 <span class="native-giant-text-mobile">Proyectos de Investigación ESM</span>
-                <br>
-                Sistema De Gestión y Consulta de Recursos de Proyectos de Investigación de la Escula Superior de Medicina
                 <br><br>
                 <b>Iniciar Sesión</b>
               </p>
@@ -129,13 +125,15 @@
                   <div class="w3-col 
                        l4
                        m4">
-                    <button class="w3-btn
+                    <input type="submit"
+                            class="w3-btn
                             w3-round-small
                             w3-black
                             w3-medium
                             w3-hover-text-white
                             native-hover-color1"
-                            style="width:100%">Entrar</button>
+                            style="width:100%"
+                            value="Entrar">
                   </div>
                 </div>                               
               </form>
