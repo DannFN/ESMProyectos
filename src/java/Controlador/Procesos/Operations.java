@@ -158,7 +158,6 @@ public class Operations {
           ou.setTransferDate(rs.getString(10));
           
           o.add(ou);
-          System.out.println("");
         }while(rs.next());
         
         System.out.println("Consulta de Egresos del proyecto" + proyectId + "Exitosa");
