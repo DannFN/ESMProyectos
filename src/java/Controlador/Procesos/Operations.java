@@ -93,18 +93,18 @@ public class Operations {
   }
   
   /*Obtener todos los ingresos de un proyecto*/
-  public ArrayList<Income> incomes(int proyectId) {    
+  public ArrayList<Income> incomes(Proyect proyect) {    
     try {
       Income in;
       
       sql = "SELECT * FROM CIncomes WHERE ProyectId = ?;";
       ps = con.prepareStatement(sql);
-      ps.setInt(1, proyectId);
+      ps.setInt(1, proyect.getProyectNumber());
       rs = ps.executeQuery();
       i = new ArrayList<>();
       
-      if(rs.next()){
-        do{
+      if(rs.next()) {
+        do {
           in = new Income();
           
           in.setIncomeId(rs.getInt(1));
@@ -124,7 +124,7 @@ public class Operations {
       
     }catch(SQLException e) {
       i = null;
-      System.out.println("Consulta de Ingresos del proyecto" + proyectId + "Fallida");
+      System.out.println("Consulta de Ingresos del Proyecto" + proyectId + "Fallida");
       System.out.println(e.getMessage());
       Logger.getLogger(Operations.class.getName()).log(Level.SEVERE, null, e);
     }
@@ -132,14 +132,46 @@ public class Operations {
     return i;
   }
   
-  public ArrayList<Outcome> outcomes(int proyectId){
+  public ArrayList<Outcome> outcomes(Proyect proyect){
     try {
       Outcome ou;
       
       sql = "SELECT * FROM COutcomes WHERE ProyectId = ?;";
+      ps = con.prepareStatement(sql);
+      ps.setInt(1, proyect.getProyectNumber());
+      rs = ps.executeQuery();
+      o = new ArrayList<>();
       
-    }catch(Exception e) {
-    
+      if(rs.next()) {
+        do {
+          ou = new Outcome();
+          
+          ou.setOutcomeId(rs.getInt(1));
+          ou.setOrderDate(rs.getString(2));
+          ou.setStartingNumber(rs.getInt(3));
+          ou.setExpenseCategory(rs.getString(4));
+          ou.setConcept(rs.getstring(5));
+          ou.setAmount(rs.getFloat(6));
+          ou.setInvoiceNumber(rs.getString(7));
+          ou.setTransferNumber(rs.getString(8));
+          ou.setPolicyNumber(rs.getString(9));
+          ou.setTransferDate(rs.getString(10));
+          
+          o.add(ou);
+          System.out.println("");
+        }while(rs.next());
+        
+        System.out.println("Consulta de Egresos del proyecto" + proyectId + "Exitosa");
+      }else {
+        System.out.println("Consulta de Egresos del proyecto" + proyectId + "Exitosa");
+        System.out.println("No hay Egresos Que Mostrar");
+      }
+      
+    }catch(SQLException e) {
+      o = null;
+      System.out.println("Consulta de Egresos del Proyecto" + proyectId + "Fallida");
+      System.out.println(e.getMessage());
+      Logger.getLogger(Operations.class.getName()).log(Level.SEVERE, null, e);
     }
   
     return o;
