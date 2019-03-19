@@ -23,11 +23,18 @@ import java.util.logging.Logger;
  */
 public class Operations {
   private Connection con;
+  /*variables de asignación de resultados*/
   private ArrayList<Proyect> p;
   private ArrayList<Income> i;
   private ArrayList<Outcome> o;
   private User u;
+  
+  /*variables de operaciones con la base de datos*/
+  private String sql;
+  private PreparedStatement ps;
+  private ResultSet rs;
 
+  /*constructor que abre la conexión*/
   public Operations() {
     openConnection();
   }
@@ -52,11 +59,8 @@ public class Operations {
   /*Obtener todos los proyectos*/
   public ArrayList<Proyect> proyects() {
    try{
-      String sql;
-      PreparedStatement ps;
-      ResultSet rs;
-      Proyect pr;
-      
+     Proyect pr;
+     
       sql = "SELECT * FROM CProyects;";
       ps = con.prepareStatement(sql);
       rs = ps.executeQuery();
@@ -71,11 +75,16 @@ public class Operations {
                     
           p.add(pr);
         }while(rs.next());
+        
+        System.out.println("Consulta de Proyectos Exitosa");
+      }else {
+        System.out.println("Consulta de Proyectos Exitosa");
+        System.out.println("No hay Proyectos Que Mostrar");
       }
 
     }catch (SQLException e) {
       p = null;
-      System.out.println("Registro Fallido");
+      System.out.println("Consulta de Proyectos Fallida");
       System.out.println(e.getMessage());
       Logger.getLogger(Operations.class.getName()).log(Level.SEVERE, null, e);
     }
@@ -84,16 +93,13 @@ public class Operations {
   }
   
   /*Obtener todos los ingresos de un proyecto*/
-  public ArrayList<Income> incomes(int idProyecto) {    
+  public ArrayList<Income> incomes(int proyectId) {    
     try {
-      String sql;
-      PreparedStatement ps;
-      ResultSet rs;
       Income in;
       
-      sql = "SELECT * FROM CIngresos WHERE idProyecto = ?;";
+      sql = "SELECT * FROM CIncomes WHERE ProyectId = ?;";
       ps = con.prepareStatement(sql);
-      ps.setInt(1, idProyecto);
+      ps.setInt(1, proyectId);
       rs = ps.executeQuery();
       i = new ArrayList<>();
       
@@ -109,15 +115,33 @@ public class Operations {
           
           i.add(in);
         }while(rs.next());
+        
+        System.out.println("Consulta de Ingresos del proyecto" + proyectId + "Exitosa");
+      }else {
+        System.out.println("Consulta de Ingresos del proyecto" + proyectId + "Exitosa");
+        System.out.println("No hay Ingresos Que Mostrar");
       }
       
     }catch(SQLException e) {
       i = null;
-      System.out.println("Registro Fallido");
+      System.out.println("Consulta de Ingresos del proyecto" + proyectId + "Fallida");
       System.out.println(e.getMessage());
       Logger.getLogger(Operations.class.getName()).log(Level.SEVERE, null, e);
     }
     
     return i;
+  }
+  
+  public ArrayList<Outcome> outcomes(int proyectId){
+    try {
+      Outcome ou;
+      
+      sql = "SELECT * FROM COutcomes WHERE ProyectId = ?;";
+      
+    }catch(Exception e) {
+    
+    }
+  
+    return o;
   }
 }
