@@ -19,15 +19,18 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author elect
+ * @author Daniel Flores
  */
 public class Operations {
+  /*variable de conexión*/
   private Connection con;
+  
   /*variables de asignación de resultados*/
   private ArrayList<Proyect> p;
   private ArrayList<Income> i;
   private ArrayList<Outcome> o;
   private User u;
+  private int status;
   
   /*variables de operaciones con la base de datos*/
   private String sql;
@@ -56,13 +59,58 @@ public class Operations {
     }
   }
   
-  /*TODO obtener datos del usuario/sesión*/
+  /*Obtener datos del usuario/sesión*/
+  public int login(String user, String pass) {
+    status = 0;
+    
+    try {
+      String temp;
+      
+      temp = Security.hash(pass);
+      
+      sql = "call logIn(?);";
+      ps = con.prepareStatement(sql);
+      ps.setString(1, user);
+      rs = ps.executeQuery();
+      
+      if(!rs.next()){
+        status = -50; /*El usuario no existe*/
+      }else {
+        if(!rs.getString(2).equals(temp)) {
+          status = -40; /*Las contraseñas son diferentes*/
+        }
+        if(rs.getString(2).equals(temp) && rs.getString(1).equals("R")){
+          status = 10; /*El usuario tiene permiso de lectura*/
+        }else
+        if(rs.getString(2).equals(temp) && rs.getString(1).equals("W")) {
+          status = 20; /*El usuario tiene permiso de lectura/escritura*/
+        }else
+        if(rs.getString(2).equals(temp) && rs.getString(1).equals("A")) {
+          status = 30; /*El usuario tiene permiso de administrador (usuario maestro)*/
+        }
+      }
+      
+      if(status > 0){
+        System.out.println("Consulta de Datos de Usuario Exitosa");
+      }else {
+        System.out.println("Consulta de Datos de Usuario Fallida");
+      }
+    }catch(SQLException e) {
+      System.out.println("Consulta de Datos de Usuario Fallida");
+      System.out.println(e.getMessage());
+      Logger.getLogger(Operations.class.getName()).log(Level.SEVERE, null, e);
+    }
+    
+    return status;
+  }
   
   /*Obtener todos los proyectos*/
   public ArrayList<Proyect> proyects() {
-   try{
-     Proyect pr;
-     
+    p = new ArrayList<>();
+    
+    try{
+      Proyect pr;
+      
       sql = "call getProyects();";
       ps = con.prepareStatement(sql);
       rs = ps.executeQuery();
@@ -72,7 +120,7 @@ public class Operations {
         do{
           pr = new Proyect();
           
-          pr.setPoyectNumber(rs.getInt(1));
+          pr.setProyectNumber(rs.getInt(1));
           pr.setTitular(rs.getString(2));
           pr.setBalance(rs.getFloat(3));
                     
@@ -84,7 +132,6 @@ public class Operations {
         System.out.println("Consulta de Proyectos Exitosa");
         System.out.println("No hay Proyectos Que Mostrar");
       }
-
     }catch (SQLException e) {
       p = null;
       System.out.println("Consulta de Proyectos Fallida");
@@ -96,13 +143,15 @@ public class Operations {
   }
   
   /*Obtener todos los ingresos de un proyecto*/
-  public ArrayList<Income> incomes(Proyect proyect) {    
+  public ArrayList<Income> incomes(int proyectNumber) {    
+    i = new ArrayList<>();
+    
     try {
       Income in;
       
       sql = "CALL getIncomes(?);";
       ps = con.prepareStatement(sql);
-      ps.setInt(1, proyect.getProyectNumber());
+      ps.setInt(1, proyectNumber);
       rs = ps.executeQuery();
       i = new ArrayList<>();
       
@@ -119,15 +168,14 @@ public class Operations {
           i.add(in);
         }while(rs.next());
         
-        System.out.println("Consulta de Ingresos del proyecto" + proyectId + "Exitosa");
+        System.out.println("Consulta de Ingresos del proyecto" + proyectNumber + "Exitosa");
       }else {
-        System.out.println("Consulta de Ingresos del proyecto" + proyectId + "Exitosa");
+        System.out.println("Consulta de Ingresos del proyecto" + proyectNumber + "Exitosa");
         System.out.println("No hay Ingresos Que Mostrar");
       }
-      
     }catch(SQLException e) {
       i = null;
-      System.out.println("Consulta de Ingresos del Proyecto" + proyectId + "Fallida");
+      System.out.println("Consulta de Ingresos del Proyecto" + proyectNumber + "Fallida");
       System.out.println(e.getMessage());
       Logger.getLogger(Operations.class.getName()).log(Level.SEVERE, null, e);
     }
@@ -136,13 +184,15 @@ public class Operations {
   }
   
   /*Obtener todos los egresos de un proyecto*/
-  public ArrayList<Outcome> outcomes(Proyect proyect){
+  public ArrayList<Outcome> outcomes(int proyectNumber){
+    o = new ArrayList<>();
+    
     try {
       Outcome ou;
       
       sql = "call getOutcomes(?);";
       ps = con.prepareStatement(sql);
-      ps.setInt(1, proyect.getProyectNumber());
+      ps.setInt(1, proyectNumber);
       rs = ps.executeQuery();
       o = new ArrayList<>();
       
@@ -154,7 +204,7 @@ public class Operations {
           ou.setOrderDate(rs.getString(2));
           ou.setStartingNumber(rs.getInt(3));
           ou.setExpenseCategory(rs.getString(4));
-          ou.setConcept(rs.getstring(5));
+          ou.setConcept(rs.getString(5));
           ou.setAmount(rs.getFloat(6));
           ou.setInvoiceNumber(rs.getString(7));
           ou.setTransferNumber(rs.getString(8));
@@ -164,32 +214,297 @@ public class Operations {
           o.add(ou);
         }while(rs.next());
         
-        System.out.println("Consulta de Egresos del proyecto" + proyectId + "Exitosa");
+        System.out.println("Consulta de Egresos del proyecto" + proyectNumber + "Exitosa");
       }else {
-        System.out.println("Consulta de Egresos del proyecto" + proyectId + "Exitosa");
+        System.out.println("Consulta de Egresos del proyecto" + proyectNumber + "Exitosa");
         System.out.println("No hay Egresos Que Mostrar");
       }
-      
     }catch(SQLException e) {
       o = null;
-      System.out.println("Consulta de Egresos del Proyecto" + proyectId + "Fallida");
+      System.out.println("Consulta de Egresos del Proyecto" + proyectNumber + "Fallida");
       System.out.println(e.getMessage());
       Logger.getLogger(Operations.class.getName()).log(Level.SEVERE, null, e);
     }
   
     return o;
   }
+  
+  /*Editar datos del proyecto*/
+  public int updateProyect(int oldProyectNumber, Proyect newproyect) {
+    status = 0;
+    
+    try{
+      sql = "call updateProyect(?, ?, ?);";
+      ps = con.prepareStatement(sql);
+      ps.setInt(1, oldProyectNumber);
+      ps.setInt(2, newproyect.getProyectNumber());
+      ps.setString(3, newproyect.getTitular());
+      
+      status = ps.executeUpdate();
+      
+      if(status > 0){
+        System.out.println("Actualización del Proyecto" + oldProyectNumber + "Exitosa");        
+      }else {
+        System.out.println("Actualización del Proyecto" + oldProyectNumber + "Fallida");
+        System.out.println("No hay Registros Asociados al Proyecto");
+      }
+    }catch(SQLException e){
+      System.out.println("Actualización del Proyecto" + oldProyectNumber + "Fallida");
+      System.out.println(e.getMessage());
+      Logger.getLogger(Operations.class.getName()).log(Level.SEVERE, null, e);
+    }
+    
+    return status;
+  }
+
+  /*Editar datos del ingreso*/
+  public int updateIncome(int proyectNumber, int oldIncomeId, Income newIncome) {
+    status = 0;
+    
+    try{
+      sql = "call updateIncome(?, ?, ?, ?, ?);";
+      ps = con.prepareStatement(sql);
+      ps.setInt(1, oldIncomeId);
+      ps.setString(2, newIncome.getExpenseCategory());
+      ps.setString(3, newIncome.getExpenseSubCategory());
+      ps.setString(4, newIncome.getConcept());
+      ps.setFloat(5, newIncome.getAmount());
+      
+      status = ps.executeUpdate();
+      
+      if(status > 0){
+        i = incomes(proyectNumber);
+        
+        System.out.println("Actualización del Ingreso" + oldIncomeId + "Exitosa");         
+      }else {
+        System.out.println("Actualización del Ingreso" + oldIncomeId + "Fallida");
+        System.out.println("No hay Registros Asociados al Ingreso");
+      }
+    }catch(SQLException e){
+      System.out.println("Actualización del Ingreso" + oldIncomeId + "Fallida");
+      System.out.println(e.getMessage());
+      Logger.getLogger(Operations.class.getName()).log(Level.SEVERE, null, e);
+    }
+    
+    return status;
+  }
+  
+  /*Editar datos del egreso*/
+  public int updateOutcome(int proyectNumber, int oldOutcomeId, Outcome newOutcome) {
+    status = 0;
+    
+    try{
+      sql = "call updateIncome(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+      ps = con.prepareStatement(sql);
+      ps.setInt(1, oldOutcomeId);
+      ps.setString(2, newOutcome.getOperationType());
+      ps.setString(3, newOutcome.getOrderDate());
+      ps.setInt(4, newOutcome.getStartingNumber());
+      ps.setString(5, newOutcome.getExpenseCategory());
+      ps.setString(6, newOutcome.getConcept());
+      ps.setFloat(7, newOutcome.getAmount());
+      ps.setString(8, newOutcome.getInvoiceNumber());
+      ps.setString(9, newOutcome.getTransferNumber());
+      ps.setString(10, newOutcome.getPolicyNumber());
+      ps.setString(11, newOutcome.getTransferDate());
+      
+      status = ps.executeUpdate();
+      
+      if(status > 0){
+        o = outcomes(proyectNumber);
+        
+        System.out.println("Actualización del Ingreso" + oldOutcomeId + "Exitosa");         
+      }else {
+        System.out.println("Actualización del Ingreso" + oldOutcomeId + "Fallida");
+        System.out.println("No hay Registros Asociados al Ingreso");
+      }
+    }catch(SQLException e){
+      System.out.println("Actualización del Ingreso" + oldOutcomeId + "Fallida");
+      System.out.println(e.getMessage());
+      Logger.getLogger(Operations.class.getName()).log(Level.SEVERE, null, e);
+    }
+    
+    return status;
+  }
+
+  /*Eliminar Proyecto*/
+  public int deleteProyect(int proyectNumber) {
+    status = 0;
+    
+    try {
+      sql = "call deleteProyect(?);";
+      ps = con.prepareStatement(sql);
+      ps.setInt(1, proyectNumber);
+      
+      status = ps.executeUpdate();
+      
+      if(status > 0){
+        System.out.println("Eliminación del Proyecto" + proyectNumber + "Existosa");
+      }else{
+        System.out.println("Eliminación del Proyecto" + proyectNumber + "Fallida");
+        System.out.println("No Hay Registros Asociados al Proyecto");
+      }
+      
+    }catch(SQLException e) {
+      System.out.println("Eliminación del Proyecto" + proyectNumber + "Fallida");
+      System.out.println(e.getMessage());
+      Logger.getLogger(Operations.class.getName()).log(Level.SEVERE, null, e);
+    }
+    
+    return status;
+  }
+  
+  /*Eliminar ingreso*/
+  public int deleteIncome(int incomeId, int proyectNumber) {
+    status = 0;
+    
+    try {
+      sql = "call deleteIncome(?);";
+      ps = con.prepareStatement(sql);
+      ps.setInt(1, incomeId);
+      
+      status = ps.executeUpdate();
+      
+      if(status > 0){
+        i = incomes(proyectNumber);
+        
+        System.out.println("Eliminación del Ingreso" + incomeId + "Existosa");
+      }else{
+        System.out.println("Eliminación del Ingreso" + incomeId + "Fallida");
+        System.out.println("No Hay Registros Asociados al Ingreso");
+      }
+      
+    }catch(SQLException e) {
+      System.out.println("Eliminación del Ingreso" + incomeId + "Fallida");
+      System.out.println(e.getMessage());
+      Logger.getLogger(Operations.class.getName()).log(Level.SEVERE, null, e);
+    }
+    
+    return status;
+  }
+  
+  /*Eliminar egreso*/
+  public int deleteOutcome(int outcomeId, int proyectNumber) {
+    status = 0;
+    
+    try {
+      sql = "call deleteOutcome(?);";
+      ps = con.prepareStatement(sql);
+      ps.setInt(1, outcomeId);
+      
+      status = ps.executeUpdate();
+      
+      if(status > 0){
+        o = outcomes(proyectNumber);
+        
+        System.out.println("Eliminación del Ingreso" + outcomeId + "Existosa");
+      }else{
+        System.out.println("Eliminación del Ingreso" + outcomeId + "Fallida");
+        System.out.println("No Hay Registros Asociados al Ingreso");
+      }
+      
+    }catch(SQLException e) {
+      System.out.println("Eliminación del Ingreso" + outcomeId + "Fallida");
+      System.out.println(e.getMessage());
+      Logger.getLogger(Operations.class.getName()).log(Level.SEVERE, null, e);
+    }
+    
+    return status;
+  }
+  
+  /*Añadir proyecto*/
+  public int addProyect(Proyect newProyect) {
+    status = 0;
+    
+    try {
+      sql = "call addProyect(?, ?);";
+      ps = con.prepareStatement(sql);
+      ps.setInt(1, newProyect.getProyectNumber());
+      ps.setString(2, newProyect.getTitular());
+      
+      status = ps.executeUpdate();
+      
+      if(status > 0){
+        p = proyects();
+        
+        System.out.println("Adición de Nuevo Proyecto Exitosa");
+      }else {
+        System.out.println("Adición de Nuevo Proyecto Fallida");
+      }
+    }catch(SQLException e) {
+      System.out.println("Adición de Nuevo Proyecto Fallida");
+      System.out.println(e.getMessage());
+      Logger.getLogger(Operations.class.getName()).log(Level.SEVERE, null, e);
+    }
+    
+    return status;
+  }
+  
+  /*Añadir ingreso*/
+  public int addIncome(int proyectNumber, Income newIncome) {
+    status = 0;
+    
+    try {
+      sql = "call addIncome(?, ?, ?, ?, ?);";
+      ps = con.prepareStatement(sql);
+      ps.setInt(1, proyectNumber);
+      ps.setString(2, newIncome.getExpenseCategory());
+      ps.setString(3, newIncome.getExpenseSubCategory());
+      ps.setString(4, newIncome.getConcept());
+      ps.setFloat(5, newIncome.getAmount());
+      
+      status = ps.executeUpdate();
+      
+      if(status > 0){
+        i = incomes(proyectNumber);
+        
+        System.out.println("Adición de Nuevo Ingreso Exitosa");
+      }else {
+        System.out.println("Adición de Nuevo Ingreso Fallida");
+      }
+    }catch(SQLException e) {
+      System.out.println("Adición de Nuevo Ingreso Fallida");
+      System.out.println(e.getMessage());
+      Logger.getLogger(Operations.class.getName()).log(Level.SEVERE, null, e);
+    }
+    
+    return status;
+  }
+  
+  /*Añadir egreso*/
+  public int addOutcome(int proyectNumber, Outcome newOutcome) {
+    status = 0;
+    
+    try {
+      sql = "call addOutcome(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+      ps = con.prepareStatement(sql);
+      ps.setInt(1, proyectNumber);
+      ps.setString(2, newOutcome.getOperationType());
+      ps.setString(3, newOutcome.getOrderDate());
+      ps.setInt(4, newOutcome.getStartingNumber());
+      ps.setString(5, newOutcome.getExpenseCategory());
+      ps.setString(6, newOutcome.getConcept());
+      ps.setFloat(7, newOutcome.getAmount());
+      ps.setString(8, newOutcome.getInvoiceNumber());
+      ps.setString(9, newOutcome.getTransferNumber());
+      ps.setString(10, newOutcome.getPolicyNumber());
+      ps.setString(11, newOutcome.getTransferDate());
+      
+      status = ps.executeUpdate();
+      
+      if(status > 0){
+        o = outcomes(proyectNumber);
+        
+        System.out.println("Adición de Nuevo Egreso Exitosa");
+      }else {
+        System.out.println("Adición de Nuevo Egreso Fallida");
+      }
+    }catch(SQLException e) {
+      System.out.println("Adición de Nuevo Egreso Fallida");
+      System.out.println(e.getMessage());
+      Logger.getLogger(Operations.class.getName()).log(Level.SEVERE, null, e);
+    }
+    
+    return status;
+  }
 }
-
-/*Editar datos del proyecto*/
-/*Editar datos del ingreso*/
-/*Editar datos del egreso*/
-
-/*Eliminar Proyecto*/
-/*Eliminar ingreso*/
-/*Eliminar egreso*/
-
-
-
-
-

@@ -11,6 +11,7 @@ package Controlador.Objetos;
  */
 public class Outcome {
   private int outcomeId;
+  private String operationType;
   private String orderDate;
   private int startingNumber;
   private String expenseCategory;
@@ -23,6 +24,7 @@ public class Outcome {
 
   public Outcome(){
     outcomeId = 0;
+    operationType = "";
     orderDate = "";
     startingNumber = 0;
     expenseCategory = "";
@@ -34,8 +36,9 @@ public class Outcome {
     transferDate = "";
   }
   
-  public Outcome(int outcomeId, String orderDate, int startingNumber, String expenseCategory, String concept, float amount, String invoiceNumber, String transferNumber, String policyNumber, String transferDate) {
+  public Outcome(int outcomeId, String operationType, String orderDate, int startingNumber, String expenseCategory, String concept, float amount, String invoiceNumber, String transferNumber, String policyNumber, String transferDate) {
     this.outcomeId = outcomeId;
+    this.operationType = operationType;
     this.orderDate = orderDate;
     this.startingNumber = startingNumber;
     this.expenseCategory = expenseCategory;
@@ -54,7 +57,15 @@ public class Outcome {
   public void setOutcomeId(int outcomeId) {
     this.outcomeId = outcomeId;
   }
+  
+  public String getOperationType() {
+    return operationType;
+  }
 
+  public void setOperationType(String operationType) {
+    this.operationType = operationType;
+  }
+  
   public String getOrderDate() {
     return orderDate;
   }

@@ -12,34 +12,34 @@ import java.util.ArrayList;
  * @author elect
  */
 public class Proyect {
-  private int poyectNumber;
+  private int proyectNumber;
   private String titular;
   private double balance;
   private ArrayList<Income> incomes;
   private ArrayList<Outcome> outcomes;
   
   public Proyect() {
-    poyectNumber = 0;
+    proyectNumber = 0;
     titular = "";
     balance = 0;
     incomes = null;
     outcomes = null;
   }
 
-  public Proyect(int poyectNumber, String titular, double balance, ArrayList<Income> incomes, ArrayList<Outcome> outcomes) {
-    this.poyectNumber = poyectNumber;
+  public Proyect(int proyectNumber, String titular, double balance, ArrayList<Income> incomes, ArrayList<Outcome> outcomes) {
+    this.proyectNumber = proyectNumber;
     this.titular = titular;
     this.balance = balance;
     this.incomes = incomes;
     this.outcomes = outcomes;
   }
   
-  public int getPoyectNumber() {
-    return poyectNumber;
+  public int getProyectNumber() {
+    return proyectNumber;
   }
 
-  public void setPoyectNumber(int poyectNumber) {
-    this.poyectNumber = poyectNumber;
+  public void setProyectNumber(int poyectNumber) {
+    this.proyectNumber = poyectNumber;
   }
 
   public String getTitular() {

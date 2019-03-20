@@ -13,13 +13,13 @@ import java.security.NoSuchAlgorithmException;
  *
  * @author elect
  */
-public class Seguridad {
+public class Security {
  
-  public Seguridad() {
+  public Security() {
     /*empty constructor*/
   }
   
-  public String hashPass(String pass){
+  public static String hash(String pass){
     String resume = "";
     byte[] msgBytes = pass.getBytes();
 
