@@ -180,3 +180,16 @@ public class Operations {
     return o;
   }
 }
+
+/*Editar datos del proyecto*/
+/*Editar datos del ingreso*/
+/*Editar datos del egreso*/
+
+/*Eliminar Proyecto*/
+/*Eliminar ingreso*/
+/*Eliminar egreso*/
+
+
+
+
+
