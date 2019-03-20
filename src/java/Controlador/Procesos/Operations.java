@@ -56,12 +56,14 @@ public class Operations {
     }
   }
   
+  /*TODO obtener datos del usuario/sesión*/
+  
   /*Obtener todos los proyectos*/
   public ArrayList<Proyect> proyects() {
    try{
      Proyect pr;
      
-      sql = "SELECT * FROM CProyects;";
+      sql = "call getProyects();";
       ps = con.prepareStatement(sql);
       rs = ps.executeQuery();
       p = new ArrayList<>();
@@ -72,6 +74,7 @@ public class Operations {
           
           pr.setPoyectNumber(rs.getInt(1));
           pr.setTitular(rs.getString(2));
+          pr.setBalance(rs.getFloat(3));
                     
           p.add(pr);
         }while(rs.next());
@@ -97,7 +100,7 @@ public class Operations {
     try {
       Income in;
       
-      sql = "SELECT * FROM CIncomes WHERE ProyectId = ?;";
+      sql = "CALL getIncomes(?);";
       ps = con.prepareStatement(sql);
       ps.setInt(1, proyect.getProyectNumber());
       rs = ps.executeQuery();
@@ -132,11 +135,12 @@ public class Operations {
     return i;
   }
   
+  /*Obtener todos los egresos de un proyecto*/
   public ArrayList<Outcome> outcomes(Proyect proyect){
     try {
       Outcome ou;
       
-      sql = "SELECT * FROM COutcomes WHERE ProyectId = ?;";
+      sql = "call getOutcomes(?);";
       ps = con.prepareStatement(sql);
       ps.setInt(1, proyect.getProyectNumber());
       rs = ps.executeQuery();
