@@ -13,6 +13,7 @@
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <title>index</title>
     <link rel="stylesheet" type="text/css" href="css/w3/w3.css">
+    <link rel="stylesheet" type="text/css" href="css/w3/w3-flat-colors.css">
     <link rel="stylesheet" type="text/css" href="css/native/w3overwrited.css">
     <link rel="stylesheet" type="text/css" href="css/native/all.css">
     <link rel="stylesheet" type="text/css" href="css/native/colors.css">
@@ -44,7 +45,7 @@
       <%@include file="header.jsp"%>
       <c:if test = "${msg != null}">
           <div class="w3-container 
-               w3-red
+               w3-flat-pomegranate
                native-text-white
                w3-padding" 
                role="alert">${msg}</div>
@@ -84,7 +85,9 @@
             </div>
 
             <div>
-              <form>
+              <form action="LogIn"
+                    method="post"
+                    autocomplete="off">
                 <div class="w3-row-padding">
                   <div class="w3-col
                        l4

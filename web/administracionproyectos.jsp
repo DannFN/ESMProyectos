@@ -4,7 +4,32 @@
     Author     : Daniel Flores
 --%>
 
+<%@page import="Controlador.Procesos.DBOperations"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="Controlador.Objetos.Proyect"%>
+<%@page import="Controlador.Objetos.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+  /*TODO habilitar código*/
+  /*HttpSession sess = request.getSession(false);
+  RequestDispatcher rd;
+  ArrayList<Proyect> p = null;
+  User us = null;
+  
+  if(sess.isNew() || sess == null || sess.getAttribute("user") == null) {
+    request.setAttribute("msg", "Debes Iniciar Sesión");
+    rd = request.getRequestDispatcher("index.jsp");
+    rd.forward(request, response);
+    return;
+  }else
+  if(sess != null && sess.getAttribute("user") != null) {
+    us = (User) sess.getAttribute("user");
+    DBOperations dbo = new DBOperations();
+    p = dbo.proyects();
+  }*/
+%>
+
 <!DOCTYPE html>
 <html>
   <head>
