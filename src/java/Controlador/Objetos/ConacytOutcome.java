@@ -4,7 +4,7 @@ package Controlador.Objetos;
  *
  * @author Daniel Flores
  */
-public class Outcome {
+public class ConacytOutcome {
   private int outcomeId;
   private String operationType;
   private String orderDate;
@@ -17,7 +17,7 @@ public class Outcome {
   private String policyNumber;
   private String transferDate;
 
-  public Outcome(){
+  public ConacytOutcome(){
     outcomeId = 0;
     operationType = "";
     orderDate = "";
@@ -31,7 +31,7 @@ public class Outcome {
     transferDate = "";
   }
   
-  public Outcome(int outcomeId, String operationType, String orderDate, int startingNumber, String expenseCategory, String concept, float amount, String invoiceNumber, String transferNumber, String policyNumber, String transferDate) {
+  public ConacytOutcome(int outcomeId, String operationType, String orderDate, int startingNumber, String expenseCategory, String concept, float amount, String invoiceNumber, String transferNumber, String policyNumber, String transferDate) {
     this.outcomeId = outcomeId;
     this.operationType = operationType;
     this.orderDate = orderDate;

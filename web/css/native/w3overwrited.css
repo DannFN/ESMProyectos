@@ -10,13 +10,21 @@ and open the template in the editor.
 
 /*todo rounded*/
 .w3-bar {
-  min-height: 3rem
+  min-height: 2.6rem
 }
 
 .w3-bar-item {
   min-height: 3rem;
   height: 100%;
   vertical-align: middle
+}
+
+.w3-hover-left-border-blue:hover {
+  border-left-color: #2196F3!important
+}
+
+.w3-hover-left-border-red:hover {
+  border-left-color: #f44336!important
 }
 
 /*TODO rounds*/

@@ -4,14 +4,14 @@ package Controlador.Objetos;
  *
  * @author Daniel Flores
  */
-public class Income {
+public class ConacytIncome {
   private int incomeId;
   private String expenseCategory;
   private String expenseSubCategory;
   private String concept;
   private float amount;
 
-  public Income() {
+  public ConacytIncome() {
     incomeId = 0;
     expenseCategory = "";
     expenseSubCategory = "";
@@ -19,7 +19,7 @@ public class Income {
     amount = 0;
   }
   
-  public Income(int incomeId, String expenseCategory, String expenseSubCategory, String concept, float amount) {
+  public ConacytIncome(int incomeId, String expenseCategory, String expenseSubCategory, String concept, float amount) {
     this.incomeId = incomeId;
     this.expenseCategory = expenseCategory;
     this.expenseSubCategory = expenseSubCategory;

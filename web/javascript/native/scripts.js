@@ -1,36 +1,46 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-function filterTable(idInput, idTable, idDivError) {
-  var input, filter, table, tr, td, i, j, divError;
+function filterTable(idInput, classDivError) {
+  var input; 
+  var filter;
+  var container; 
+  var name; 
+  var titular;
+  var i;
+  var j;
+  var divError;
   
   input = document.getElementById(idInput);
-  filter = input.value.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
-  table = document.getElementById(idTable);
-  tr = table.getElementsByTagName("tr");
-  divError = document.getElementById(idDivError);
+  filter = input.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  
+  container = document.getElementsByClassName('proyect-container-class');
+  divError = document.getElementsByClassName(classDivError);
+  
   j = 0;
   
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[1];
+  for (i = 0; i < container.length; i++) {
+    name = container[i].getElementsByClassName('proyect-name-class')[0];
+    titular = container[i].getElementsByClassName('proyect-titular-class')[0];
     
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").indexOf(filter) > -1) {
-        tr[i].style.display = "";
-        j++;
+    if (name || titular) {
+      txtValue = name.textContent || name.innerText;
+      txtValue1 = titular.textContent || name.innerText;
+      
+      if ((txtValue.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').indexOf(filter) > -1) || (txtValue1.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').indexOf(filter) > -1)) {
+        container[i].style.display = '';
+        j ++;
       } else {
-        tr[i].style.display = "none";
+        container[i].style.display = 'none';
       }
     }
   }
   
   if(j > 0){
-    divError.className = divError.className.replace('w3-show', 'w3-hide');
+    for(i = 0; i < divError.length; i++){
+     divError[i].className = divError[i].className.replace('w3-show', 'w3-hide'); 
+    }
   }else {
-    divError.className = divError.className.replace('w3-hide', 'w3-show');
+    for(i = 0; i < divError.length; i++){
+     divError[i].className = divError[i].className.replace('w3-hide', 'w3-show');
+    }
   }
 }

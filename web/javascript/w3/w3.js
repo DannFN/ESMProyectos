@@ -1,29 +1,20 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 function showCloseNavBlock(idElement) {
   var x = document.getElementById(idElement);
   if (x.className.indexOf('w3-show') === -1) {
-    x.className += ' w3-show';
+    x.classList.add('w3-show');
   } else { 
-    x.className = x.className.replace(' w3-show', '');
+    x.classList.remove('w3-show');
   }
 }
 
-function stickyHeader(idStickyHeader, idMainHeader) {
-  var mainHeader = document.getElementById(idMainHeader);
+function stickyHeader(idStickyHeader) {
   var stickyHeader = document.getElementById(idStickyHeader);
   var sticky = stickyHeader.offsetTop;
   
   if (window.pageYOffset > sticky) {
     stickyHeader.classList.add('native-sticky-header');
-    mainHeader.classList.add('w3-hide');
   } else {
     stickyHeader.classList.remove('native-sticky-header');
-    mainHeader.classList.remove('w3-hide');
   }
 }
 
@@ -39,10 +30,31 @@ function closeModal(idModal) {
   modal.style.display = 'none';
 }
 
-function closeModalOutside(event, idModal) {
+function closeModalOutside(evt, idModal) {
   var modal = document.getElementById(idModal);
   
-  if (event.target === modal) {
-    modal.style.display = "none";
+  if (evt.target === modal) {
+    modal.style.display = 'none';
   }
+}
+
+function openTab(evt, tabName) {
+  var i, x, tablinks;
+  
+  x = document.getElementsByClassName('tab-content');
+  
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = 'none';
+  }
+  
+  tablinks = document.getElementsByClassName('tablink');
+  
+  for (i = 0; i < x.length; i++) {
+    tablinks[i].classList.replace('w3-border-theme-d4', 'w3-border-theme');
+    tablinks[i].classList.replace('w3-theme-d2', 'w3-theme');
+  }
+  
+  document.getElementById(tabName).style.display = 'block';
+  evt.currentTarget.firstElementChild.classList.replace('w3-theme', 'w3-theme-d2');
+  evt.currentTarget.firstElementChild.classList.replace('w3-border-theme', 'w3-border-theme-d4');
 }

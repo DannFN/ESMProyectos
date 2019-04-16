@@ -6,23 +6,26 @@ import java.util.ArrayList;
  *
  * @author Daniel Flores
  */
-public class Proyect {
+public class ConacytProyect {
   private int proyectNumber;
+  private String proyectName;
   private String titular;
   private double balance;
-  private ArrayList<Income> incomes;
-  private ArrayList<Outcome> outcomes;
+  private ArrayList<ConacytIncome> incomes;
+  private ArrayList<ConacytOutcome> outcomes;
   
-  public Proyect() {
+  public ConacytProyect() {
     proyectNumber = 0;
+    proyectName = "";
     titular = "";
     balance = 0;
     incomes = null;
     outcomes = null;
   }
 
-  public Proyect(int proyectNumber, String titular, double balance, ArrayList<Income> incomes, ArrayList<Outcome> outcomes) {
+  public ConacytProyect(int proyectNumber, String proyectName, String titular, double balance, ArrayList<ConacytIncome> incomes, ArrayList<ConacytOutcome> outcomes) {
     this.proyectNumber = proyectNumber;
+    this.proyectName = proyectName;
     this.titular = titular;
     this.balance = balance;
     this.incomes = incomes;
@@ -37,6 +40,14 @@ public class Proyect {
     this.proyectNumber = poyectNumber;
   }
 
+  public String getProyectName() {
+    return proyectName;
+  }
+
+  public void setProyectName(String proyectName) {
+    this.proyectName = proyectName;
+  }
+  
   public String getTitular() {
     return titular;
   }
@@ -53,19 +64,19 @@ public class Proyect {
     this.balance = balance;
   }
 
-  public ArrayList<Income> getIncomes() {
+  public ArrayList<ConacytIncome> getIncomes() {
     return incomes;
   }
 
-  public void setIncomes(ArrayList<Income> incomes) {
+  public void setIncomes(ArrayList<ConacytIncome> incomes) {
     this.incomes = incomes;
   }
 
-  public ArrayList<Outcome> getOutcomes() {
+  public ArrayList<ConacytOutcome> getOutcomes() {
     return outcomes;
   }
 
-  public void setOutcomes(ArrayList<Outcome> outcomes) {
+  public void setOutcomes(ArrayList<ConacytOutcome> outcomes) {
     this.outcomes = outcomes;
   }
 }

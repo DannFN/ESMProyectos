@@ -76,7 +76,7 @@ public class LogIn extends HttpServlet {
           dbo.closeConnection();
 
           sess.setAttribute("user", u);
-          response.sendRedirect("lecturaproyectos.jsp");
+          response.sendRedirect("lectura-proyectos.jsp");
           break;
         }
 
@@ -85,7 +85,7 @@ public class LogIn extends HttpServlet {
           dbo.closeConnection();
 
           sess.setAttribute("user", u);
-          response.sendRedirect("administracionproyectos.jsp");
+          response.sendRedirect("administracion-proyectos.jsp");
           break;
         }
 
@@ -94,7 +94,7 @@ public class LogIn extends HttpServlet {
           dbo.closeConnection();
 
           sess.setAttribute("user", u);
-          response.sendRedirect("administracionusuarios.jsp");
+          response.sendRedirect("administracion-usuarios.jsp");
           break;
         }
       }
