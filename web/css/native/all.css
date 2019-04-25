@@ -142,6 +142,15 @@ textarea {
   color: #f1f1f1;
 }
 
+td input, td select{
+  height: 2.3rem;
+  font-size: 14px
+}
+
+td select option  {
+  font-size: 14px
+}
+
 /*botones*/
 
 .native-button-navbar {

@@ -25,7 +25,7 @@ public class DBOperations {
   private static PreparedStatement ps;
   private static ResultSet rs;
   
-  /*status de query*/
+  /*status de peticiones*/
   private int status;
 
   /*variables de asignación de resultados (Listas)*/
@@ -37,7 +37,7 @@ public class DBOperations {
   /*variables de asignación de resultados (objetos individuales)*/
   private ConacytProyect cpro;
   private User user;
-  private ConacytIncome cin;
+  private ConacytIncome cin;  
   private ConacytOutcome cou;
 
   /*constructor de apertura de la conexión*/
@@ -62,7 +62,7 @@ public class DBOperations {
     }
   }
 
-  /*Operaciones de usuario/sesion*/
+  /*--------------------Operaciones de usuario/sesion-------------------------*/
   /*Obtener datos del usuario/sesión*/
   public int login(String user, String pass) {
     status = 0;
@@ -103,21 +103,20 @@ public class DBOperations {
   }
 
   /*Obtener datos de usuario para sesion*/
-  public User user(String user){
-    User us = new User();
+  public User user(String us){
+    user = new User();
 
     try {
       sql = "CALL getUserData(?);";
       ps = con.prepareStatement(sql);
-      ps.setString(1, user);
+      ps.setString(1, us);
       rs = ps.executeQuery();
 
       if(rs.next()){
         do{
-          us.setUserId(rs.getInt(1));
-          us.setUserType(rs.getString(2).charAt(0));
-          us.setUserName(rs.getString(3));
-          us.setSession(true);
+          user.setUserId(rs.getInt(1));
+          user.setUserType(rs.getString(2).charAt(0));
+          user.setUserName(rs.getString(3));
         }while(rs.next());
       }
     }catch(SQLException e) {
@@ -126,7 +125,7 @@ public class DBOperations {
       Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
     }
 
-    return us;
+    return user;
   }
 
   /*Obtener todos los usuarios*/
@@ -326,7 +325,7 @@ public class DBOperations {
     return status;
   }
 
-  /*Operaciones de proyectos*/
+  /*-------------------------Operaciones de proyectos-------------------------*/
   /*Obtener todos los proyectos*/
   public ArrayList<ConacytProyect> conacytProyects() {
     p = new ArrayList<>();
@@ -490,14 +489,12 @@ public class DBOperations {
     return status;
   }
 
-  /*Operaciones de ingresos*/
+  /*--------------------------Operaciones de ingresos-------------------------*/
   /*Obtener todos los ingresos de un proyecto*/
   public ArrayList<ConacytIncome> conacytIncomes(int proyectNumber) {
     i = new ArrayList<>();
 
     try {
-      ConacytIncome in;
-
       sql = "CALL getConacytIncomes(?);";
       ps = con.prepareStatement(sql);
       ps.setInt(1, proyectNumber);
@@ -506,15 +503,15 @@ public class DBOperations {
 
       if(rs.next()) {
         do {
-          in = new ConacytIncome();
+          cin = new ConacytIncome();
 
-          in.setIncomeId(rs.getInt(1));
-          in.setExpenseCategory(rs.getString(3));
-          in.setExpenseSubCategory(rs.getString(4));
-          in.setConcept(rs.getString(5));
-          in.setAmount(rs.getFloat(6));
+          cin.setIncomeId(rs.getInt(1));
+          cin.setConcept(rs.getString(3));
+          cin.setExpenseCategory(rs.getString(4));
+          cin.setExpenseSubCategory(rs.getString(5));
+          cin.setAmount(rs.getFloat(6));
 
-          i.add(in);
+          i.add(cin);
         }while(rs.next());
       }
     }catch(SQLException e) {
@@ -525,6 +522,29 @@ public class DBOperations {
 
     return i;
   }
+  
+  /*Añadir ingreso*/
+  public int addConacytIncome(int proyectNumber, ConacytIncome newIncome) {
+    status = 0;
+
+    try {
+      sql = "CALL addConacytIncome(?, ?, ?, ?, ?);";
+      ps = con.prepareStatement(sql);
+      ps.setInt(1, proyectNumber);
+      ps.setString(2, newIncome.getConcept());
+      ps.setString(3, newIncome.getExpenseCategory());
+      ps.setString(4, newIncome.getExpenseSubCategory());
+      ps.setFloat(5, newIncome.getAmount());
+
+      status = ps.executeUpdate();
+    }catch(SQLException e) {
+      System.out.println("Adición de Nuevo Ingreso Fallida");
+      System.out.println(e.getMessage());
+      Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
+    }
+
+    return status;
+  }
 
   /*Editar datos del ingreso*/
   public int updateConacytIncome(int proyectNumber, int oldIncomeId, ConacytIncome newIncome) {
@@ -534,9 +554,9 @@ public class DBOperations {
       sql = "CALL updateConacytIncome(?, ?, ?, ?, ?);";
       ps = con.prepareStatement(sql);
       ps.setInt(1, oldIncomeId);
-      ps.setString(2, newIncome.getExpenseCategory());
-      ps.setString(3, newIncome.getExpenseSubCategory());
-      ps.setString(4, newIncome.getConcept());
+      ps.setString(2, newIncome.getConcept());
+      ps.setString(3, newIncome.getExpenseCategory());
+      ps.setString(4, newIncome.getExpenseSubCategory());
       ps.setFloat(5, newIncome.getAmount());
 
       status = ps.executeUpdate();
@@ -550,7 +570,7 @@ public class DBOperations {
   }
 
   /*Eliminar ingreso*/
-  public int deleteConacytIncome(int incomeId, int proyectNumber) {
+  public int deleteConacytIncome(int incomeId) {
     status = 0;
 
     try {
@@ -568,37 +588,12 @@ public class DBOperations {
     return status;
   }
 
-  /*Añadir ingreso*/
-  public int addConacytIncome(int proyectNumber, ConacytIncome newIncome) {
-    status = 0;
-
-    try {
-      sql = "CALL addConacytIncome(?, ?, ?, ?, ?);";
-      ps = con.prepareStatement(sql);
-      ps.setInt(1, proyectNumber);
-      ps.setString(2, newIncome.getExpenseCategory());
-      ps.setString(3, newIncome.getExpenseSubCategory());
-      ps.setString(4, newIncome.getConcept());
-      ps.setFloat(5, newIncome.getAmount());
-
-      status = ps.executeUpdate();
-    }catch(SQLException e) {
-      System.out.println("Adición de Nuevo Ingreso Fallida");
-      System.out.println(e.getMessage());
-      Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
-    }
-
-    return status;
-  }
-
-  /*Operaciones de egresos*/
+  /*-------------------------Operaciones de egresos---------------------------*/
   /*Obtener todos los egresos de un proyecto*/
   public ArrayList<ConacytOutcome> conacytOutcomes(int proyectNumber){
     o = new ArrayList<>();
 
     try {
-      ConacytOutcome ou;
-
       sql = "CALL getConacytOutcomes(?);";
       ps = con.prepareStatement(sql);
       ps.setInt(1, proyectNumber);
@@ -607,20 +602,22 @@ public class DBOperations {
 
       if(rs.next()) {
         do {
-          ou = new ConacytOutcome();
+          cou = new ConacytOutcome();
 
-          ou.setOutcomeId(rs.getInt(1));
-          ou.setOrderDate(rs.getString(2));
-          ou.setStartingNumber(rs.getInt(3));
-          ou.setExpenseCategory(rs.getString(4));
-          ou.setConcept(rs.getString(5));
-          ou.setAmount(rs.getFloat(6));
-          ou.setInvoiceNumber(rs.getString(7));
-          ou.setTransferNumber(rs.getString(8));
-          ou.setPolicyNumber(rs.getString(9));
-          ou.setTransferDate(rs.getString(10));
+          cou.setOutcomeId(rs.getInt(1));
+          cou.setConcept(rs.getString(3));
+          cou.setExpenseCategory(rs.getString(4));
+          cou.setOperationType(rs.getString(5));
+          cou.setOrderDate(rs.getString(6));
+          cou.setOrderNumber(rs.getString(7));
+          cou.setTransferDate(rs.getString(8));
+          cou.setTransferNumber(rs.getString(9));
+          cou.setStartingNumber(rs.getString(10));
+          cou.setInvoiceNumber(rs.getString(11));
+          cou.setPolicyNumber(rs.getString(12));
+          cou.setAmount(rs.getFloat(13));
 
-          o.add(ou);
+          o.add(cou);
         }while(rs.next());
       }
     }catch(SQLException e) {
@@ -632,28 +629,60 @@ public class DBOperations {
     return o;
   }
 
+  /*Añadir egreso*/
+  public int addOutcome(int proyectNumber, ConacytOutcome newOutcome) {
+    status = 0;
+
+    try {
+      sql = "CALL addConacytOutcome(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+      ps = con.prepareStatement(sql);
+      ps.setInt(1, proyectNumber);
+      ps.setString(2, newOutcome.getConcept());
+      ps.setString(3, newOutcome.getExpenseCategory());
+      ps.setString(4, newOutcome.getOperationType());
+      ps.setString(5, newOutcome.getOrderDate());
+      ps.setString(6, newOutcome.getOrderNumber());
+      ps.setString(7, newOutcome.getTransferDate());
+      ps.setString(8, newOutcome.getTransferNumber());
+      ps.setString(9, newOutcome.getStartingNumber());
+      ps.setString(10, newOutcome.getInvoiceNumber());
+      ps.setString(11, newOutcome.getPolicyNumber());
+      ps.setFloat(12, newOutcome.getAmount());
+
+      status = ps.executeUpdate();
+    }catch(SQLException e) {
+      System.out.println("Adición de Nuevo Egreso Fallida");
+      System.out.println(e.getMessage());
+      Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
+    }
+
+    return status;
+  }
+  
   /*Editar datos del egreso*/
-  public int updateConacytOutcome(int proyectNumber, int oldOutcomeId, ConacytOutcome newOutcome) {
+  public int updateConacytOutcome(ConacytOutcome newOutcome) {
     status = 0;
 
     try{
-      sql = "CALL updateConacytOutcome(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+      sql = "CALL updateConacytOutcome(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
       ps = con.prepareStatement(sql);
-      ps.setInt(1, oldOutcomeId);
-      ps.setString(2, newOutcome.getOperationType());
-      ps.setString(3, newOutcome.getOrderDate());
-      ps.setInt(4, newOutcome.getStartingNumber());
-      ps.setString(5, newOutcome.getExpenseCategory());
-      ps.setString(6, newOutcome.getConcept());
-      ps.setFloat(7, newOutcome.getAmount());
-      ps.setString(8, newOutcome.getInvoiceNumber());
-      ps.setString(9, newOutcome.getTransferNumber());
-      ps.setString(10, newOutcome.getPolicyNumber());
-      ps.setString(11, newOutcome.getTransferDate());
+      
+      ps.setInt(1, newOutcome.getOutcomeId());
+      ps.setString(2, newOutcome.getConcept());
+      ps.setString(3, newOutcome.getExpenseCategory());
+      ps.setString(4, newOutcome.getOperationType());
+      ps.setString(5, newOutcome.getOrderDate());
+      ps.setString(6, newOutcome.getOrderNumber());
+      ps.setString(7, newOutcome.getTransferDate());
+      ps.setString(8, newOutcome.getTransferNumber());
+      ps.setString(9, newOutcome.getStartingNumber());
+      ps.setString(10, newOutcome.getInvoiceNumber());
+      ps.setString(11, newOutcome.getPolicyNumber());
+      ps.setFloat(12, newOutcome.getAmount());
 
       status = ps.executeUpdate();
     }catch(SQLException e){
-      System.out.println("Actualización del Ingreso" + oldOutcomeId + "Fallida");
+      System.out.println("Actualización del Ingreso " + newOutcome.getOutcomeId() + " Fallida");
       System.out.println(e.getMessage());
       Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
     }
@@ -680,42 +709,13 @@ public class DBOperations {
     return status;
   }
 
-  /*Añadir egreso*/
-  public int addOutcome(int proyectNumber, ConacytOutcome newOutcome) {
-    status = 0;
-
-    try {
-      sql = "CALL addConacytOutcome(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
-      ps = con.prepareStatement(sql);
-      ps.setInt(1, proyectNumber);
-      ps.setString(2, newOutcome.getOperationType());
-      ps.setString(3, newOutcome.getOrderDate());
-      ps.setInt(4, newOutcome.getStartingNumber());
-      ps.setString(5, newOutcome.getExpenseCategory());
-      ps.setString(6, newOutcome.getConcept());
-      ps.setFloat(7, newOutcome.getAmount());
-      ps.setString(8, newOutcome.getInvoiceNumber());
-      ps.setString(9, newOutcome.getTransferNumber());
-      ps.setString(10, newOutcome.getPolicyNumber());
-      ps.setString(11, newOutcome.getTransferDate());
-
-      status = ps.executeUpdate();
-    }catch(SQLException e) {
-      System.out.println("Adición de Nuevo Egreso Fallida");
-      System.out.println(e.getMessage());
-      Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
-    }
-
-    return status;
-  }
-
-  /*Getters y setters*/
+  /*---------------------------Getters y setters------------------------------*/
   public Connection getCon() {
     return con;
   }
 
   public void setCon(Connection con) {
-    this.con = con;
+    DBOperations.con = con;
   }
 
   public ArrayList<ConacytProyect> getP() {
@@ -763,7 +763,7 @@ public class DBOperations {
   }
 
   public void setSql(String sql) {
-    this.sql = sql;
+    DBOperations.sql = sql;
   }
 
   public PreparedStatement getPs() {
@@ -771,7 +771,7 @@ public class DBOperations {
   }
 
   public void setPs(PreparedStatement ps) {
-    this.ps = ps;
+    DBOperations.ps = ps;
   }
 
   public ResultSet getRs() {
@@ -779,6 +779,6 @@ public class DBOperations {
   }
 
   public void setRs(ResultSet rs) {
-    this.rs = rs;
+    DBOperations.rs = rs;
   }
 }

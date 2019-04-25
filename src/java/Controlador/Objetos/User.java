@@ -9,23 +9,20 @@ public class User {
   private char userType;
   private String userName;
   private String userPass;
-  private boolean session;
 
   public User() {
     userId = 0;
     userType = ' ';
     userName = "";
     userPass = "";
-    session = false;
   }
 
-  public User(int userId, char userType, String userName, String userPass, boolean session) {
+  public User(int userId, char userType, String userName, String userPass) {
     this.userId = userId;
     this.userType = userType;
     this.userName = userName;
     this.userPass = userPass;
-    this.session = session;
-  }
+  }  
 
   public int getUserId() {
     return userId;
@@ -58,12 +55,4 @@ public class User {
   public void setUserPass(String userPass) {
     this.userPass = userPass;
   }
-
-  public boolean isSession() {
-    return session;
-  }
-
-  public void setSession(boolean session) {
-    this.session = session;
-  }  
 }

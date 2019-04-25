@@ -6,24 +6,24 @@ package Controlador.Objetos;
  */
 public class ConacytIncome {
   private int incomeId;
+  private String concept;
   private String expenseCategory;
   private String expenseSubCategory;
-  private String concept;
   private float amount;
 
   public ConacytIncome() {
     incomeId = 0;
+    concept = "";
     expenseCategory = "";
     expenseSubCategory = "";
-    concept = "";
     amount = 0;
   }
-  
-  public ConacytIncome(int incomeId, String expenseCategory, String expenseSubCategory, String concept, float amount) {
+
+  public ConacytIncome(int incomeId, String concept, String expenseCategory, String expenseSubCategory, float amount) {
     this.incomeId = incomeId;
+    this.concept = concept;
     this.expenseCategory = expenseCategory;
     this.expenseSubCategory = expenseSubCategory;
-    this.concept = concept;
     this.amount = amount;
   }
 
@@ -33,6 +33,14 @@ public class ConacytIncome {
 
   public void setIncomeId(int incomeId) {
     this.incomeId = incomeId;
+  }
+
+  public String getConcept() {
+    return concept;
+  }
+
+  public void setConcept(String concept) {
+    this.concept = concept;
   }
 
   public String getExpenseCategory() {
@@ -49,14 +57,6 @@ public class ConacytIncome {
 
   public void setExpenseSubCategory(String expenseSubCategory) {
     this.expenseSubCategory = expenseSubCategory;
-  }
-
-  public String getConcept() {
-    return concept;
-  }
-
-  public void setConcept(String concept) {
-    this.concept = concept;
   }
 
   public float getAmount() {

@@ -529,16 +529,16 @@
                       <input type="text" id="income-concept" class="w3-input w3-border w3-round-small" required>
                     </td>
                     <td class="w3-text-grey">
-                      <label for="expense-category" class="w3-hide-small w3-hide-medium native-text-elipsis">Categoria de gasto</label>
-                      <select id="expense-category" class="w3-input w3-border w3-round-small" required>
+                      <label for="income-expense-category" class="w3-hide-small w3-hide-medium native-text-elipsis">Categoria de gasto</label>
+                      <select id="income-expense-category" class="w3-input w3-border w3-round-small" required>
                         <option disabled hidden value="" selected>Seleccionar</option>
                         <option value="1">GINVE</option>
                         <option value="2">GCORR</option>
                       </select>
                     </td>
                     <td class="w3-text-grey">
-                      <label for="expense-subcategory" class="w3-hide-small w3-hide-medium native-text-elipsis">subcategoria de gasto</label>
-                      <select id="expense-category" class="w3-input w3-border w3-round-small" required>
+                      <label for="income-expense-subcategory" class="w3-hide-small w3-hide-medium native-text-elipsis">subcategoria de gasto</label>
+                      <select id="income-expense-subcategory" class="w3-input w3-border w3-round-small" required>
                         <option disabled hidden value="" selected>Seleccionar</option>
                         <option value="405">405</option>
                         <option value="200">200</option>
@@ -669,6 +669,83 @@
 
                         <button class="w3-button w3-win8-magenta w3-round-small w3-small">
                           <i class="fas fa-edit fa-x1"></i> Eliminar
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  
+                  <!--añadir egreso directamente-->
+                  <tr class="w3-white native-outcome-td-data native-td-data">
+                    <td class="w3-text-blue native-text-elipsis native-td-overflow">
+                      <label for="outcome-concept" class="w3-small w3-hide-small w3-hide-medium">Concepto</label>
+                      <input type="text" id="outcome-concept" class="w3-input w3-border w3-round-small" required>
+                    </td>
+                    <td class="w3-text-grey">
+                      <label for="outcome-expense-category" class="w3-small w3-hide-small w3-hide-medium native-text-elipsis">Categoria gasto</label>
+                      <select id="outcome-expense-category" class="w3-input w3-border w3-round-small" required>
+                        <option disabled hidden value="" selected>Seleccionar</option>
+                        <option value="1">GINVE</option>
+                        <option value="2">GCORR</option>
+                      </select>
+                      <br>
+                      <label for="outcome-operation" class="w3-small w3-hide-small w3-hide-medium native-text-elipsis">Operación</label>
+                      <select id="outcome-operation" class="w3-input w3-border w3-round-small" required>
+                        <option disabled hidden value="" selected>Seleccionar</option>
+                        <option value="1">Compra</option>
+                        <option value="2">Reembolso</option>
+                      </select>
+                    </td>
+                    <td class="w3-text-grey">
+                      <label for="outcome-order-date" class="w3-small w3-hide-small w3-hide-medium native-text-elipsis">Fec. pedido</label>
+                      <input type="date" id="outcome-order-date" class="w3-input w3-border w3-round-small" required>
+                      <br> 
+                      <label for="outcome-order-number" class="w3-small w3-hide-small w3-hide-medium native-text-elipsis">N° pedido</label>
+                      <input type="text" id="outcome-order-number" class="w3-input w3-border w3-round-small" required>
+                    </td>
+                    <td class="w3-text-grey">
+                      <label for="outcome-transfer-date" class="w3-small w3-hide-small w3-hide-medium native-text-elipsis">Fec. transferencia</label>
+                      <input type="date" id="outcome-order-date" class="w3-input w3-border w3-round-small" required>
+                      <br> 
+                      <label for="outcome-transfer-number" class="w3-small w3-hide-small w3-hide-medium native-text-elipsis">N° transferencia</label>
+                      <input type="text" id="outcome-order-number" class="w3-input w3-border w3-round-small" required>
+                    </td>
+                    <td class="w3-text-grey">
+                      <label for="outcome-starting-number" class="w3-small w3-hide-small w3-hide-medium native-text-elipsis">N° partida</label>
+                      <input type="text" id="outcome-starting-number" class="w3-input w3-border w3-round-small" required>
+                    </td>
+                    <td class="w3-text-grey">
+                      <label for="outcome-invoice-number" class="w3-small w3-hide-small w3-hide-medium native-text-elipsis">N° factura</label>
+                      <input type="text" id="outcome-invoice-number" class="w3-input w3-border w3-round-small" required>
+                      <br> 
+                      <label for="outcome-policy-number" class="w3-small w3-hide-small w3-hide-medium native-text-elipsis">N° poliza</label>
+                      <input type="text" id="outcome-policy-number" class="w3-input w3-border w3-round-small" required>
+                    </td>
+                    <td class="w3-text-red">
+                      <label for="income-amount" class="w3-small w3-hide-small w3-hide-medium">Importe</label>
+                      <input type="number" id="outcome-amount" class="w3-input w3-border w3-round-small" required>
+                    </td>
+                    <td>&nbsp;</td>
+                  </tr>
+                  
+                  <tr class="w3-white">
+                    <td colspan="8" class="w3-padding w3-center">
+                      <div class="w3-hide-medium w3-hide-small">
+                        <button class="w3-button w3-flat-belize-hole w3-hover-blue w3-round-small">
+                          Añadir egreso <i class="fas fa-plus fa-x1"></i>
+                        </button>
+
+                        <button class="w3-button w3-flat-pomegranate w3-hover-red w3-round-small">
+                          Cancelar <i class="fas fa-times fa-x1"></i>
+                        </button>
+                      </div>
+                      
+                      <div class="w3-hide-large">
+                        <button class="w3-button w3-flat-belize-hole w3-hover-blue w3-round-small w3-small">
+                          Añadir egreso <i class="fas fa-plus fa-x1"></i>
+                        </button>
+
+                        <button class="w3-button w3-flat-pomegranate w3-hover-red w3-round-small w3-small">
+                          Cancelar <i class="fas fa-times"></i>
                         </button>
                       </div>
                     </td>
