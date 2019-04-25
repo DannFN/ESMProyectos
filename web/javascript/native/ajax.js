@@ -1,19 +1,22 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-$(document).ready(function() {
-	$('#id_botón_acción').click(function(event) {
-		//variables por id
-		var variable = $('#id_a_obtener').val();
-		$.post('Servlet', {
-			//Parametros
-			parametro : variable, //variable_asociada_al_parametro
-   parametro1 : variable //variable_asociada_al_parametro1
-		}, function(responseText, statusText) {
-			$('#id_elemento_a_alterar').html(responseText||statusText);
-		});
-	});
-});
+function addProyect() {
+  $('#add-proyect-submit').click(function(event) {
+    var variable = $('#proyect-number').val();
+    var variable1 = $('#proyect-name').val();
+    var variable2 = $('#proyect-titular').val();
+    
+    $.post('Servlet', 
+    {
+      parameter : variable,
+      parameter1 : variable1,
+      parameter2 : variable2
+    }, 
+    function(responseText, statusText) {
+      if(statusText === 'success' && responseText !== 'Internal server error') {
+        $('#conacyt-proyects-table').append(responseText);
+        /*TODO cambiar propiedades handler de exito*/
+      }else {
+        /*TODO cambiar propiedades handler de error*/
+      }
+    });
+  });
+}

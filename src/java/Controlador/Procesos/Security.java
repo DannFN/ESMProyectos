@@ -3,6 +3,8 @@ package Controlador.Procesos;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -27,7 +29,9 @@ public class Security {
       BigInteger resumenNumero = new BigInteger(1, bytesDelResumen);
       resume = resumenNumero.toString(16);							
     } catch (NoSuchAlgorithmException e) {
+      System.out.println("Fallo en el es cifrado de datos");
       System.out.println(e.getMessage());
+      Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
     }
     
     return resume;    

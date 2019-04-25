@@ -18,26 +18,29 @@ import java.util.logging.Logger;
  */
 public class DBOperations {
   /*variable de conexión*/
-  private Connection con;
+  private static Connection con;
+  
+  /*variables de operaciones con la base de datos*/
+  private static String sql;
+  private static PreparedStatement ps;
+  private static ResultSet rs;
+  
+  /*status de query*/
+  private int status;
 
-  /*variables de asignación de resultados*/
+  /*variables de asignación de resultados (Listas)*/
   private ArrayList<ConacytProyect> p;
   private ArrayList<ConacytIncome> i;
   private ArrayList<ConacytOutcome> o;
   private ArrayList<User> u;
-  private int status;
-  
+
+  /*variables de asignación de resultados (objetos individuales)*/
   private ConacytProyect cpro;
   private User user;
   private ConacytIncome cin;
   private ConacytOutcome cou;
 
-  /*variables de operaciones con la base de datos*/
-  private String sql;
-  private PreparedStatement ps;
-  private ResultSet rs;
-
-  /*constructor que abre la conexión*/
+  /*constructor de apertura de la conexión*/
   public DBOperations() {
     openConnection();
   }
@@ -90,13 +93,6 @@ public class DBOperations {
           status = 30; /*El usuario tiene permiso de administrador (usuario maestro)*/
         }
       }
-
-      if(status > 0){
-        System.out.println("Consulta de Datos de Usuario Exitosa");
-      }else {
-        System.out.println("Consulta de Datos de Usuario Exitosa");
-        System.out.println("No Hay Registros Asociados al Usuario");
-      }
     }catch(SQLException e) {
       System.out.println("Consulta de Datos de Usuario Fallida");
       System.out.println(e.getMessage());
@@ -106,7 +102,7 @@ public class DBOperations {
     return status;
   }
 
-  /*Obtner datos de usuario para sesion*/
+  /*Obtener datos de usuario para sesion*/
   public User user(String user){
     User us = new User();
 
@@ -123,15 +119,8 @@ public class DBOperations {
           us.setUserName(rs.getString(3));
           us.setSession(true);
         }while(rs.next());
-
-        System.out.println("Consulta de Datos de Usuario Exitosa");
-      }else {
-        System.out.println("Consulta de Datos de Usuario Fallida");
-        System.out.println("No Hay registros asociados al usuario");
       }
-
     }catch(SQLException e) {
-      us = null;
       System.out.println("Consulta de Datos de Usuario Fallida");
       System.out.println(e.getMessage());
       Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
@@ -161,12 +150,7 @@ public class DBOperations {
 
           u.add(us);
         }while(rs.next());
-        System.out.println("Consulta de Usuarios Exitosa");
-      }else {
-        System.out.println("Consulta de Usuarios Exitosa");
-        System.out.println("No Hay Usuarios Registrados");
       }
-
     }catch(SQLException e) {
       System.out.println("Consulta de Usuarios Fallida");
       System.out.println(e.getMessage());
@@ -203,13 +187,6 @@ public class DBOperations {
           status = ps.executeUpdate();
         }
       }
-
-      if(status > 0){
-        System.out.println("Actualización de Datos de Usuario Exitosa");
-      }else {
-        System.out.println("Actualización de Datos de Usuario Fallida");
-        System.out.println("No hay Registros Asociados al Usuario");
-      }
     }catch(SQLException e){
       System.out.println("Actualización de Datos de Usuario Fallida");
       System.out.println(e.getMessage());
@@ -240,13 +217,6 @@ public class DBOperations {
           status = ps.executeUpdate();
       }else {
         status = -40; /*Las contraseñas para comprobación son diferentes*/
-      }
-
-      if(status > 0){
-        System.out.println("Actualización de Datos de Usuario Exitosa");
-      }else {
-        System.out.println("Actualización de Datos de Usuario Fallida");
-        System.out.println("No hay Registros Asociados al Usuario o las Contraseñas No Coinciden");
       }
     }catch(SQLException e){
       System.out.println("Actualización de Datos de Usuario Fallida");
@@ -286,13 +256,6 @@ public class DBOperations {
           status = ps.executeUpdate();
         }
       }
-
-      if(status > 0){
-        System.out.println("Actualización de Datos de Usuario Exitosa");
-      }else {
-        System.out.println("Actualización de Datos de Usuario Fallida");
-        System.out.println("No hay Registros Asociados al Usuario");
-      }
     }catch(SQLException e){
       System.out.println("Actualización de Datos de Usuario Fallida");
       System.out.println(e.getMessage());
@@ -325,13 +288,6 @@ public class DBOperations {
 
         rs = ps.executeQuery();
       }
-
-      if(status > 0){
-        System.out.println("Adición de Nuevo Usuario Exitosa");
-      }else {
-        System.out.println("Adición de Nuevo Usuario Fallida");
-        System.out.println("Ya Existen Registros Asociados al Usuario");
-      }
     }catch(SQLException e){
       System.out.println("Adición de Nuevo Usuario Fallida ");
       System.out.println(e.getMessage());
@@ -360,13 +316,6 @@ public class DBOperations {
         ps.setString(1, userName);
 
         rs = ps.executeQuery();
-      }
-
-      if(status > 0){
-        System.out.println("Eliminación del Usuario Exitosa");
-      }else {
-        System.out.println("Eliminación del Usuario Fallida");
-        System.out.println("Ya Existen Registros Asociados al Usuario");
       }
     }catch(SQLException e){
       System.out.println("Eliminación del Usuario Fallida");
@@ -400,11 +349,6 @@ public class DBOperations {
 
           p.add(pr);
         }while(rs.next());
-
-        System.out.println("Consulta de Proyectos de Conacyt Exitosa");
-      }else {
-        System.out.println("Consulta de Proyectos de Conacyt Exitosa");
-        System.out.println("No hay Proyectos de Conacyt Que Mostrar");
       }
     }catch (SQLException e) {
       System.out.println("Consulta de Proyectos de Conacyt Fallida");
@@ -415,6 +359,7 @@ public class DBOperations {
    return p;
   }
   
+  /*Obtener un proyecto en especifico*/
   public ConacytProyect conacytProyect(int proyectNumber) {
     cpro = new ConacytProyect();
     
@@ -435,9 +380,10 @@ public class DBOperations {
         cpro.setIncomes(conacytIncomes(proyectNumber));
         cpro.setOutcomes(conacytOutcomes(proyectNumber));        
       }
-      
     }catch(SQLException e) {
-      
+      System.out.println("Consulta de Proyecto de Conacyt Fallida");
+      System.out.println(e.getMessage());
+      Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
     }
     
     return cpro;
@@ -457,11 +403,6 @@ public class DBOperations {
         do {
           b += rs.getDouble(6);
         }while(rs.next());
-
-        System.out.println("Consulta de Ingresos del proyecto" + proyectNumber + "Exitosa");
-      }else {
-        System.out.println("Consulta de Ingresos del proyecto" + proyectNumber + "Exitosa");
-        System.out.println("No hay Ingresos Que Mostrar");
       }
 
       sql = "CALL getConacytOutcomes(?);";
@@ -477,13 +418,7 @@ public class DBOperations {
             b += rs.getDouble(8);
           }
         }while(rs.next());
-
-        System.out.println("Consulta de Egresos del proyecto" + proyectNumber + "Exitosa");
-      }else {
-        System.out.println("Consulta de Egresos del proyecto" + proyectNumber + "Exitosa");
-        System.out.println("No hay Ingresos Que Mostrar");
       }
-
     }catch(SQLException e) {
       System.out.println("Consulta de Balance de Proyecto fallida");
       System.out.println(e.getMessage());
@@ -506,13 +441,6 @@ public class DBOperations {
       ps.setString(4, newProyect.getTitular());
 
       status = ps.executeUpdate();
-
-      if(status > 0){
-        System.out.println("Actualización del Proyecto" + oldProyectNumber + "Exitosa");
-      }else {
-        System.out.println("Actualización del Proyecto" + oldProyectNumber + "Fallida");
-        System.out.println("No hay Registros Asociados al Proyecto");
-      }
     }catch(SQLException e){
       System.out.println("Actualización del Proyecto" + oldProyectNumber + "Fallida");
       System.out.println(e.getMessage());
@@ -532,14 +460,6 @@ public class DBOperations {
       ps.setInt(1, proyectNumber);
 
       status = ps.executeUpdate();
-
-      if(status > 0){
-        System.out.println("Eliminación del Proyecto" + proyectNumber + "Existosa");
-      }else{
-        System.out.println("Eliminación del Proyecto" + proyectNumber + "Fallida");
-        System.out.println("No Hay Registros Asociados al Proyecto");
-      }
-
     }catch(SQLException e) {
       System.out.println("Eliminación del Proyecto" + proyectNumber + "Fallida");
       System.out.println(e.getMessage());
@@ -561,14 +481,6 @@ public class DBOperations {
       ps.setString(3, newProyect.getTitular());
 
       status = ps.executeUpdate();
-
-      if(status > 0){
-        p = conacytProyects();
-
-        System.out.println("Adición de Nuevo Proyecto Exitosa");
-      }else {
-        System.out.println("Adición de Nuevo Proyecto Fallida");
-      }
     }catch(SQLException e) {
       System.out.println("Adición de Nuevo Proyecto Fallida");
       System.out.println(e.getMessage());
@@ -604,11 +516,6 @@ public class DBOperations {
 
           i.add(in);
         }while(rs.next());
-
-        System.out.println("Consulta de Ingresos del proyecto" + proyectNumber + "Exitosa");
-      }else {
-        System.out.println("Consulta de Ingresos del proyecto" + proyectNumber + "Exitosa");
-        System.out.println("No hay Ingresos Que Mostrar");
       }
     }catch(SQLException e) {
       System.out.println("Consulta de Ingresos del Proyecto" + proyectNumber + "Fallida");
@@ -633,15 +540,6 @@ public class DBOperations {
       ps.setFloat(5, newIncome.getAmount());
 
       status = ps.executeUpdate();
-
-      if(status > 0){
-        i = conacytIncomes(proyectNumber);
-
-        System.out.println("Actualización del Ingreso" + oldIncomeId + "Exitosa");
-      }else {
-        System.out.println("Actualización del Ingreso" + oldIncomeId + "Fallida");
-        System.out.println("No hay Registros Asociados al Ingreso");
-      }
     }catch(SQLException e){
       System.out.println("Actualización del Ingreso" + oldIncomeId + "Fallida");
       System.out.println(e.getMessage());
@@ -661,16 +559,6 @@ public class DBOperations {
       ps.setInt(1, incomeId);
 
       status = ps.executeUpdate();
-
-      if(status > 0){
-        i = conacytIncomes(proyectNumber);
-
-        System.out.println("Eliminación del Ingreso" + incomeId + "Existosa");
-      }else{
-        System.out.println("Eliminación del Ingreso" + incomeId + "Fallida");
-        System.out.println("No Hay Registros Asociados al Ingreso");
-      }
-
     }catch(SQLException e) {
       System.out.println("Eliminación del Ingreso" + incomeId + "Fallida");
       System.out.println(e.getMessage());
@@ -694,14 +582,6 @@ public class DBOperations {
       ps.setFloat(5, newIncome.getAmount());
 
       status = ps.executeUpdate();
-
-      if(status > 0){
-        i = conacytIncomes(proyectNumber);
-
-        System.out.println("Adición de Nuevo Ingreso Exitosa");
-      }else {
-        System.out.println("Adición de Nuevo Ingreso Fallida");
-      }
     }catch(SQLException e) {
       System.out.println("Adición de Nuevo Ingreso Fallida");
       System.out.println(e.getMessage());
@@ -742,11 +622,6 @@ public class DBOperations {
 
           o.add(ou);
         }while(rs.next());
-
-        System.out.println("Consulta de Egresos del proyecto" + proyectNumber + "Exitosa");
-      }else {
-        System.out.println("Consulta de Egresos del proyecto" + proyectNumber + "Exitosa");
-        System.out.println("No hay Egresos Que Mostrar");
       }
     }catch(SQLException e) {
       System.out.println("Consulta de Egresos del Proyecto" + proyectNumber + "Fallida");
@@ -777,15 +652,6 @@ public class DBOperations {
       ps.setString(11, newOutcome.getTransferDate());
 
       status = ps.executeUpdate();
-
-      if(status > 0){
-        o = conacytOutcomes(proyectNumber);
-
-        System.out.println("Actualización del Ingreso" + oldOutcomeId + "Exitosa");
-      }else {
-        System.out.println("Actualización del Ingreso" + oldOutcomeId + "Fallida");
-        System.out.println("No hay Registros Asociados al Ingreso");
-      }
     }catch(SQLException e){
       System.out.println("Actualización del Ingreso" + oldOutcomeId + "Fallida");
       System.out.println(e.getMessage());
@@ -805,16 +671,6 @@ public class DBOperations {
       ps.setInt(1, outcomeId);
 
       status = ps.executeUpdate();
-
-      if(status > 0){
-        o = conacytOutcomes(proyectNumber);
-
-        System.out.println("Eliminación del Ingreso" + outcomeId + "Existosa");
-      }else{
-        System.out.println("Eliminación del Ingreso" + outcomeId + "Fallida");
-        System.out.println("No Hay Registros Asociados al Ingreso");
-      }
-
     }catch(SQLException e) {
       System.out.println("Eliminación del Ingreso" + outcomeId + "Fallida");
       System.out.println(e.getMessage());
@@ -844,14 +700,6 @@ public class DBOperations {
       ps.setString(11, newOutcome.getTransferDate());
 
       status = ps.executeUpdate();
-
-      if(status > 0){
-        o = conacytOutcomes(proyectNumber);
-
-        System.out.println("Adición de Nuevo Egreso Exitosa");
-      }else {
-        System.out.println("Adición de Nuevo Egreso Fallida");
-      }
     }catch(SQLException e) {
       System.out.println("Adición de Nuevo Egreso Fallida");
       System.out.println(e.getMessage());

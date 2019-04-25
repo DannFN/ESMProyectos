@@ -4,9 +4,25 @@
         <servlet-name>LogIn</servlet-name>
         <servlet-class>Controlador.Servlets.LogIn</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddProyect</servlet-name>
+        <servlet-class>Controlador.Servlets.AddProyect</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deleteproyect</servlet-name>
+        <servlet-class>Controlador.Servlets.deleteproyect</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LogIn</servlet-name>
         <url-pattern>/LogIn</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddProyect</servlet-name>
+        <url-pattern>/AddProyect</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteproyect</servlet-name>
+        <url-pattern>/deleteproyect</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

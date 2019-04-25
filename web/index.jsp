@@ -1,299 +1,162 @@
 <%-- 
-    Document   : index
-    Created on : 22/02/2019, 11:24:03 AM
-    Author     : Daniel Flores
+	Document   : index
+	Created on : 22/02/2019, 11:24:03 AM
+	Author     : Daniel Flores
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta content="width=device-width, initial-scale=1" name="viewport">
-    <title>index</title>
-    <link rel="stylesheet" type="text/css" href="css/w3/w3.css">
-    <link rel="stylesheet" type="text/css" href="css/w3/w3-theme.css">
-    <link rel="stylesheet" type="text/css" href="css/w3/w3-flat-colors.css">
-    <link rel="stylesheet" type="text/css" href="css/w3/w3-metro-colors.css">
-    <link rel="stylesheet" type="text/css" href="css/w3/w3-win8-colors.css">
-    <link rel="stylesheet" type="text/css" href="css/w3/w3-ios-colors.css">
-    <link rel="stylesheet" type="text/css" href="css/native/w3overwrited.css">
-    <link rel="stylesheet" type="text/css" href="css/native/all.css">
-    <link rel="stylesheet" type="text/css" href="css/native/index.css">
-    
-    <script type="text/javascript" src="javascript/native/validations.js"></script>
-  </head>
+	<head>
+		<title>index</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+
+  <link rel="stylesheet" type="text/css" href="css/w3/w3.css">
+  <link rel="stylesheet" type="text/css" href="css/native/w3-overwrited.css">
+  <link rel="stylesheet" type="text/css" href="css/native/all.css">
+  <link rel="stylesheet" type="text/css" href="css/native/index.css">
+	  
+  <link rel="stylesheet" type="text/css" href="css/w3/w3-theme.css">
+  <link rel="stylesheet" type="text/css" href="css/w3/w3-flat-colors.css">
+  <link rel="stylesheet" type="text/css" href="css/w3/w3-metro-colors.css">
+  <link rel="stylesheet" type="text/css" href="css/w3/w3-win8-colors.css">
   
-  <body ondrag="return false"
-        ondrop="return false">
-    <!--image background-->
-    <div class="w3-opacity
-         native-background
-         native-background-1
-         native-blur">
-      <!--Empty-->
-      &nbsp;
-    </div>
-    
-    <!--color background-->
-    <div class="w3-opacity
-         native-background
-         w3-theme-l2">
-      <!--Empty-->
-      &nbsp;
-    </div>
-    
-    <!--content-->
-    <!--header-->
-    <div class="w3-container
-         w3-padding
-         w3-text-white
-         w3-theme-d2">
-      <div class="w3-col
-           l12
-           m12
-           s12
-           w3-center">
-        <div class="w3-row">
-          <!--escudo 1 vista large-->
-          <div class="w3-col
-               l4
-               w3-hide-medium
-               w3-hide-small">
-            <div class="w3-circle
-                 w3-white
-                 w3-right
-                 w3-display-container
-                 native-img-container-large">
-              <img src="images/ipn-logo.png"
-                   class="w3-display-middle"
-                   alt="Escudo IPN">
-            </div> 
-          </div>
+  <script type="text/javascript" src="javascript/native/validations.js"></script>
+	</head>
+	
+	<body ondrag="return false" ondrop="return false">
+		<!--imagen background-->
+		<div class="w3-opacity native-background native-background-1 native-blur">
+			<!--vacio-->
+			&nbsp;
+		</div>
 
-          <!--escudo 1 vista medium-->      
-          <div class="w3-col
-               m3
-               w3-hide-large
-               w3-hide-small">
-            <div class="w3-circle
-                 w3-white
-                 w3-right
-                 w3-display-container
-                 native-img-container-medium">
-              <img src="images/ipn-logo.png"
-                   class="w3-display-middle"
-                   alt="Escudo IPN">
-            </div> 
-          </div>
+		<!--color background-->
+		<div class="w3-opacity native-background w3-theme-l2">
+			<!--vacio-->
+			&nbsp;
+		</div>
 
-          <!--escudo 1 vista small-->
-          <div class="w3-col
-               s2
-               w3-hide-large
-               w3-hide-medium">
-            <div class="w3-circle
-                 w3-white
-                 w3-right
-                 w3-display-container
-                 native-img-container-small">
-              <img src="images/ipn-logo.png"
-                   class="w3-display-middle"
-                   alt="Escudo IPN">
-            </div> 
-          </div>
+		<!--contenido de la pagina-->
+		<!--header-->
+		<header class="w3-container w3-padding-16 w3-theme-d2">
+			<div class="w3-row">
+				<!--escudo 1-->
+				<div class="w3-col l4 m3 s2">
+					<!--escudo 1 vista large-->
+					<div class="w3-circle w3-white w3-right w3-display-container w3-hide-medium w3-hide-small native-img-container-large">
+						<img src="images/ipn-logo.png" alt="Escudo IPN" class="w3-display-middle">
+					</div>
 
-          <!--titulo header-->
-          <div class="w3-col
-               l4
-               m6
-               s8">
-            <p>
-              <b>Instituto Politecnico Nacional</b> 
-              <span class="w3-hide-small"><br></span>
-              <span class="w3-hide-small">Escuela Superior de Medicina</span>
-            </p>
-          </div>
+					<!--escudo 1 vista medium-->
+					<div class="w3-circle w3-white w3-right w3-display-container w3-hide-large w3-hide-small native-img-container-medium">
+						<img src="images/ipn-logo.png" alt="Escudo IPN" class="w3-display-middle">
+					</div>
+					
+					<!--escudo 1 vista small-->
+					<div class="w3-circle w3-white w3-right w3-display-container w3-hide-large w3-hide-medium native-img-container-small">
+						<img src="images/ipn-logo.png" alt="Escudo IPN" class="w3-display-middle">
+					</div>
+				</div>
 
-          <!--escudo 2 vista large-->
-          <div class="w3-col
-               l4
-               w3-hide-medium
-               w3-hide-small">
-            <div class="w3-circle
-                 w3-white
-                 w3-left
-                 w3-display-container
-                 native-img-container-large">
-              <img src="images/esm-logo.png"
-                   class="w3-display-middle"
-                   alt="Escudo ESM">
-            </div> 
-          </div>
+				<!--cabecera-->
+				<div class="w3-col l4 m6 s8 w3-center">
+						<b>Instituto Politécnico Nacional</b>
+						<br class="w3-hide-small">
+						<span class="w3-hide-small">Escuela superior de Medicina</span>
+				</div>
 
-          <!--escudo 2 vista medium-->
-          <div class="w3-col
-               m3
-               w3-hide-large
-               w3-hide-small">
-            <div class="w3-circle
-                 w3-white
-                 w3-left
-                 w3-display-container
-                 native-img-container-medium">
-              <img src="images/esm-logo.png"
-                   class="w3-display-middle"
-                   alt="Escudo ESM">
-            </div> 
-          </div>
+				<!--escudo 2-->
+				<div class="w3-col l4 m3 s2">
+					<!--escudo 2 vista large-->
+					<div class="w3-circle w3-white w3-left w3-display-container w3-hide-medium w3-hide-small native-img-container-large">
+						<img src="images/esm-logo.png" alt="Escudo ESM" class="w3-display-middle">
+					</div>
 
-          <!--escudo 2 vista small-->
-          <div class="w3-col
-               s2
-               w3-hide-large
-               w3-hide-medium">
-            <div class="w3-circle
-                 w3-white
-                 w3-left
-                 w3-display-container
-                 native-img-container-small">
-              <img src="images/esm-logo.png"
-                   class="w3-display-middle"
-                   alt="Escudo ESM">
-            </div> 
-          </div>
+					<!--escudo 2 vista medium-->
+					<div class="w3-circle w3-white w3-left w3-display-container w3-hide-large w3-hide-small native-img-container-medium">
+						<img src="images/esm-logo.png" alt="Escudo IPN" class="w3-display-middle">
+					</div>
+					
+					<!--escudo 2 vista small-->
+					<div class="w3-circle w3-white w3-left w3-display-container w3-hide-large w3-hide-medium native-img-container-small">
+						<img src="images/esm-logo.png" alt="Escudo IPN" class="w3-display-middle">
+					</div>
+				</div>
+			</div>
+
+			<!--subtitulo-->
+			<div class="w3-padding-small w3-center w3-hide-small">
+				<small>Sistema De Gestión y Consulta de Recursos de Proyectos de Investigación de la Escuela Superior de Medicina</small>
+			</div>
+		</header>
+
+		<!--manejador de errores-->
+		<c:if test = "${msg != null}">
+			<div class="w3-container w3-padding w3-win8-magenta" role="alert">${msg}</div>
+  </c:if>
+	
+  <!--contenido del cuerpo-->
+  <div class="w3-container native-main">
+  	<div class="w3-row native-margin-top-adaptative">
+  		<div class="w3-col l2">
+  			<!--vacio-->
+  			&nbsp;
+  		</div>
+
+  		<div class="w3-col l8">
+  			<!--texto gigante vista large-->
+  			<div class="w3-center w3-text-white w3-hide-small">
+  				<span class="native-giant-text">Proyectos de Investigación ESM</span>
+  				<br><br>
+  				<b>Iniciar sesión</b>
+  			</div>
+
+					<!--texto gigante vista small-->
+					<div class="w3-center w3-text-white w3-hide-large w3-hide-medium">
+						<span class="native-giant-text-mobile">Proyectos de Investigación ESM</span>
+						<br>
+						<small>Sistema De Gestión y Consulta de Recursos de Proyectos de Investigación de la Escuela Superior de Medicina</small>
+						<br>
+						<b>Iniciar sesión</b>
+					</div>
+
+					<div>
+	  			<form action="LogIn" method="post" autocomplete="off">
+	  				<div class="w3-row-padding">
+	  					<div class="w3-col l4 m4 s12">
+	  						<input type="text" name="user" class="w3-input w3-round-small w3-white" placeholder="Usuario" required="required">
+	  						<br class="w3-hide-large w3-hide-medium">
+	  					</div>  					
+	  					
+	  					<div class="w3-col l4 m4 s12">
+	  						<input type="password" name="password" class="w3-input w3-round-small w3-white" placeholder="Contraseña" required="required">
+	  						<br class="w3-hide-large w3-hide-medium">
+	  					</div>
+
+	  					<div class="w3-col l4 m4 s12">
+          <button type="submit" class="w3-btn w3-round-small w3-black w3-hover-theme" style="width: 100%" >Entrar</button>
         </div>
-      </div>
-      
-      <!--subtitulo header-->
-      <div class="w3-padding-small
-           w3-text-white
-           w3-center
-           w3-hide-small">
-        <small>Sistema De Gestión y Consulta de Recursos de Proyectos de Investigación de la Escula Superior de Medicina</small>
-      </div>
-    </div>
+	  				</div>
+	  			</form>
+	  		</div>
+  		</div>
 
-    <!--manejador de errores-->
-    <c:if test = "${msg != null}">
-        <div class="w3-container 
-             w3-win8-magenta
-             native-text-white
-             w3-padding" 
-             role="alert">${msg}</div>
-    </c:if>
+  		<div class="w3-col l2">
+  			<!--vacio-->
+  			&nbsp;
+  		</div>
+  	</div>
+  </div>
 
-    <!--body content-->
-    <div class="w3-container
-         native-main">
-      <div class="native-margin-adaptative">
-        <div class="w3-col
-             l2">
-          <!--Empty-->
-          &nbsp;
-        </div>
-
-        <div class="w3-col
-             l8">
-          <div class="w3-container">
-            <p class="w3-center
-               w3-text-white
-               w3-hide-small">
-              <span class="native-giant-text">Proyectos de Investigación ESM</span>
-              <br><br>
-              <b>Iniciar Sesión</b>
-            </p>
-
-            <p class="w3-center
-               w3-text-white
-               w3-hide-large
-               w3-hide-medium">
-              <span class="native-giant-text-mobile">Proyectos de Investigación ESM</span>
-              <br><br>
-              <small>Sistema De Gestión y Consulta de Recursos de Proyectos de Investigación de la Escula Superior de Medicina</small>
-              <br><br>
-              <b>Iniciar Sesión</b>
-            </p>
-          </div>
-
-          <div>
-            <form action="LogIn"
-                  method="post"
-                  autocomplete="off">
-              <div class="w3-row-padding">
-                <div class="w3-col
-                     l4
-                     m4">
-                  <input type="text"
-                         class="w3-input
-                         w3-round-small
-                         w3-white"
-                         id="user"
-                         name="user"
-                         placeholder="Usuario"
-                         required>
-
-                  <div class="w3-hide-large
-                       w3-hide-medium">
-                    <br>
-                  </div>
-                </div>
-
-                <div class="w3-col
-                     l4
-                     m4">
-                  <input type="password"
-                         class="w3-input
-                         w3-round-small
-                         w3-white"
-                         id="password"
-                         name="password"
-                         placeholder="Contraseña"
-                         required>
-
-                  <div class="w3-hide-large
-                       w3-hide-medium">
-                    <br>
-                  </div>
-                </div>
-
-                <div class="w3-col 
-                     l4
-                     m4">
-                  <input type="submit"
-                          class="w3-btn
-                          w3-round-small
-                          w3-black
-                          w3-medium
-                          w3-hover-text-white
-                          w3-hover-theme"
-                          style="width:100%"
-                          value="Entrar">
-                </div>
-              </div>                               
-            </form>
-          </div>
-        </div>
-
-        <div class="w3-col
-             l2">
-          <!--Empty-->
-          &nbsp;
-        </div>
-      </div>
-    </div>
-
-    <!--footer-->
-    <footer class="w3-text-white
-            w3-padding-16
-            w3-cell-row
-            w3-metro-darken">
-      <div class="w3-container 
-           w3-cell 
-           w3-cell-middle">
-        <a href="#">Aviso de Privacidad</a>
-      </div>
-    </footer>
-  </body>
+  <!--pie de página-->
+  <footer class="w3-padding-16 w3-cell-row w3-metro-darken">
+  	<div class="w3-container w3-cell w3-cell-middle">
+  		<a href="#">Aviso de Privacidad</a>
+  	</div>
+  </footer>
+	</body>
 </html>

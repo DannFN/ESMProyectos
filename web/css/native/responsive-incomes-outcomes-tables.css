@@ -1,0 +1,85 @@
+/* 
+    Created on : 23/04/2019, 04:46:11 PM
+    Author     : elect
+*/
+table {
+	width: 100%;
+	border-collapse:collapse;
+	border-spacing:0;
+	vertical-align: middle;
+}
+
+td {
+	padding: 10px;
+}
+
+.native-td-overflow {
+  max-width: 130px
+}
+
+tr:nth-of-type(odd) { 
+ background: #EEE; 
+}
+
+tr:nth-of-type(even) { 
+ background: #FFF; 
+}
+
+@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px)  {
+	/*Forzar el comportamiento de la tabla como si no fuera una*/
+	table {
+		border: none;
+	}
+
+	table, 	thead, tbody, th, td, tr { 
+		display: block;
+	}
+
+	/*Esconder la cabecera de la tabla sin establacer display: none; para accesibilidad*/
+	thead td { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+ 
+ .native-td-overflow {
+    max-width: none
+  }
+ 
+ .native-td-data {
+  border-bottom: 1px solid #CCC
+ }
+ 
+	.native-td-data td { 
+		/*Establacer comportamiento como una fila*/
+		position: relative;
+		padding-left: 50%;
+  width: 100%
+	}
+
+	.native-td-data td:before { 
+		/*Establecer comportamiento como una cabecera*/
+		position: absolute;
+		/*Los valores top/left imitan el padding */
+		left: 6px;
+		width: 50%; 
+		white-space: pre;
+	}
+
+	/*Etiquetar la información para ingresos*/
+	.native-income-td-data td:nth-of-type(1):before { content: "Concepto:"; font-weight: bold; color: #616161 }
+	.native-income-td-data td:nth-of-type(2):before { content: "Cat. gasto:"; font-weight: bold; color: #616161 }
+	.native-income-td-data td:nth-of-type(3):before { content: "Subcat. gasto:"; font-weight: bold; color: #616161 }
+ .native-income-td-data td:nth-of-type(4):before { content: "Impote:"; font-weight: bold; color: #616161 }
+	.native-income-td-data td:nth-of-type(5) { padding: 0; padding-top: 5px; padding-bottom: 10px }
+ 
+ /*Etiquetar la información para egresos*/
+ .native-outcome-td-data td:nth-of-type(1):before { content: "Concepto:"; font-size: 14px; font-weight: bold; color: #616161}
+	.native-outcome-td-data td:nth-of-type(2):before { content: "Cat. gasto: \A Operación:"; font-size: 14px; font-weight: bold; color: #616161 }
+	.native-outcome-td-data td:nth-of-type(3):before { content: "Fec. pedido: \A N° pedido"; font-size: 14px; font-weight: bold; color: #616161 }
+ .native-outcome-td-data td:nth-of-type(4):before { content: "Fec. transferencia: \A N° transferencia:"; font-size: 14px; font-weight: bold; color: #616161 }
+ .native-outcome-td-data td:nth-of-type(5):before { content: "N° partida:"; font-size: 14px; font-weight: bold; color: #616161 }
+	.native-outcome-td-data td:nth-of-type(6):before { content: "N° factura: \A N° poliza"; font-size: 14px; font-weight: bold; color: #616161 }
+ .native-outcome-td-data td:nth-of-type(7):before { content: "Importe:"; font-size: 14px; font-weight: bold; color: #616161 }
+ .native-outcome-td-data td:nth-of-type(8) { padding: 0; padding-top: 5px; padding-bottom: 10px }
+}

@@ -1,8 +1,3 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
 /* 
     Created on : 22/02/2019, 12:40:15 PM
     Author     : Daniel Flores
@@ -40,14 +35,9 @@ a {
   height: 92%
 }
 
-.native-max-standard-width {
-  min-width: 380px;
-  max-width: 1100px
-}
-
 .native-main {
-  min-height: 40rem;
-  height: 94vh
+  min-height: 34rem;
+  height: 93vh
 }
 
 footer {
@@ -133,47 +123,29 @@ textarea {
 }
 
 .native-input-search {
-  height: 2.5rem;
+  height: 2.3rem;
 }
 
 .native-input-search::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: #f1f1f1;
 }
+
 .native-input-search::-moz-placeholder { /* Firefox 19+ */
   color: #f1f1f1;
 }
+
 .native-input-search::-ms-input-placeholder { /* IE 10+ */
   color: #f1f1f1;
 }
+
 .native-input-search::-moz-placeholder { /* Firefox 18- */
   color: #f1f1f1;
 }
 
-.native-input-income-outcome {
-  height: 1.5rem;
-  padding: 2px
-}
-
 /*botones*/
-.native-button-medium-circle {
-  height: 2.5rem;
-  width: 2.5rem;
-  font-size: 10px;
-  border: none
-}
 
 .native-button-navbar {
-  height: 2.5rem;
-}
-
-.native-button-small {
-  padding: 10px;
-  font-size: 10px
-}
-
-.native-button-medium {
-  padding: 12px;
-  font-size: 12px
+  height: 2.3rem;
 }
 
 /*Backgrounds*/
@@ -191,16 +163,8 @@ textarea {
 }
 
 /*Especificos*/
-.native-blur-min {
-  filter: blur(2px)
-}
-
-.native-blur, native-blur-medium {
+.native-blur {
   filter: blur(4px)
-}
-
-.native-blur-max {
-  filter: blur(8px)
 }
 
 .native-sticky-header {
@@ -208,10 +172,6 @@ textarea {
   top: 0;
   z-index: 1;
   width: 100%
-}
-
-.native-sticky-header + .native-general-content {
-  padding-top: 100px
 }
 
 .native-banner {
@@ -233,15 +193,6 @@ textarea {
   font-size: 22px;
   font-weight: bold;
   text-shadow: 2px 2px 25px #505254
-}
-
-.native-proyect-container {
-  margin-top: 5px;
-  margin-bottom: 10px
-}
-
-.native-proyect-element1 {
-  font-size: 20px
 }
 
 .native-logos-large {

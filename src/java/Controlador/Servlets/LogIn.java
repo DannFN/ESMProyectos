@@ -35,66 +35,58 @@ public class LogIn extends HttpServlet {
     processRequest(request, response);
     response.setContentType("text/html;charset=UTF-8");
     request.setCharacterEncoding("UTF-8"); 
-    DBOperations dbo;
-    HttpSession sess;
-    RequestDispatcher rd;
+    DBOperations dbo = new DBOperations();
       
     try {
-      dbo = new DBOperations();
-      sess = request.getSession(true);
-
+      HttpSession sess;
+      RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+      
       String param = request.getParameter("user");
       String param1 = request.getParameter("password");
 
       switch(dbo.login(param, param1)){
         case 0: {
-          dbo.closeConnection();
           request.setAttribute("msg", "Hubo un problema con el servidor intentalo más tarde");
-          rd = request.getRequestDispatcher("index.jsp");
           rd.forward(request, response);
           break;
         }
 
         case -50: {
-          dbo.closeConnection();
           request.setAttribute("msg", "No existe ninguna cuenta asociada al usuario");
-          rd = request.getRequestDispatcher("index.jsp");
           rd.forward(request, response);
-          return;
+          break;
         }
 
         case -40: {
-          dbo.closeConnection();
           request.setAttribute("msg", "La contraseña ingresada es incorrecta");
-          rd = request.getRequestDispatcher("index.jsp");
           rd.forward(request, response);
-          return;
+          break;
         }
 
         case 10: {
           User u = dbo.user(param);
-          dbo.closeConnection();
-
+          sess = request.getSession(true);
+          
           sess.setAttribute("user", u);
-          response.sendRedirect("lectura-proyectos.jsp");
+          response.sendRedirect("proyects-read.jsp");
           break;
         }
 
         case 20: {
           User u = dbo.user(param);
-          dbo.closeConnection();
-
+          sess = request.getSession(true);
+          
           sess.setAttribute("user", u);
-          response.sendRedirect("administracion-proyectos.jsp");
+          response.sendRedirect("proyects-admin.jsp");
           break;
         }
 
         case 30: {
           User u = dbo.user(param);
-          dbo.closeConnection();
-
+          sess = request.getSession(true);
+          
           sess.setAttribute("user", u);
-          response.sendRedirect("administracion-usuarios.jsp");
+          response.sendRedirect("users-admin.jsp");
           break;
         }
       }
@@ -102,6 +94,8 @@ public class LogIn extends HttpServlet {
       System.out.println("Error");
       System.out.println(e.getMessage());
       Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, e);
+    }finally {
+      dbo.closeConnection();
     }
   }
 

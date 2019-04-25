@@ -10,18 +10,23 @@ import java.util.logging.Logger;
  *
  * @author Daniel Flores
  */
-public class DBConexion {
+public final class DBConexion {
   
-  private Connection con;
+  private static Connection con;
+  
+  private static final String PARAM = "jdbc:mysql://127.0.0.1:3306/PESM";
+  private static final String PARAM1 = "com.mysql.jdbc.Driver";
+  private static final String PARAM2 = "root";
+  private static final String PARAM3 = "n0m3l0";
   
   public DBConexion() {
-    String cadena="jdbc:mysql://localhost:3306/PESM";
     try {
-      Class.forName("com.mysql.jdbc.Driver");
-      con = DriverManager.getConnection(cadena,"root","n0m3l0");
-    }catch (ClassNotFoundException | SQLException ex) {
-      System.out.println(ex.getMessage());
-      Logger.getLogger(DBConexion.class.getName()).log(Level.SEVERE, null, ex);
+      Class.forName(PARAM1);
+      con = DriverManager.getConnection(PARAM, PARAM2, PARAM3);
+    }catch (ClassNotFoundException | SQLException e) {
+      System.out.println("Error en la conexión");
+      System.out.println(e.getMessage());
+      Logger.getLogger(DBConexion.class.getName()).log(Level.SEVERE, null, e);
     }
   }
   
