@@ -1,10 +1,12 @@
 package Controlador.Procesos;
 
+import static java.lang.Class.forName;
+import static java.lang.System.out;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import static java.util.logging.Level.SEVERE;
+import static java.util.logging.Logger.getLogger;
 
 /**
  *
@@ -21,12 +23,12 @@ public final class DBConexion {
   
   public DBConexion() {
     try {
-      Class.forName(PARAM1);
+      forName(PARAM1);
       con = DriverManager.getConnection(PARAM, PARAM2, PARAM3);
     }catch (ClassNotFoundException | SQLException e) {
-      System.out.println("Error en la conexión");
-      System.out.println(e.getMessage());
-      Logger.getLogger(DBConexion.class.getName()).log(Level.SEVERE, null, e);
+      out.println("Error en la conexión");
+      out.println(e.getMessage());
+      getLogger(DBConexion.class.getName()).log(SEVERE, null, e);
     }
   }
   

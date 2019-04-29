@@ -34,7 +34,7 @@
   if(sess != null && sess.getAttribute("user") != null) {
     us = (User) sess.getAttribute("user");
     DBOperations dbo = new DBOperations();
-    int cpn = Integer.parseInt(request.getParameter("conacyt-proyect-number")):
+    int cpn = Integer.parseInt(request.getParameter("conacyt-proyect-number"));
     p = dbo.conacytProyect(cpn);
     dbo.closeConnection();
   }*/ 
@@ -154,9 +154,8 @@
       </div>
     </div>
     
-    <!--banner + pestañas-->
+    <!--banner-->
     <div class="w3-center native-banner-background">
-      <!--banner-->
       <div class="w3-container w3-text-white native-banner native-inset-shadow">
         <div class="w3-container w3-padding-32 w3-text-white native-banner">
           <span class="w3-hide-small native-banner-text-large">Proyecto N°: Nombre del Proyecto</span> 
@@ -177,7 +176,7 @@
       <div class="w3-col l10 m10 s12">
         <br class="w3-hide-small">
 
-        <!--ingresos--->
+        <!--contenido de los ingresos de un proyecto conacyt--->
         <div class="w3-card" style="margin-bottom: 20px">
           <!--header ingresos-->
           <div class="w3-container w3-padding-16 w3-xlarge w3-green">
@@ -257,12 +256,12 @@
                           <i class="fas fa-ellipsis-h"></i>
                         </button>
                         <div id="dropdown-income-1" class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
-                          <a href="#" class="w3-bar-item w3-button">
+                          <button class="w3-bar-item w3-button">
                             <i class="fas fa-trash-alt fa-fw"></i> Editar
-                          </a>
-                          <a href="#" class="w3-bar-item w3-button">
+                          </button>
+                          <button class="w3-bar-item w3-button">
                             <i class="fas fa-edit fa-fw"></i> Eliminar
-                          </a>
+                          </button>
                         </div>
                       </div>
 
@@ -295,250 +294,6 @@
                     <td class="w3-text-grey">
                       <label for="expense-subcategory" class="w3-hide-small w3-hide-medium native-text-elipsis">subcategoria de gasto</label>
                       <select id="expense-category" class="w3-input w3-border w3-round-small" required>
-                        <option disabled hidden value="" selected>Seleccionar</option>
-                        <option value="405">405</option>
-                        <option value="200">200</option>
-                      </select>
-                    </td>
-                    <td class="w3-text-green">
-                      <label for="income-amount" class="w3-hide-small w3-hide-medium">Importe</label>
-                      <input type="number" id="income-amount" class="w3-input w3-border w3-round-small" required>
-                    </td>
-                    <td>
-                      &nbsp;
-                    </td>
-                  </tr>
-                                    
-                  <tr class="w3-white">
-                    <td colspan="5" class="w3-padding w3-center">
-                      <div class="w3-hide-medium w3-hide-small">
-                        <button class="w3-button w3-flat-belize-hole w3-hover-blue w3-round-small">
-                          Añadir Ingreso <i class="fas fa-plus fa-x1"></i>
-                        </button>
-
-                        <button class="w3-button w3-flat-pomegranate w3-hover-red w3-round-small">
-                          Cancelar <i class="fas fa-times fa-x1"></i>
-                        </button>
-                      </div>
-                      
-                      <div class="w3-hide-large">
-                        <button class="w3-button w3-flat-belize-hole w3-hover-blue w3-round-small w3-small">
-                          Añadir Ingreso <i class="fas fa-plus fa-x1"></i>
-                        </button>
-
-                        <button class="w3-button w3-flat-pomegranate w3-hover-red w3-round-small w3-small">
-                          Cancelar <i class="fas fa-times"></i>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              
-              <!--tabla de ingresos de segunda administración-->
-              <table>
-                <thead>
-                  <tr class="w3-flat-emerald w3-border-bottom w3-border-green w3-large">
-                    <th colspan="5" class="w3-container w3-padding-16 w3-left-align">
-                      Segunda administración
-                    </th>
-                  </tr>
-
-                  <tr class="w3-pale-green w3-border-bottom w3-border-green">
-                    <td><b>Concepto</b></td>
-                    <td>Cat. gasto</td>
-                    <td>Subcat. gasto</td>
-                    <td><b>Importe (MXN)</b></td>
-                    <td>&nbsp</td>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  <tr class="w3-hide"><!--TODO retirar hide-->
-                    <td colspan="5" class="w3-center w3-text-grey w3-padding-64">
-                      No hay ingresos que mostrar
-                      <i class="fa fa-bars fa-lg"></i>
-                    </td>
-                  </tr>
-                  
-                  <tr class="w3-hide">
-                    <td colspan="5" class="w3-padding-64 w3-center w3-text-grey">
-                      No hay proyectos coincidentes con la busqueda
-                    </td>
-                  </tr>
-                  
-                  <!--fila de ingreso-->
-                  <tr class="native-td-data native-income-td-data">
-                    <td class="w3-text-blue native-text-elipsis"><b>Ratones de laboratorio blancos</b></td>
-                    <td class="w3-text-grey">GINVE</td>
-                    <td class="w3-text-grey">405</td>
-                    <td class="w3-text-green"><b>+$100,000,000.00</b></td>
-                    <td>
-                      <div class="w3-dropdown-click w3-right w3-hide-medium w3-hide-small">
-                        <button class="w3-button w3-small w3-round-small" onclick="showCloseNavBlock('dropdown-income-1')">
-                          <i class="fas fa-ellipsis-h"></i>
-                        </button>
-                        <div id="dropdown-income-1" class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
-                          <a href="#" class="w3-bar-item w3-button">
-                            <i class="fas fa-trash-alt fa-fw"></i> Editar
-                          </a>
-                          <a href="#" class="w3-bar-item w3-button">
-                            <i class="fas fa-edit fa-fw"></i> Eliminar
-                          </a>
-                        </div>
-                      </div>
-
-                      <div class="w3-center w3-hide-large">
-                        <button class="w3-button w3-blue w3-round-small w3-small">
-                          <i class="fas fa-trash-alt fa-x1"></i> Editar
-                        </button>
-
-                        <button class="w3-button w3-win8-magenta w3-round-small w3-small">
-                          <i class="fas fa-edit fa-x1"></i> Eliminar
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                  
-                  <!--agregar ingreso directamente-->
-                  <tr class="w3-white native-td-data native-income-td-data">
-                    <td class="w3-text-blue native-text-elipsis">
-                      <label for="income-concept" class="w3-hide-small w3-hide-medium">Concepto</label>
-                      <input type="text" id="income-concept" class="w3-input w3-border w3-round-small" required>
-                    </td>
-                    <td class="w3-text-grey">
-                      <label for="expense-category" class="w3-hide-small w3-hide-medium native-text-elipsis">Categoria de gasto</label>
-                      <select id="expense-category" class="w3-input w3-border w3-round-small" required>
-                        <option disabled hidden value="" selected>Seleccionar</option>
-                        <option value="1">GINVE</option>
-                        <option value="2">GCORR</option>
-                      </select>
-                    </td>
-                    <td class="w3-text-grey">
-                      <label for="expense-subcategory" class="w3-hide-small w3-hide-medium native-text-elipsis">subcategoria de gasto</label>
-                      <select id="expense-category" class="w3-input w3-border w3-round-small" required>
-                        <option disabled hidden value="" selected>Seleccionar</option>
-                        <option value="405">405</option>
-                        <option value="200">200</option>
-                      </select>
-                    </td>
-                    <td class="w3-text-green">
-                      <label for="income-amount" class="w3-hide-small w3-hide-medium">Importe</label>
-                      <input type="number" id="income-amount" class="w3-input w3-border w3-round-small" required>
-                    </td>
-                    <td>
-                      &nbsp;
-                    </td>
-                  </tr>
-                                    
-                  <tr class="w3-white">
-                    <td colspan="5" class="w3-padding w3-center">
-                      <div class="w3-hide-medium w3-hide-small">
-                        <button class="w3-button w3-flat-belize-hole w3-hover-blue w3-round-small">
-                          Añadir Ingreso <i class="fas fa-plus fa-x1"></i>
-                        </button>
-
-                        <button class="w3-button w3-flat-pomegranate w3-hover-red w3-round-small">
-                          Cancelar <i class="fas fa-times fa-x1"></i>
-                        </button>
-                      </div>
-                      
-                      <div class="w3-hide-large">
-                        <button class="w3-button w3-flat-belize-hole w3-hover-blue w3-round-small w3-small">
-                          Añadir Ingreso <i class="fas fa-plus fa-x1"></i>
-                        </button>
-
-                        <button class="w3-button w3-flat-pomegranate w3-hover-red w3-round-small w3-small">
-                          Cancelar <i class="fas fa-times"></i>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              
-              <!--tabla de ingresos de tercera administración-->
-              <table>
-                <thead>
-                  <tr class="w3-flat-emerald w3-border-bottom w3-border-green w3-large">
-                    <th colspan="5" class="w3-container w3-padding-16 w3-left-align">
-                      Tercera administración
-                    </th>
-                  </tr>
-
-                  <tr class="w3-pale-green w3-border-bottom w3-border-green">
-                    <td><b>Concepto</b></td>
-                    <td>Cat. gasto</td>
-                    <td>Subcat. gasto</td>
-                    <td><b>Importe (MXN)</b></td>
-                    <td>&nbsp</td>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  <tr class="w3-hide"><!--TODO retirar hide-->
-                    <td colspan="5" class="w3-center w3-text-grey w3-padding-64">
-                      No hay ingresos que mostrar
-                      <i class="fa fa-bars fa-lg"></i>
-                    </td>
-                  </tr>
-                  
-                  <tr class="w3-hide">
-                    <td colspan="5" class="w3-padding-64 w3-center w3-text-grey">
-                      No hay proyectos coincidentes con la busqueda
-                    </td>
-                  </tr>
-                  
-                  <!--fila de ingreso-->
-                  <tr class="native-td-data native-income-td-data">
-                    <td class="w3-text-blue native-text-elipsis"><b>Ratones de laboratorio blancos</b></td>
-                    <td class="w3-text-grey">GINVE</td>
-                    <td class="w3-text-grey">405</td>
-                    <td class="w3-text-green"><b>+$100,000,000.00</b></td>
-                    <td>
-                      <div class="w3-dropdown-click w3-right w3-hide-medium w3-hide-small">
-                        <button class="w3-button w3-small w3-round-small" onclick="showCloseNavBlock('dropdown-income-1')">
-                          <i class="fas fa-ellipsis-h"></i>
-                        </button>
-                        <div id="dropdown-income-1" class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
-                          <a href="#" class="w3-bar-item w3-button">
-                            <i class="fas fa-trash-alt fa-fw"></i> Editar
-                          </a>
-                          <a href="#" class="w3-bar-item w3-button">
-                            <i class="fas fa-edit fa-fw"></i> Eliminar
-                          </a>
-                        </div>
-                      </div>
-
-                      <div class="w3-center w3-hide-large">
-                        <button class="w3-button w3-blue w3-round-small w3-small">
-                          <i class="fas fa-trash-alt fa-x1"></i> Editar
-                        </button>
-
-                        <button class="w3-button w3-win8-magenta w3-round-small w3-small">
-                          <i class="fas fa-edit fa-x1"></i> Eliminar
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                  
-                  <!--agregar ingreso directamente-->
-                  <tr class="w3-white native-td-data native-income-td-data">
-                    <td class="w3-text-blue native-text-elipsis">
-                      <label for="income-concept" class="w3-hide-small w3-hide-medium">Concepto</label>
-                      <input type="text" id="income-concept" class="w3-input w3-border w3-round-small" required>
-                    </td>
-                    <td class="w3-text-grey">
-                      <label for="income-expense-category" class="w3-hide-small w3-hide-medium native-text-elipsis">Categoria de gasto</label>
-                      <select id="income-expense-category" class="w3-input w3-border w3-round-small" required>
-                        <option disabled hidden value="" selected>Seleccionar</option>
-                        <option value="1">GINVE</option>
-                        <option value="2">GCORR</option>
-                      </select>
-                    </td>
-                    <td class="w3-text-grey">
-                      <label for="income-expense-subcategory" class="w3-hide-small w3-hide-medium native-text-elipsis">subcategoria de gasto</label>
-                      <select id="income-expense-subcategory" class="w3-input w3-border w3-round-small" required>
                         <option disabled hidden value="" selected>Seleccionar</option>
                         <option value="405">405</option>
                         <option value="200">200</option>
@@ -582,7 +337,7 @@
           </div>
         </div>
         
-        <!--egresos--->
+        <!--contenido de los egresos de un proyecto conacyt--->
         <div class="w3-card" style="margin-bottom: 20px">
           <!--header egresos-->
           <div class="w3-container w3-padding-16 w3-xlarge w3-flat-pomegranate">
@@ -653,12 +408,12 @@
                           <i class="fas fa-ellipsis-h"></i>
                         </button>
                         <div id="dropdown-outcome-1" class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
-                          <a href="#" class="w3-bar-item w3-button">
+                          <button class="w3-bar-item w3-button">
                             <i class="fas fa-trash-alt fa-fw"></i> Editar
-                          </a>
-                          <a href="#" class="w3-bar-item w3-button">
+                          </button>
+                          <button class="w3-bar-item w3-button">
                             <i class="fas fa-edit fa-fw"></i> Eliminar
-                          </a>
+                          </button>
                         </div>
                       </div>
 

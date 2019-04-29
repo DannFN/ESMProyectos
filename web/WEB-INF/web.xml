@@ -6,11 +6,23 @@
     </servlet>
     <servlet>
         <servlet-name>AddProyect</servlet-name>
-        <servlet-class>Controlador.Servlets.AddProyect</servlet-class>
+        <servlet-class>Controlador.Servlets.AddCProyect</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>deleteproyect</servlet-name>
-        <servlet-class>Controlador.Servlets.deleteproyect</servlet-class>
+        <servlet-name>DeleteProyect</servlet-name>
+        <servlet-class>Controlador.Servlets.DeleteCProyect</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogOut</servlet-name>
+        <servlet-class>Controlador.Servlets.LogOut</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditProyectGet</servlet-name>
+        <servlet-class>Controlador.Servlets.EditCProyectGet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditProyectDo</servlet-name>
+        <servlet-class>Controlador.Servlets.EditCProyectDo</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LogIn</servlet-name>
@@ -21,8 +33,20 @@
         <url-pattern>/AddProyect</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>deleteproyect</servlet-name>
-        <url-pattern>/deleteproyect</url-pattern>
+        <servlet-name>DeleteProyect</servlet-name>
+        <url-pattern>/DeleteProyect</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogOut</servlet-name>
+        <url-pattern>/LogOut</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditProyectGet</servlet-name>
+        <url-pattern>/EditProyectGet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditProyectDo</servlet-name>
+        <url-pattern>/EditProyectDo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

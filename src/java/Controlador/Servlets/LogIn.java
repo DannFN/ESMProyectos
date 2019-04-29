@@ -3,8 +3,11 @@ package Controlador.Servlets;
 import Controlador.Objetos.User;
 import Controlador.Procesos.DBOperations;
 import java.io.IOException;
+import static java.lang.System.out;
 import java.util.logging.Level;
+import static java.util.logging.Level.SEVERE;
 import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,19 +23,16 @@ public class LogIn extends HttpServlet {
 
   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
-    response.setContentType("text/html;charset=UTF-8");
   }
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
-    processRequest(request, response);
   }
 
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
-    processRequest(request, response);
     response.setContentType("text/html;charset=UTF-8");
     request.setCharacterEncoding("UTF-8"); 
     DBOperations dbo = new DBOperations();
@@ -91,9 +91,9 @@ public class LogIn extends HttpServlet {
         }
       }
     }catch(IOException | ServletException e) {
-      System.out.println("Error");
-      System.out.println(e.getMessage());
-      Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, e);
+      out.println("Error");
+      out.println(e.getMessage());
+      getLogger(LogIn.class.getName()).log(SEVERE, null, e);
     }finally {
       dbo.closeConnection();
     }

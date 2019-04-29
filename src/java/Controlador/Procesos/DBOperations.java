@@ -4,13 +4,16 @@ import Controlador.Objetos.ConacytIncome;
 import Controlador.Objetos.ConacytOutcome;
 import Controlador.Objetos.ConacytProyect;
 import Controlador.Objetos.User;
+import static Controlador.Procesos.Security.hash;
+import static java.lang.String.valueOf;
+import static java.lang.System.out;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import static java.util.logging.Level.SEVERE;
+import static java.util.logging.Logger.getLogger;
 
 /**
  *
@@ -26,13 +29,13 @@ public class DBOperations {
   private static ResultSet rs;
   
   /*status de peticiones*/
-  private int status;
+  private static int status;
 
   /*variables de asignación de resultados (Listas)*/
-  private ArrayList<ConacytProyect> p;
-  private ArrayList<ConacytIncome> i;
-  private ArrayList<ConacytOutcome> o;
-  private ArrayList<User> u;
+  private static ArrayList<ConacytProyect> p;
+  private static ArrayList<ConacytIncome> i;
+  private static ArrayList<ConacytOutcome> o;
+  private static ArrayList<User> u;
 
   /*variables de asignación de resultados (objetos individuales)*/
   private ConacytProyect cpro;
@@ -56,9 +59,9 @@ public class DBOperations {
     try{
       con.close();
     }catch(SQLException e) {
-      System.out.println("Cierre Fallido");
-      System.out.println(e.getMessage());
-      Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
+      out.println("Cierre Fallido");
+      out.println(e.getMessage());
+      getLogger(DBOperations.class.getName()).log(SEVERE, null, e);
     }
   }
 
@@ -70,7 +73,7 @@ public class DBOperations {
     try {
       String temp;
 
-      temp = Security.hash(pass);
+      temp = hash(pass);
 
       sql = "CALL logIn(?);";
       ps = con.prepareStatement(sql);
@@ -94,9 +97,9 @@ public class DBOperations {
         }
       }
     }catch(SQLException e) {
-      System.out.println("Consulta de Datos de Usuario Fallida");
-      System.out.println(e.getMessage());
-      Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
+      out.println("Consulta de Datos de Usuario Fallida");
+      out.println(e.getMessage());
+      getLogger(DBOperations.class.getName()).log(SEVERE, null, e);
     }
 
     return status;
@@ -120,9 +123,10 @@ public class DBOperations {
         }while(rs.next());
       }
     }catch(SQLException e) {
-      System.out.println("Consulta de Datos de Usuario Fallida");
-      System.out.println(e.getMessage());
-      Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
+      user = null;
+      out.println("Consulta de Datos de Usuario Fallida");
+      out.println(e.getMessage());
+      getLogger(DBOperations.class.getName()).log(SEVERE, null, e);
     }
 
     return user;
@@ -130,30 +134,28 @@ public class DBOperations {
 
   /*Obtener todos los usuarios*/
   public ArrayList<User> users() {
-    u = new ArrayList<>();
+    u = new ArrayList<User>();
 
     try {
-      User us;
-
       sql = "CALL getUsers();";
       ps = con.prepareStatement(sql);
       rs = ps.executeQuery();
 
       if(rs.next()){
         do {
-          us = new User();
+          user = new User();
 
-          us.setUserId(rs.getInt(1));
-          us.setUserType(rs.getString(2).charAt(0));
-          us.setUserName(rs.getString(3));
+          user.setUserId(rs.getInt(1));
+          user.setUserType(rs.getString(2).charAt(0));
+          user.setUserName(rs.getString(3));
 
-          u.add(us);
+          u.add(user);
         }while(rs.next());
       }
     }catch(SQLException e) {
-      System.out.println("Consulta de Usuarios Fallida");
-      System.out.println(e.getMessage());
-      Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
+      out.println("Consulta de Usuarios Fallida");
+      out.println(e.getMessage());
+      getLogger(DBOperations.class.getName()).log(SEVERE, null, e);
     }
 
     return u;
@@ -164,8 +166,8 @@ public class DBOperations {
     status = 0;
 
     try{
-      String temp = Security.hash(newPass);
-      String temp1 = Security.hash(user.getUserPass());
+      String temp = hash(newPass);
+      String temp1 = hash(user.getUserPass());
 
       sql = "CALL logIn(?);";
       ps = con.prepareStatement(sql);
@@ -187,9 +189,9 @@ public class DBOperations {
         }
       }
     }catch(SQLException e){
-      System.out.println("Actualización de Datos de Usuario Fallida");
-      System.out.println(e.getMessage());
-      Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
+      out.println("Actualización de Datos de Usuario Fallida");
+      out.println(e.getMessage());
+      getLogger(DBOperations.class.getName()).log(SEVERE, null, e);
     }
 
     return status;
@@ -200,8 +202,8 @@ public class DBOperations {
     status = 0;
 
     try{
-      String temp = Security.hash(mUPass);
-      String temp1 = Security.hash(newPass);
+      String temp = hash(mUPass);
+      String temp1 = hash(newPass);
 
       sql = "CALL checkMU();";
       ps = con.prepareStatement(sql);
@@ -218,9 +220,9 @@ public class DBOperations {
         status = -40; /*Las contraseñas para comprobación son diferentes*/
       }
     }catch(SQLException e){
-      System.out.println("Actualización de Datos de Usuario Fallida");
-      System.out.println(e.getMessage());
-      Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
+      out.println("Actualización de Datos de Usuario Fallida");
+      out.println(e.getMessage());
+      getLogger(DBOperations.class.getName()).log(SEVERE, null, e);
     }
 
     return status;
@@ -256,9 +258,9 @@ public class DBOperations {
         }
       }
     }catch(SQLException e){
-      System.out.println("Actualización de Datos de Usuario Fallida");
-      System.out.println(e.getMessage());
-      Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
+      out.println("Actualización de Datos de Usuario Fallida");
+      out.println(e.getMessage());
+      getLogger(DBOperations.class.getName()).log(SEVERE, null, e);
     }
 
     return status;
@@ -269,7 +271,7 @@ public class DBOperations {
     status = 0;
 
     try{
-      String temp = Security.hash(newUser.getUserPass());
+      String temp = hash(newUser.getUserPass());
 
       sql = "CALL logIn(?);";
       ps = con.prepareStatement(sql);
@@ -281,16 +283,16 @@ public class DBOperations {
       }else {
         sql = "CALL addUser(?, ?, ?);";
         ps = con.prepareStatement(sql);
-        ps.setString(1, String.valueOf(newUser.getUserType()));
+        ps.setString(1, valueOf(newUser.getUserType()));
         ps.setString(2, newUser.getUserName());
         ps.setString(3, temp);
 
         rs = ps.executeQuery();
       }
     }catch(SQLException e){
-      System.out.println("Adición de Nuevo Usuario Fallida ");
-      System.out.println(e.getMessage());
-      Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
+      out.println("Adición de Nuevo Usuario Fallida ");
+      out.println(e.getMessage());
+      getLogger(DBOperations.class.getName()).log(SEVERE, null, e);
     }
 
     return status;
@@ -317,9 +319,9 @@ public class DBOperations {
         rs = ps.executeQuery();
       }
     }catch(SQLException e){
-      System.out.println("Eliminación del Usuario Fallida");
-      System.out.println(e.getMessage());
-      Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
+      out.println("Eliminación del Usuario Fallida");
+      out.println(e.getMessage());
+      getLogger(DBOperations.class.getName()).log(SEVERE, null, e);
     }
 
     return status;
@@ -328,7 +330,7 @@ public class DBOperations {
   /*-------------------------Operaciones de proyectos-------------------------*/
   /*Obtener todos los proyectos*/
   public ArrayList<ConacytProyect> conacytProyects() {
-    p = new ArrayList<>();
+    p = new ArrayList<ConacytProyect>();
 
     try{
       ConacytProyect pr;
@@ -350,9 +352,9 @@ public class DBOperations {
         }while(rs.next());
       }
     }catch (SQLException e) {
-      System.out.println("Consulta de Proyectos de Conacyt Fallida");
-      System.out.println(e.getMessage());
-      Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
+      out.println("Consulta de Proyectos de Conacyt Fallida");
+      out.println(e.getMessage());
+      getLogger(DBOperations.class.getName()).log(SEVERE, null, e);
     }
 
    return p;
@@ -374,15 +376,13 @@ public class DBOperations {
           cpro.setProyectName(rs.getString(2));
           cpro.setTitular(rs.getString(3)); 
           cpro.setBalance(conacytBalance(proyectNumber));
-        }while(rs.next());
-        
-        cpro.setIncomes(conacytIncomes(proyectNumber));
-        cpro.setOutcomes(conacytOutcomes(proyectNumber));        
+        }while(rs.next());       
       }
     }catch(SQLException e) {
-      System.out.println("Consulta de Proyecto de Conacyt Fallida");
-      System.out.println(e.getMessage());
-      Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
+      cpro = null;
+      out.println("Consulta de Proyecto de Conacyt Fallida");
+      out.println(e.getMessage());
+      getLogger(DBOperations.class.getName()).log(SEVERE, null, e);
     }
     
     return cpro;
@@ -393,35 +393,35 @@ public class DBOperations {
     double b = 0;
 
     try {
-      sql = "CALL getConacytIncomes(?);";
+      sql = "CALL getConacytIncomesAmount(?);";
       ps = con.prepareStatement(sql);
       ps.setInt(1, proyectNumber);
       rs = ps.executeQuery();
 
       if(rs.next()){
         do {
-          b += rs.getDouble(6);
+          b += rs.getDouble(1);
         }while(rs.next());
       }
 
-      sql = "CALL getConacytOutcomes(?);";
+      sql = "CALL getConacytOutcomesAmount(?);";
       ps = con.prepareStatement(sql);
       ps.setInt(1, proyectNumber);
       rs = ps.executeQuery();
 
       if(rs.next()){
         do {
-          if(rs.getString(3).equals("C")){
-            b -= rs.getDouble(8);
+          if(rs.getString(1).equals("C")){
+            b -= rs.getDouble(2);
           }else {
-            b += rs.getDouble(8);
+            b += rs.getDouble(2);
           }
         }while(rs.next());
       }
     }catch(SQLException e) {
-      System.out.println("Consulta de Balance de Proyecto fallida");
-      System.out.println(e.getMessage());
-      Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
+      out.println("Consulta de Balance de Proyecto fallida");
+      out.println(e.getMessage());
+      getLogger(DBOperations.class.getName()).log(SEVERE, null, e);
     }
 
     return b;
@@ -441,9 +441,9 @@ public class DBOperations {
 
       status = ps.executeUpdate();
     }catch(SQLException e){
-      System.out.println("Actualización del Proyecto" + oldProyectNumber + "Fallida");
-      System.out.println(e.getMessage());
-      Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
+      out.println("Actualización del Proyecto" + oldProyectNumber + "Fallida");
+      out.println(e.getMessage());
+      getLogger(DBOperations.class.getName()).log(SEVERE, null, e);
     }
 
     return status;
@@ -460,9 +460,9 @@ public class DBOperations {
 
       status = ps.executeUpdate();
     }catch(SQLException e) {
-      System.out.println("Eliminación del Proyecto" + proyectNumber + "Fallida");
-      System.out.println(e.getMessage());
-      Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
+      out.println("Eliminación del Proyecto" + proyectNumber + "Fallida");
+      out.println(e.getMessage());
+      getLogger(DBOperations.class.getName()).log(SEVERE, null, e);
     }
 
     return status;
@@ -481,9 +481,9 @@ public class DBOperations {
 
       status = ps.executeUpdate();
     }catch(SQLException e) {
-      System.out.println("Adición de Nuevo Proyecto Fallida");
-      System.out.println(e.getMessage());
-      Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
+      out.println("Adición de Nuevo Proyecto Fallida");
+      out.println(e.getMessage());
+      getLogger(DBOperations.class.getName()).log(SEVERE, null, e);
     }
 
     return status;
@@ -492,14 +492,13 @@ public class DBOperations {
   /*--------------------------Operaciones de ingresos-------------------------*/
   /*Obtener todos los ingresos de un proyecto*/
   public ArrayList<ConacytIncome> conacytIncomes(int proyectNumber) {
-    i = new ArrayList<>();
+    i = new ArrayList<ConacytIncome>();
 
     try {
       sql = "CALL getConacytIncomes(?);";
       ps = con.prepareStatement(sql);
       ps.setInt(1, proyectNumber);
       rs = ps.executeQuery();
-      i = new ArrayList<>();
 
       if(rs.next()) {
         do {
@@ -515,9 +514,9 @@ public class DBOperations {
         }while(rs.next());
       }
     }catch(SQLException e) {
-      System.out.println("Consulta de Ingresos del Proyecto" + proyectNumber + "Fallida");
-      System.out.println(e.getMessage());
-      Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
+      out.println("Consulta de Ingresos del Proyecto" + proyectNumber + "Fallida");
+      out.println(e.getMessage());
+      getLogger(DBOperations.class.getName()).log(SEVERE, null, e);
     }
 
     return i;
@@ -538,9 +537,9 @@ public class DBOperations {
 
       status = ps.executeUpdate();
     }catch(SQLException e) {
-      System.out.println("Adición de Nuevo Ingreso Fallida");
-      System.out.println(e.getMessage());
-      Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
+      out.println("Adición de Nuevo Ingreso Fallida");
+      out.println(e.getMessage());
+      getLogger(DBOperations.class.getName()).log(SEVERE, null, e);
     }
 
     return status;
@@ -561,9 +560,9 @@ public class DBOperations {
 
       status = ps.executeUpdate();
     }catch(SQLException e){
-      System.out.println("Actualización del Ingreso" + oldIncomeId + "Fallida");
-      System.out.println(e.getMessage());
-      Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
+      out.println("Actualización del Ingreso" + oldIncomeId + "Fallida");
+      out.println(e.getMessage());
+      getLogger(DBOperations.class.getName()).log(SEVERE, null, e);
     }
 
     return status;
@@ -580,9 +579,9 @@ public class DBOperations {
 
       status = ps.executeUpdate();
     }catch(SQLException e) {
-      System.out.println("Eliminación del Ingreso" + incomeId + "Fallida");
-      System.out.println(e.getMessage());
-      Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
+      out.println("Eliminación del Ingreso" + incomeId + "Fallida");
+      out.println(e.getMessage());
+      getLogger(DBOperations.class.getName()).log(SEVERE, null, e);
     }
 
     return status;
@@ -591,14 +590,13 @@ public class DBOperations {
   /*-------------------------Operaciones de egresos---------------------------*/
   /*Obtener todos los egresos de un proyecto*/
   public ArrayList<ConacytOutcome> conacytOutcomes(int proyectNumber){
-    o = new ArrayList<>();
+    o = new ArrayList<ConacytOutcome>();
 
     try {
       sql = "CALL getConacytOutcomes(?);";
       ps = con.prepareStatement(sql);
       ps.setInt(1, proyectNumber);
       rs = ps.executeQuery();
-      o = new ArrayList<>();
 
       if(rs.next()) {
         do {
@@ -621,9 +619,9 @@ public class DBOperations {
         }while(rs.next());
       }
     }catch(SQLException e) {
-      System.out.println("Consulta de Egresos del Proyecto" + proyectNumber + "Fallida");
-      System.out.println(e.getMessage());
-      Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
+      out.println("Consulta de Egresos del Proyecto" + proyectNumber + "Fallida");
+      out.println(e.getMessage());
+      getLogger(DBOperations.class.getName()).log(SEVERE, null, e);
     }
 
     return o;
@@ -651,9 +649,9 @@ public class DBOperations {
 
       status = ps.executeUpdate();
     }catch(SQLException e) {
-      System.out.println("Adición de Nuevo Egreso Fallida");
-      System.out.println(e.getMessage());
-      Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
+      out.println("Adición de Nuevo Egreso Fallida");
+      out.println(e.getMessage());
+      getLogger(DBOperations.class.getName()).log(SEVERE, null, e);
     }
 
     return status;
@@ -682,9 +680,9 @@ public class DBOperations {
 
       status = ps.executeUpdate();
     }catch(SQLException e){
-      System.out.println("Actualización del Ingreso " + newOutcome.getOutcomeId() + " Fallida");
-      System.out.println(e.getMessage());
-      Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
+      out.println("Actualización del Ingreso " + newOutcome.getOutcomeId() + " Fallida");
+      out.println(e.getMessage());
+      getLogger(DBOperations.class.getName()).log(SEVERE, null, e);
     }
 
     return status;
@@ -701,9 +699,9 @@ public class DBOperations {
 
       status = ps.executeUpdate();
     }catch(SQLException e) {
-      System.out.println("Eliminación del Ingreso" + outcomeId + "Fallida");
-      System.out.println(e.getMessage());
-      Logger.getLogger(DBOperations.class.getName()).log(Level.SEVERE, null, e);
+      out.println("Eliminación del Ingreso" + outcomeId + "Fallida");
+      out.println(e.getMessage());
+      getLogger(DBOperations.class.getName()).log(SEVERE, null, e);
     }
 
     return status;
@@ -723,7 +721,7 @@ public class DBOperations {
   }
 
   public void setP(ArrayList<ConacytProyect> p) {
-    this.p = p;
+    DBOperations.p = p;
   }
 
   public ArrayList<ConacytIncome> getI() {
@@ -731,7 +729,7 @@ public class DBOperations {
   }
 
   public void setI(ArrayList<ConacytIncome> i) {
-    this.i = i;
+    DBOperations.i = i;
   }
 
   public ArrayList<ConacytOutcome> getO() {
@@ -739,7 +737,7 @@ public class DBOperations {
   }
 
   public void setO(ArrayList<ConacytOutcome> o) {
-    this.o = o;
+    DBOperations.o = o;
   }
 
   public ArrayList<User> getU() {
@@ -747,7 +745,7 @@ public class DBOperations {
   }
 
   public void setU(ArrayList<User> u) {
-    this.u = u;
+    DBOperations.u = u;
   }
 
   public int getStatus() {
@@ -755,7 +753,7 @@ public class DBOperations {
   }
 
   public void setStatus(int status) {
-    this.status = status;
+    DBOperations.status = status;
   }
 
   public String getSql() {
