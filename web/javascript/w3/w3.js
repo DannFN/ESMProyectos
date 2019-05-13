@@ -7,6 +7,21 @@ function showCloseNavBlock(idElement) {
   }
 }
 
+function showCloseMultipleRows(classElement){
+  var i, x;
+  x = document.getElementsByClassName(classElement);
+  
+  for(i = 0; i < x.lenght; i++){
+    if (x[i].className.indexOf('w3-hide') !== -1) {
+      x[i].classList.add('w3-show');
+      console.log(x[i].className.indexOf('w3-hide'));
+    } else { 
+      x[i].classList.remove('w3-show');
+      console.log(x[i].className.indexOf('w3-hide'));
+    }
+  }
+}
+
 function stickyHeader(idStickyHeader) {
   var stickyHeader = document.getElementById(idStickyHeader);
   var sticky = stickyHeader.offsetTop;
@@ -49,7 +64,7 @@ function openTab(evt, tabName) {
   
   tablinks = document.getElementsByClassName('tablink');
   
-  for (i = 0; i < x.length; i++) {
+  for (i = 0; i < tablinks.length; i++) {
     tablinks[i].classList.replace('w3-border-theme-d4', 'w3-border-theme');
     tablinks[i].classList.replace('w3-theme-d2', 'w3-theme');
   }

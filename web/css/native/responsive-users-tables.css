@@ -1,0 +1,65 @@
+/* 
+    Created on : 29/04/2019, 04:04:02 PM
+    Author     : Daniel flores
+*/
+table {
+	width: 100%;
+	border-collapse:collapse;
+	border-spacing:0;
+	vertical-align: middle;
+}
+
+td {
+	padding: 10px;
+}
+
+tr:nth-of-type(odd) { 
+ background: #EEE; 
+}
+
+tr:nth-of-type(even) { 
+ background: #FFF; 
+}
+
+@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px)  {
+	/*Forzar el comportamiento de la tabla como si no fuera una*/
+	table {
+		border: none
+	}
+
+	table, 	thead, tbody, th, td, tr { 
+		display: block;
+	}
+
+	/*Esconder la cabecera de la tabla sin establacer display: none; para accesibilidad*/
+	thead td { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+
+ .native-td-data {
+  border-bottom: 1px solid #CCC
+ }
+ 
+	.native-td-data td { 
+		/*Establacer comportamiento como una fila*/
+		position: relative;
+		padding-left: 30%
+	}
+
+	.native-td-data td:before { 
+		/*Establecer comportamiento como una cabecera*/
+		position: absolute;
+		/*Los valores top/left imitan el padding */
+		left: 6px;
+		width: 30%; 
+		white-space: pre;
+	}
+
+	/*Etiquetar la información*/
+	.native-td-data td:nth-of-type(2):before { content: "Usuario: "; font-weight: bold; color: #616161 }
+	.native-td-data td:nth-of-type(3):before { content: "Nivel:"; font-weight: bold; color: #616161 }
+	.native-td-data td:nth-of-type(4) { padding: 0; padding-top: 5px; padding-bottom: 10px }
+}
+

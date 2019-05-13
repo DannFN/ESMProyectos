@@ -1,4 +1,3 @@
-<!--
 <%-- 
     Document   : detalles-proyecto
     Created on : 1/04/2019, 05:15:43 PM
@@ -39,7 +38,6 @@
     dbo.closeConnection();
   }*/ 
 %>
--->
 
 <!DOCTYPE html>
 <html>
@@ -107,11 +105,11 @@
           <i class="far fa-edit"></i> Editar datos del proyecto
         </button>
         
-        <button class="w3-bar-item w3-button w3-hover-theme w3-hide-small native-button-navbar">
+        <button class="w3-bar-item w3-button w3-hover-theme w3-hide-small native-button-navbar" onclick="showCloseMultipleRows('add-income-form')">
           <i class="fa fa-plus"></i> Añadir ingreso
         </button>
         
-        <button class="w3-bar-item w3-button w3-hover-theme w3-hide-small native-button-navbar">
+        <button class="w3-bar-item w3-button w3-hover-theme w3-hide-small native-button-navbar" onclick="showCloseMultipleRows('add-outcome-form')">
           <i class="fa fa-plus"></i> Añadir egreso
         </button>
         
@@ -278,22 +276,35 @@
                   </tr>
                   
                   <!--agregar ingreso directamente-->
-                  <tr class="w3-white native-td-data native-income-td-data">
+                  <tr class="w3-hide add-income-form">
+                    <td colspan="5" class="w3-center w3-padding-16"><b class="w3-text-purple w3-large">Añadir Ingreso</b></td>
+                  </tr>
+                  
+                  <tr class="w3-white w3-hide native-td-data native-income-td-data add-income-form">
+                    <td>
+                      <label for="income-administration" class="w3-hide-small w3-hide-medium native-text-elipsis">Administración</label>
+                      <select id="administration" class="w3-input w3-border w3-round-small" required>
+                        <option disabled hidden value="" selected>Seleccionar</option>
+                        <option value="1">Primera administación</option>
+                        <option value="2">Segunda administración</option>
+                        <option value="3">Tercera administración</option>
+                      </select>
+                    </td>
                     <td class="w3-text-blue native-text-elipsis">
                       <label for="income-concept" class="w3-hide-small w3-hide-medium">Concepto</label>
                       <input type="text" id="income-concept" class="w3-input w3-border w3-round-small" required>
                     </td>
                     <td class="w3-text-grey">
-                      <label for="expense-category" class="w3-hide-small w3-hide-medium native-text-elipsis">Categoria de gasto</label>
-                      <select id="expense-category" class="w3-input w3-border w3-round-small" required>
+                      <label for="income-expense-category" class="w3-hide-small w3-hide-medium native-text-elipsis">Categoria de gasto</label>
+                      <select id="income-expense-category" class="w3-input w3-border w3-round-small" required>
                         <option disabled hidden value="" selected>Seleccionar</option>
                         <option value="1">GINVE</option>
                         <option value="2">GCORR</option>
                       </select>
                     </td>
                     <td class="w3-text-grey">
-                      <label for="expense-subcategory" class="w3-hide-small w3-hide-medium native-text-elipsis">subcategoria de gasto</label>
-                      <select id="expense-category" class="w3-input w3-border w3-round-small" required>
+                      <label for="income-expense-subcategory" class="w3-hide-small w3-hide-medium native-text-elipsis">subcategoria de gasto</label>
+                      <select id="income-expense-category" class="w3-input w3-border w3-round-small" required>
                         <option disabled hidden value="" selected>Seleccionar</option>
                         <option value="405">405</option>
                         <option value="200">200</option>
@@ -303,30 +314,17 @@
                       <label for="income-amount" class="w3-hide-small w3-hide-medium">Importe</label>
                       <input type="number" id="income-amount" class="w3-input w3-border w3-round-small" required>
                     </td>
-                    <td>
-                      &nbsp;
-                    </td>
                   </tr>
                                     
-                  <tr class="w3-white">
+                  <tr class="w3-white w3-hide add-income-form">
                     <td colspan="5" class="w3-padding w3-center">
-                      <div class="w3-hide-medium w3-hide-small">
+                      <div>
                         <button class="w3-button w3-flat-belize-hole w3-hover-blue w3-round-small">
                           Añadir Ingreso <i class="fas fa-plus fa-x1"></i>
                         </button>
 
-                        <button class="w3-button w3-flat-pomegranate w3-hover-red w3-round-small">
+                        <button class="w3-button w3-flat-pomegranate w3-hover-red w3-round-small" onclick="showCloseMultipleRows('add-income-form')">
                           Cancelar <i class="fas fa-times fa-x1"></i>
-                        </button>
-                      </div>
-                      
-                      <div class="w3-hide-large">
-                        <button class="w3-button w3-flat-belize-hole w3-hover-blue w3-round-small w3-small">
-                          Añadir Ingreso <i class="fas fa-plus fa-x1"></i>
-                        </button>
-
-                        <button class="w3-button w3-flat-pomegranate w3-hover-red w3-round-small w3-small">
-                          Cancelar <i class="fas fa-times"></i>
                         </button>
                       </div>
                     </td>
@@ -430,7 +428,11 @@
                   </tr>
                   
                   <!--añadir egreso directamente-->
-                  <tr class="w3-white native-outcome-td-data native-td-data">
+                  <tr class="w3-hide add-outcome-form">
+                    <td colspan="8" class="w3-center w3-padding-16"><b class="w3-text-purple w3-large">Añadir Egreso</b></td>
+                  </tr>
+                  
+                  <tr class="w3-white w3-hide native-outcome-td-data native-td-data add-outcome-form">
                     <td class="w3-text-blue native-text-elipsis native-td-overflow">
                       <label for="outcome-concept" class="w3-small w3-hide-small w3-hide-medium">Concepto</label>
                       <input type="text" id="outcome-concept" class="w3-input w3-border w3-round-small" required>
@@ -482,25 +484,15 @@
                     <td>&nbsp;</td>
                   </tr>
                   
-                  <tr class="w3-white">
+                  <tr class="w3-white w3-hide">
                     <td colspan="8" class="w3-padding w3-center">
                       <div class="w3-hide-medium w3-hide-small">
                         <button class="w3-button w3-flat-belize-hole w3-hover-blue w3-round-small">
                           Añadir egreso <i class="fas fa-plus fa-x1"></i>
                         </button>
 
-                        <button class="w3-button w3-flat-pomegranate w3-hover-red w3-round-small">
+                        <button class="w3-button w3-flat-pomegranate w3-hover-red w3-round-small" onclick="showCloseMultipleRows('add-outcome-form')">
                           Cancelar <i class="fas fa-times fa-x1"></i>
-                        </button>
-                      </div>
-                      
-                      <div class="w3-hide-large">
-                        <button class="w3-button w3-flat-belize-hole w3-hover-blue w3-round-small w3-small">
-                          Añadir egreso <i class="fas fa-plus fa-x1"></i>
-                        </button>
-
-                        <button class="w3-button w3-flat-pomegranate w3-hover-red w3-round-small w3-small">
-                          Cancelar <i class="fas fa-times"></i>
                         </button>
                       </div>
                     </td>

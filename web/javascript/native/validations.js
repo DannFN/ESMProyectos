@@ -1,5 +1,5 @@
-document.oncontextmenu = function() { return false; };
-document.onselectstart = function() { return false; };
+/*document.oncontextmenu = function() { return false; };
+document.onselectstart = function() { return false; };*/
 
 function numYLet(e) {
 	tecla = (document.all) ? e.keyCode : e.which;
