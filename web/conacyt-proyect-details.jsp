@@ -125,7 +125,7 @@
             <i class="far fa-edit fa-fw"></i> Editar datos del proyecto
           </button>
           
-          <button class="w3-bar-item w3-button w3-hover-theme native-button-navbar">
+          <button class="w3-bar-item w3-button w3-hover-theme native-button-navbar" onclick="showModal('modal1') ">
             <i class="fa fa-plus fa-fw"></i> Añadir ingreso
           </button>
 
@@ -182,7 +182,7 @@
           </div>
 
           <!--contenedor ingresos-->
-          <div class="w3-container w3-white">
+          <div class="w3-container w3-white w3-padding-32">
             <div class="w3-row w3-padding-16">
               <div class="w3-col l7 m4 w3-hide-small">
                 <!--vacio-->
@@ -231,14 +231,8 @@
                 <tbody>
                   <tr class="w3-hide"><!--TODO retirar hide-->
                     <td colspan="5" class="w3-center w3-text-grey w3-padding-64">
-                      No hay ingresos que mostrar
+                      No hay ingresos que mostrar, No hay ingresos que mostrar, comienza añadiendo uno haciendo click sobre el botón &nbsp;
                       <i class="fa fa-bars fa-lg"></i>
-                    </td>
-                  </tr>
-                  
-                  <tr class="w3-hide">
-                    <td colspan="5" class="w3-padding-64 w3-center w3-text-grey">
-                      No hay proyectos coincidentes con la busqueda
                     </td>
                   </tr>
                   
@@ -272,6 +266,13 @@
                           <i class="fas fa-edit fa-x1"></i> Eliminar
                         </button>
                       </div>
+                    </td>
+                  </tr>
+                  
+                  <!--resultados no encontrados-->
+                  <tr class="w3-hide not-found-tr">
+                    <td colspan="5" class="w3-padding-64 w3-center w3-text-grey">
+                      No hay ingresos coincidentes con la busqueda
                     </td>
                   </tr>
                   
@@ -342,7 +343,7 @@
             <i class="fas fa-arrow-up fa-1x"></i> Egresos
           </div>
           
-          <div class="w3-container w3-white">
+          <div class="w3-container w3-white w3-padding-32">
             <div class="w3-row w3-padding-16">
               <div class="w3-col l7 m4 w3-hide-small">
                 <!--vacio-->
@@ -392,6 +393,14 @@
                 </thead>
                 
                 <tbody>
+                  <tr class="w3-hide"><!--TODO retirar hide-->
+                    <td colspan="5" class="w3-center w3-text-grey w3-padding-64">
+                      No hay egresos que mostrar, comienza añadiendo uno haciendo click sobre el botón &nbsp;
+                      <i class="fa fa-bars fa-lg"></i>
+                    </td>
+                  </tr>
+                  
+                  <!--fila de ingreso-->
                   <tr class="native-outcome-td-data native-td-data">
                     <td class="w3-text-blue native-text-elipsis native-td-overflow"><b>Ratones de laboratorio blancos</b></td>
                     <td class="w3-text-grey">GINVE <br> <small>Reembolso</small></td>
@@ -424,6 +433,12 @@
                           <i class="fas fa-edit fa-x1"></i> Eliminar
                         </button>
                       </div>
+                    </td>
+                  </tr>
+                  
+                  <tr class="w3-hide not-found-tr">
+                    <td colspan="5" class="w3-padding-64 w3-center w3-text-grey">
+                      No hay egresos coincidentes con la busqueda
                     </td>
                   </tr>
                   
@@ -484,7 +499,7 @@
                     <td>&nbsp;</td>
                   </tr>
                   
-                  <tr class="w3-white w3-hide">
+                  <tr class="w3-white w3-hide add-outcome-form">
                     <td colspan="8" class="w3-padding w3-center">
                       <div class="w3-hide-medium w3-hide-small">
                         <button class="w3-button w3-flat-belize-hole w3-hover-blue w3-round-small">
@@ -507,6 +522,55 @@
       <div class="w3-col l1 m1 w3-hide-small">
         <!--vacio-->
         &nbsp;
+      </div>
+    </div>
+    
+    <!--modal 1-->
+    <div id="modal1" class="w3-modal">
+      <div class="w3-modal-content" style="margin: 16px auto">
+        <div class="w3-white">
+          <span onclick="closeModal('modal1')" class="w3-button w3-display-topright w3-round-small w3-metro-dark-green w3-hover-light-green" style="margin: 5px"><b>&times;</b></span>
+          <div class="w3-container w3-green">
+            <h6>Añadir ingreso</h6>
+          </div>
+          <div id="sip-proyect-edit-container" class="w3-padding-16">            
+            <div class="w3-row">
+              <div class="w3-col w3-padding">
+                <label for="conacyt-income-administration-modal" class="w3-text-grey">Administración</label>
+                <select id="conacyt-income-administration-modal" class="w3-input w3-border w3-round-small" required>
+                  <option disabled hidden value="" selected>Seleccionar</option>
+                  <option value="1">Primera administación</option>
+                  <option value="2">Segunda administración</option>
+                  <option value="3">Tercera administración</option>
+                </select>
+              </div>
+              <div class="w3-col w3-padding">
+                <label for="conacyt-income-concept-modal" class="w3-text-grey">Concepto</label>
+                <input type="text" id="conacyt-income-concept-modal" class="w3-input w3-border w3-round-small" required>
+              </div>
+              <div class="w3-col w3-padding">
+                <label for="conacyt-income-expense-category-modal" class="w3-text-grey">Categoria de gasto</label>
+                <select id="conacyt-income-expense-category-modal" class="w3-input w3-border w3-round-small" required>
+                  <option disabled hidden value="" selected>Seleccionar</option>
+                  <option value="1">GINVE</option>
+                  <option value="2">GCORR</option>
+                </select>
+              </div>
+              <div class="w3-col w3-padding">
+                <label for="conacyt-income-expense-subcategory-modal" class="w3-text-grey">Subcategoria de gasto</label>
+                <select id="conacyt-income-expense-subcategory-modal" class="w3-input w3-border w3-round-small" required>
+                  <option disabled hidden value="" selected>Seleccionar</option>
+                  <option value="405">405</option>
+                  <option value="200">200</option>
+                </select>
+              </div>              
+              <div class="w3-col w3-padding">
+                <label for="conacyt-income-amount-modal" class="w3-text-grey">Importe</label>
+                <input type="number" id="conacyt-income-amount-modal" class="w3-input w3-border w3-round-small" required>
+              </div>
+            </div>            
+          </div>
+        </div>
       </div>
     </div>
 

@@ -11,7 +11,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-  
   response.setHeader("Cache-Control","no-cache");
   response.setHeader("Cache-Control","no-store");
   response.setDateHeader("Expires", 0);
@@ -77,7 +76,7 @@
           </div>
         </div>
         <div class="w3-col l10 m10 s8">
-          <input type="text" id="searchbox" class="w3-input w3-round-small w3-theme-d1 w3-border-0 native-input-search" placeholder="&#xf002; &nbsp; Filtrar resultados por nombre de proyecto o titular" style="font-family:'Trebuchet MS', 'FontAwesome'">
+          <input type="text" id="searchbox" class="w3-input w3-round-small w3-theme-d1 w3-border-0 native-input-search" placeholder="&#xf002; &nbsp; Filtrar resultados por nombre de proyecto o titular" style="font-family:'Trebuchet MS', 'FontAwesome'" onkeyup="filterProyectsTable()">
         </div>
         <div class="w3-col l1 m1 s2 w3-center">
           <button class="w3-button w3-theme-d2 w3-hover-theme w3-round-small native-button-navbar w3-hide-small" onclick="showCloseNavBlock('actions-bar')">
@@ -91,10 +90,16 @@
 
       <!--barra de acciones-->
       <div id="actions-bar" class="w3-bar w3-theme-d3 w3-hide">
-        <button class="w3-bar-item w3-button w3-hover-theme w3-hide-small native-button-navbar" onclick="showModal('modal1')">
+        <button class="w3-bar-item w3-button w3-hover-theme w3-hide-medium w3-hide-small native-button-navbar" onclick="showCloseMultipleRows('add-conacyt-proyect-form')">
           <i class="fa fa-plus"></i> Añadir proyecto Conacyt
         </button>
-        <button class="w3-bar-item w3-button w3-hover-theme w3-hide-small native-button-navbar" onclick="showModal('modal2')">
+        <button class="w3-bar-item w3-button w3-hover-theme w3-hide-large w3-hide-small native-button-navbar" onclick="showModal('modal1')">
+          <i class="fa fa-plus"></i> Añadir proyecto Conacyt
+        </button>
+        <button class="w3-bar-item w3-button w3-hover-theme w3-hide-medium w3-hide-small native-button-navbar" onclick="showCloseMultipleRows('add-sip-proyect-form')">
+          <i class="fa fa-plus"></i> Añadir proyecto SIP
+        </button>
+        <button class="w3-bar-item w3-button w3-hover-theme w3-hide-large w3-hide-small native-button-navbar" onclick="showModal('modal2')">
           <i class="fa fa-plus"></i> Añadir proyecto SIP
         </button>
         <form action="LogOut" method="post" class="w3-right">
@@ -104,7 +109,7 @@
         </form>
         
         <!--barra de acciones mobile-->
-        <div id="actions-bar-mobile" class="w3-bar-block w3-hide w3-hide-large w3-hide-medium">
+        <div id="actions-bar-mobile" class="w3-bar-block w3-hide w3-hide-large">
           <button class="w3-bar-item w3-button w3-hover-theme native-button-navbar" onclick="showModal('modal1')">
             <i class="fa fa-plus fa-fw"></i> Añadir proyecto Conacyt
           </button>
@@ -138,21 +143,21 @@
     <div class="w3-center native-banner-background">
       <!--banner-->
       <div class="w3-container w3-text-white native-banner native-inset-shadow">
-          <!--escudos vistas large y medium-->
-          <img src="images/logos.png" alt="Escudos IPN. ESM y Conacyt" class="w3-hide-small native-logos-large">
+        <!--escudos vistas large y medium-->
+        <img src="images/logos.png" alt="Escudos IPN. ESM y Conacyt" class="w3-hide-small native-logos-large">
 
-          <!--escudos vista small-->
-          <img src="images/logos.png" alt="Escudos IPN. ESM y Conacyt" class="w3-hide-large w3-hide-medium native-logos-small">
-          <br>
-          
-          <!--texto banner vistas large y medium-->
-          <span class="w3-hide-small native-banner-text-large">Vista General de Proyectos</span>
-          <!--texto banner vista small-->
-          <span class="w3-hide-large w3-hide-medium native-banner-text-small">Vista General de Proyectos</span> 
-          <br>
-          <small>
-            Sistema De Gestión y Consulta de Recursos de Proyectos de Investigación de la Escuela Superior de Medicina
-          </small>
+        <!--escudos vista small-->
+        <img src="images/logos.png" alt="Escudos IPN. ESM y Conacyt" class="w3-hide-large w3-hide-medium native-logos-small">
+        <br>
+
+        <!--texto banner vistas large y medium-->
+        <span class="w3-hide-small native-banner-text-large">Vista General de Proyectos</span>
+        <!--texto banner vista small-->
+        <span class="w3-hide-large w3-hide-medium native-banner-text-small">Vista General de Proyectos</span> 
+        <br>
+        <small>
+          Sistema De Gestión y Consulta de Recursos de Proyectos de Investigación de la Escuela Superior de Medicina
+        </small>
       </div>
 
       <!--pestañas-->
@@ -171,7 +176,8 @@
     </div>
 
     <!--contenido de la página-->
-    <div class="native-main">      
+    <div class="native-main">  
+      <!--contenido de los proyectos conacyt-->
       <div id="conacyt-proyects" class="w3-row tab-content">
         <div class="w3-col l2 m1 w3-hide-small">
           <!--vacio-->
@@ -179,8 +185,8 @@
         </div>
 
         <div class="w3-col l8 m10 s12">
-          <!--contenido de los proyectos conacyt-->
           <br class="w3-hide-small">
+          
           <table class="w3-card"> 
             <thead>
               <tr class="w3-theme-d2">
@@ -195,8 +201,7 @@
               </tr>
             </thead>
 
-            <tbody id="conacyt-proyects-table">
-              
+            <tbody id="conacyt-proyects-table">                 
               <%if(p.isEmpty() || p == null) {%>
                 <tr class="w3-hide"><!--TODO retirar hide-->
                   <td colspan="4" class="w3-center w3-text-grey w3-padding-64">
@@ -204,9 +209,9 @@
                     <i class="fa fa-bars fa-lg"></i>
                   </td>
                 </tr>
-              <%}else {
-                for(ConacytProyect cp : p) {%>
-                  <!--fila de proyectos-->
+              <%}else {%>
+                <!--fila de proyectos-->
+                <%for(ConacytProyect cp : p) {%>
                   <tr id="conacyt-proyect-container-<%=cp.getProyectNumber()%>" class="native-td-data">
                     <td class="w3-center w3-hide-medium w3-hide-small">
                       <b id="conacyt-proyect-number-<%=cp.getProyectNumber()%>"><%=cp.getProyectNumber()%></b>
@@ -265,11 +270,48 @@
                     </td>
                   </tr>
                 <%}
-              }%>
-                
-              <tr class="w3-hide">
+              }%>              
+              
+              <!--resultados no encontrados-->
+              <tr class="w3-hide not-found-tr">
                 <td colspan="4" class="w3-padding-64 w3-center w3-text-grey">
                   No hay proyectos coincidentes con la busqueda
+                </td>
+              </tr>
+              
+              <!--Añadir Proyecto directamente-->
+              <tr class="w3-hide add-conacyt-proyect-form">
+                <td colspan="4" class="w3-center w3-padding-16"><b class="w3-text-purple w3-large">Añadir Proyecto</b></td>
+              </tr>
+
+              <tr class="w3-white w3-hide native-td-data native-income-td-data add-conacyt-proyect-form">
+                <td style="width: 10%">
+                  <label for="add-conacyt-proyect-number" class="w3-hide-small w3-hide-medium native-text-elipsis">N° de proyecto</label>
+                  <input type="number" id="add-conacyt-proyect-number" class="w3-input w3-border w3-round-small" required>
+                </td>
+
+                <td class="w3-text-blue native-text-elipsis">
+                  <label for="add-conacyt-proyect-name" class="w3-hide-small w3-hide-medium">Nombre del proyecto</label>
+                  <input type="text" id="add-conacyt-proyect-name" class="w3-input w3-border w3-round-small" required>
+                </td>
+
+                <td colspan="2" class="w3-text-dark-grey">
+                  <label for="add-conacyt-proyect-titular" class="w3-hide-small w3-hide-medium">Nombre del Titular</label>
+                  <input type="text" id="add-conacyt-proyect-titular" class="w3-input w3-border w3-round-small" required>                  
+                </td>
+              </tr>
+
+              <tr class="w3-white w3-hide add-conacyt-proyect-form">
+                <td colspan="4" class="w3-padding w3-center">
+                  <div>
+                    <button class="w3-button w3-flat-belize-hole w3-hover-blue w3-round-small">
+                      Añadir Proyecto <i class="fas fa-plus fa-x1"></i>
+                    </button>
+
+                    <button class="w3-button w3-flat-pomegranate w3-hover-red w3-round-small" onclick="showCloseMultipleRows('add-conacyt-proyect-form')">
+                      Cancelar <i class="fas fa-times fa-x1"></i>
+                    </button>
+                  </div>
                 </td>
               </tr>
             </tbody>
@@ -367,7 +409,7 @@
             <h6>Editar Proyecto</h6>
           </div>
           <div id="conacyt-proyect-edit-container" class="w3-container w3-padding-16">
-            <!--contenido dinamico de edición del proyecto de conacyt-->
+            <!--TODO contenido dinamico de edición del proyecto de conacyt-->
           </div>
         </div>
       </div>
@@ -377,12 +419,12 @@
     <div id="modal4" class="w3-modal">
       <div class="w3-modal-content" style="margin: 16px auto">
         <div class="w3-white">
-          <span onclick="closeModal('modal3')" class="w3-button w3-display-topright w3-round-small w3-theme-d4 w3-hover-theme" style="margin: 5px"><b>&times;</b></span>
+          <span onclick="closeModal('modal4')" class="w3-button w3-display-topright w3-round-small w3-theme-d4 w3-hover-theme" style="margin: 5px"><b>&times;</b></span>
           <div class="w3-container w3-theme-d2">
             <h6>Editar Proyecto</h6>
           </div>
           <div id="sip-proyect-edit-container" class="w3-container w3-padding-16">
-            <!--contenido dinamico de edición del proyecto de sip-->
+            <!--TODO contenido dinamico de edición del proyecto de sip-->
           </div>
         </div>
       </div>

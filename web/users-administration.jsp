@@ -67,7 +67,7 @@
           <i class="fa fa-plus"></i> Añadir usuario
         </button>
 
-        <button class="w3-bar-item w3-button w3-hover-theme w3-hide-small native-button-navbar" onclick="showModal('modal1')">
+        <button class="w3-bar-item w3-button w3-hover-theme w3-hide-small native-button-navbar" onclick="showModal('modal2')">
           <i class="fa fa-edit"></i> Cambiar mi contraseña
         </button>
         
@@ -87,13 +87,13 @@
             <i class="fa fa-plus fa-fw"></i> Añadir usuario
           </button>
           
-          <button class="w3-bar-item w3-button w3-hover-theme native-button-navbar" onclick="showModal('modal1')">
+          <button class="w3-bar-item w3-button w3-hover-theme native-button-navbar" onclick="showModal('modal2')">
             <i class="fa fa-edit"></i> Cambiar mi contraseña
           </button>
 
-          <button class="w3-bar-item w3-button w3-hover-theme native-button-navbar" onclick="showModal('modal2')">
-            <i class="fa fa-plus fa-fw"></i> Administrar Proyectos
-          </button>
+          <a href="proyects-administration.jsp" class="w3-bar-item w3-button w3-hover-theme native-button-navbar">
+            <i class="fa fa-plus"></i> Administrar proyectos
+          </a>
 
           <form action="LogOut" method="post">
             <button type="submit" class="w3-bar-item w3-button w3-hover-theme native-button-navbar">
@@ -201,6 +201,75 @@
       <div class="w3-col l1 m1 w3-hide-small">
         <!--vacio-->
         &nbsp;
+      </div>
+    </div>
+    
+    <!--ventana modal 1-->
+    <div id="modal1" class="w3-modal">
+      <div class="w3-modal-content" style="margin: 16px auto">
+        <div class="w3-white">
+          <span onclick="closeModal('modal1')" class="w3-button w3-display-topright w3-round-small w3-indigo w3-hover-light-blue" style="margin: 5px"><b>&times;</b></span>
+          <div class="w3-container w3-blue">
+            <h6>Añadir Usuario</h6>
+          </div>
+          <div class="w3-container w3-padding-16">
+            <div class="w3-row">
+              <div class="w3-col l6 w3-padding">
+                <label for="add-user-name">Nombre de Usuario</label>
+                <input type="number" id="add-conacyt-proyect-number" class="w3-input w3-border w3-round-small" required>
+              </div>
+              
+              <div class="w3-col l6 w3-padding">
+                <label for="add-user-access-level">Nivel de acceso</label>
+                <select id="add-user-access-level" class="w3-input w3-border w3-round-small" required>
+                  <option disabled hidden value="" selected>Seleccionar</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="w3-row">
+              <div class="w3-col l6 w3-padding">
+                <label for="add-user-password">Contraseña</label>
+                <input type="password" id="add-user-password" class="w3-input w3-border w3-round-small" required>
+              </div>
+              
+              <div class="w3-col l6 w3-padding">
+                <label for="add-user-password-confirmation">Confirmar contraseña</label>
+                <input type="password" id="add-user-password-confirmation" class="w3-input w3-border w3-round-small" required>
+              </div>
+              
+              <div class="w3-col l12 w3-padding">
+                <button class="w3-button w3-flat-green-sea w3-hover-green w3-round-small w3-left" onclick="addCProyect()">Añadir</button> 
+                <button class="w3-button w3-metro-dark-red w3-hover-red w3-round-small w3-right" onclick="closeModal('modal1')">Cancelar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!--ventana modal 2-->
+    <div id="modal2" class="w3-modal">
+      <div class="w3-modal-content" style="margin: 16px auto">
+        <div class="w3-white">
+          <span onclick="closeModal('modal2')" class="w3-button w3-display-topright w3-round-small w3-theme-d4 w3-hover-theme" style="margin: 5px"><b>&times;</b></span>
+          <div class="w3-container w3-theme-d2">
+            <h6>Cambiar Contraseña</h6>
+          </div>
+          <div id="sip-proyect-edit-container" class="w3-container w3-padding-16">
+            <div class="w3-row">
+              <div class="w3-col l6 w3-padding">
+                <label for="change-user-password">Contraseña actual</label>
+                <input type="password" id="change-user-password" class="w3-input w3-border w3-round-small" required>
+              </div>
+              
+              <div class="w3-col l6 w3-padding">
+                <label for="change-user-confirm-password">Nueva contraseña</label>
+                <input type="password" id="change-user-confirm-password" class="w3-input w3-border w3-round-small" required>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     

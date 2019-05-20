@@ -11,13 +11,11 @@ function showCloseMultipleRows(classElement){
   var i, x;
   x = document.getElementsByClassName(classElement);
   
-  for(i = 0; i < x.lenght; i++){
+  for(i = 0; i < x.length; i++){
     if (x[i].className.indexOf('w3-hide') !== -1) {
-      x[i].classList.add('w3-show');
-      console.log(x[i].className.indexOf('w3-hide'));
+      x[i].classList.remove('w3-hide');
     } else { 
-      x[i].classList.remove('w3-show');
-      console.log(x[i].className.indexOf('w3-hide'));
+      x[i].classList.add('w3-hide');
     }
   }
 }
