@@ -10,7 +10,7 @@
 <%@page import="Controlador.Objetos.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<%
+<%/*
   response.setHeader("Cache-Control","no-cache");
   response.setHeader("Cache-Control","no-store");
   response.setDateHeader("Expires", 0);
@@ -31,7 +31,7 @@
     us = (User) sess.getAttribute("user");
     DBOperations dbo = new DBOperations();
     p = dbo.conacytProyects();
-  }
+  }*/
 %>
 
 <!DOCTYPE html>
@@ -40,26 +40,21 @@
     <title>Administración de proyectos</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
-
     <link rel="stylesheet" type="text/css" href="css/w3/w3.css">
-    
     <link rel="stylesheet" type="text/css" href="css/native/w3-overwrited.css">
     <link rel="stylesheet" type="text/css" href="fontawesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="css/native/all.css">
     <link rel="stylesheet" type="text/css" href="css/native/responsive-proyects-tables.css">
-
     <link rel="stylesheet" type="text/css" href="css/w3/w3-theme.css">
     <link rel="stylesheet" type="text/css" href="css/w3/w3-metro-colors.css">
     <link rel="stylesheet" type="text/css" href="css/w3/w3-flat-colors.css">
     <link rel="stylesheet" type="text/css" href="css/w3/w3-win8-colors.css">
-    
     <script type="text/javascript" src="javascript/additionals/jquery.js"></script>
     <script type="text/javascript" src="javascript/w3/w3.js"></script>
     <script type="text/javascript" src="javascript/native/ajax.js"></script>
     <script type="text/javascript" src="javascript/native/scripts.js"></script>
     <script type="text/javascript" src="javascript/native/validations.js"></script>
     <script>
-      window.onscroll = function() { stickyHeader('sticky-header'); };
       window.onload = function() { document.getElementById('default-open').click(); };
       window.onclick = function() { closeModalOutside(event, 'modal1'); closeModalOutside(event, 'modal2'); closeModalOutside(event, 'modal3'); };
     </script>  
@@ -90,16 +85,10 @@
 
       <!--barra de acciones-->
       <div id="actions-bar" class="w3-bar w3-theme-d3 w3-hide">
-        <button class="w3-bar-item w3-button w3-hover-theme w3-hide-medium w3-hide-small native-button-navbar" onclick="showCloseMultipleRows('add-conacyt-proyect-form')">
+        <a href="#add-conacyt-proyect-smoth" class="w3-bar-item w3-button w3-hover-theme w3-hide-medium w3-hide-small native-button-navbar" onclick="showCloseMultipleRows('add-conacyt-proyect-form')">
           <i class="fa fa-plus"></i> Añadir proyecto Conacyt
-        </button>
-        <button class="w3-bar-item w3-button w3-hover-theme w3-hide-large w3-hide-small native-button-navbar" onclick="showModal('modal1')">
-          <i class="fa fa-plus"></i> Añadir proyecto Conacyt
-        </button>
+        </a>
         <button class="w3-bar-item w3-button w3-hover-theme w3-hide-medium w3-hide-small native-button-navbar" onclick="showCloseMultipleRows('add-sip-proyect-form')">
-          <i class="fa fa-plus"></i> Añadir proyecto SIP
-        </button>
-        <button class="w3-bar-item w3-button w3-hover-theme w3-hide-large w3-hide-small native-button-navbar" onclick="showModal('modal2')">
           <i class="fa fa-plus"></i> Añadir proyecto SIP
         </button>
         <form action="LogOut" method="post" class="w3-right">
@@ -133,7 +122,7 @@
       </div>
 
       <!--manejador de éxito-->
-      <div id="success-handler" class="w3-bar w3-container w3-padding w3-win8-green w3-hide">
+      <div id="success-handler" class="w3-bar w3-container w3-padding w3-flat-emerald w3-hide">
         <span class="w3-bar-item">Operación exitosa</span>
         <button class="w3-bar-item w3-button w3-hover-green w3-round-small w3-right" onclick="showCloseNavBlock('success-handler')"><i class="fas fa-times"></i></button>
       </div>
@@ -202,75 +191,70 @@
             </thead>
 
             <tbody id="conacyt-proyects-table">                 
-              <%if(p.isEmpty() || p == null) {%>
-                <tr class="w3-hide"><!--TODO retirar hide-->
-                  <td colspan="4" class="w3-center w3-text-grey w3-padding-64">
-                    No hay proyectos que mostrar, comienza añadiendo uno haciendo click sobre el botón &nbsp;
-                    <i class="fa fa-bars fa-lg"></i>
-                  </td>
-                </tr>
-              <%}else {%>
-                <!--fila de proyectos-->
-                <%for(ConacytProyect cp : p) {%>
-                  <tr id="conacyt-proyect-container-<%=cp.getProyectNumber()%>" class="native-td-data">
-                    <td class="w3-center w3-hide-medium w3-hide-small">
-                      <b id="conacyt-proyect-number-<%=cp.getProyectNumber()%>"><%=cp.getProyectNumber()%></b>
-                    </td>
-                    <td class="native-text-elipsis">
-                      <b id="conacyt-proyect-name-<%=cp.getProyectNumber()%>" class="w3-text-blue"><%=cp.getProyectName()%></b>
-                      <br>
-                      <small class="w3-hide-small w3-hide-medium conacyt-proyect-titular-<%=cp.getProyectNumber()%>"><%=cp.getTitular()%></small>
-                    </td>
-                    <td class="w3-hide-large native-text-elipsis">
-                      <span class="conacyt-proyect-titular-<%=cp.getProyectNumber()%>"><%=cp.getTitular()%></span>
-                    </td>
-                    <td>
-                      <b id="conacyt-proyect-balance-<%=cp.getProyectNumber()%>" class="w3-text-green">$<%=cp.getBalance()%> MXN</b>
-                    </td>
-                    <td>
-                      <div class="w3-dropdown-click w3-right w3-hide-medium w3-hide-small">
-                        <button class="w3-button w3-small w3-round-small" onclick="showCloseNavBlock('dropdown-cproyect-<%=cp.getProyectNumber()%>')"> 
-                          <i class="fas fa-ellipsis-h"></i>
+              <tr class="w3-hide"><!--TODO retirar hide-->
+                <td colspan="4" class="w3-center w3-text-grey w3-padding-64">
+                  No hay proyectos que mostrar, comienza añadiendo uno haciendo click sobre el botón &nbsp;
+                  <i class="fa fa-bars fa-lg"></i>
+                </td>
+              </tr>
+              
+              <tr id="conacyt-proyect-container-1" class="native-td-data">
+                <td class="w3-center w3-hide-medium w3-hide-small">
+                  <b id="conacyt-proyect-number-1">1</b>
+                </td>
+                <td class="native-text-elipsis">
+                  <b id="conacyt-proyect-name-1" class="w3-text-blue">Ratones blancos de laboratorio</b>
+                  <br>
+                  <small class="w3-hide-small w3-hide-medium conacyt-proyect-titular-1">Rodriguez Beltrán Sergio</small>
+                </td>
+                <td class="w3-hide-large native-text-elipsis">
+                  <span class="conacyt-proyect-titular-1">Rodriguez Beltrán Sergio</span>
+                </td>
+                <td>
+                  <b id="conacyt-proyect-balance-1" class="w3-text-green">$100,000,000.00 MXN</b>
+                </td>
+                <td>
+                  <div class="w3-dropdown-click w3-right w3-hide-medium w3-hide-small">
+                    <button class="w3-button w3-small w3-round-small" onclick="showCloseNavBlock('dropdown-cproyect-1')"> 
+                      <i class="fas fa-ellipsis-h"></i>
+                    </button>
+                    <div id="dropdown-cproyect-1" class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
+                      <form action="conacyt-proyect-details.jsp" method="get">
+                        <input type="number" name="proyect-number" value="1" hidden readonly required>
+                        <button type="submit" class="w3-bar-item w3-button">
+                          Detalles <i class="fas fa-arrow-right fa-fw w3-right"></i>
                         </button>
-                        <div id="dropdown-cproyect-<%=cp.getProyectNumber()%>" class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
-                          <form action="conacyt-proyect-details.jsp" method="get">
-                            <input type="number" name="proyect-number" value="<%=cp.getProyectNumber()%>" hidden readonly required>
-                            <button type="submit" class="w3-bar-item w3-button">
-                              Detalles <i class="fas fa-arrow-right fa-fw w3-right"></i>
-                            </button>
-                          </form>
-                          <div>
-                            <input type="number" id="conacyt-proyect-number-edit-<%=cp.getProyectNumber()%>" value="<%=cp.getProyectNumber()%>" hidden readonly required>
-                            <button class="w3-bar-item w3-button" onclick="showModal('modal3'); editCProyectGet('conacyt-proyect-number-edit-<%=cp.getProyectNumber()%>');">
-                              <i class="fas fa-trash-alt fa-fw"></i> Editar 
-                            </button>
-                          </div>
-                          <div>
-                            <input type="number" id="conacyt-proyect-number-delete-<%=cp.getProyectNumber()%>" value="<%=cp.getProyectNumber()%>" hidden readonly required>
-                            <button class="w3-bar-item w3-button" onclick="deleteCProyect('conacyt-proyect-number-delete-<%=cp.getProyectNumber()%>')">
-                              <i class="fas fa-edit fa-fw"></i> Eliminar
-                            </button>
-                          </div>
-                        </div>
+                      </form>
+                      <div>
+                        <input type="number" id="conacyt-proyect-number-edit-1" value="1" hidden readonly required>
+                        <button class="w3-bar-item w3-button" onclick="showModal('modal3'); editCProyectGet('conacyt-proyect-number-edit-1');">
+                          <i class="fas fa-trash-alt fa-fw"></i> Editar 
+                        </button>
                       </div>
-                      <div class="w3-center w3-hide-large">
-                        <button class="w3-button w3-blue w3-round-small w3-small" onclick="showModal('modal3'); editCProyectGet('conacyt-proyect-number-edit-<%=cp.getProyectNumber()%>');">
-                          <i class="fas fa-trash-alt fa-x1"></i> Editar
+                      <div>
+                        <input type="number" id="conacyt-proyect-number-delete-1" value="1" hidden readonly required>
+                        <button class="w3-bar-item w3-button" onclick="deleteCProyect('conacyt-proyect-number-delete-1')">
+                          <i class="fas fa-edit fa-fw"></i> Eliminar
                         </button>
-                        <button class="w3-button w3-win8-magenta w3-round-small w3-small" onclick="deleteCProyect('conacyt-proyect-number-delete-<%=cp.getProyectNumber()%>')">
-                          <i class="fas fa-edit fa-x1"></i> Eliminar
-                        </button>
-                        <form action="conacyt-proyect-details.jsp" method="get" style="display: inline-block">
-                          <input type="number" name="proyect-number" value="<%=cp.getProyectNumber()%>" hidden readonly required>
-                          <button type="submit" class="w3-button w3-black w3-round-small w3-small">
-                            Detalles <i class="fas fa-arrow-right"></i>
-                          </button>
-                        </form>
                       </div>
-                    </td>
-                  </tr>
-                <%}
-              }%>              
+                    </div>
+                  </div>
+                  <div class="w3-center w3-hide-large">
+                    <button class="w3-button w3-blue w3-round-small w3-small" onclick="showModal('modal3'); editCProyectGet('conacyt-proyect-number-edit-1');">
+                      <i class="fas fa-trash-alt fa-x1"></i> Editar
+                    </button>
+                    <button class="w3-button w3-win8-magenta w3-round-small w3-small" onclick="deleteCProyect('conacyt-proyect-number-delete-1')">
+                      <i class="fas fa-edit fa-x1"></i> Eliminar
+                    </button>
+                    <form action="conacyt-proyect-details.jsp" method="get" style="display: inline-block">
+                      <input type="number" name="proyect-number" value="1" hidden readonly required>
+                      <button type="submit" class="w3-button w3-black w3-round-small w3-small">
+                        Detalles <i class="fas fa-arrow-right"></i>
+                      </button>
+                    </form>
+                  </div>
+                </td>
+              </tr>              
               
               <!--resultados no encontrados-->
               <tr class="w3-hide not-found-tr">
@@ -280,11 +264,11 @@
               </tr>
               
               <!--Añadir Proyecto directamente-->
-              <tr class="w3-hide add-conacyt-proyect-form">
+              <tr id="add-conacyt-proyect-smoth" class="w3-hide add-conacyt-proyect-form">
                 <td colspan="4" class="w3-center w3-padding-16"><b class="w3-text-purple w3-large">Añadir Proyecto</b></td>
               </tr>
 
-              <tr class="w3-white w3-hide native-td-data native-income-td-data add-conacyt-proyect-form">
+              <tr class="w3-white w3-hide add-conacyt-proyect-form">
                 <td style="width: 10%">
                   <label for="add-conacyt-proyect-number" class="w3-hide-small w3-hide-medium native-text-elipsis">N° de proyecto</label>
                   <input type="number" id="add-conacyt-proyect-number" class="w3-input w3-border w3-round-small" required>

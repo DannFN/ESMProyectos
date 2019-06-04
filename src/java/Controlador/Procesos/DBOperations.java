@@ -120,6 +120,8 @@ public class DBOperations {
           user.setUserId(rs.getInt(1));
           user.setUserType(rs.getString(2).charAt(0));
           user.setUserName(rs.getString(3));
+          user.setUserRealName(rs.getString(4));
+          user.setUserSurname(rs.getString(5));
         }while(rs.next());
       }
     }catch(SQLException e) {
@@ -130,11 +132,11 @@ public class DBOperations {
     }
 
     return user;
-  }
+  } 
 
   /*Obtener todos los usuarios*/
   public ArrayList<User> users() {
-    u = new ArrayList<User>();
+    u = new ArrayList<>();
 
     try {
       sql = "CALL getUsers();";
@@ -148,6 +150,8 @@ public class DBOperations {
           user.setUserId(rs.getInt(1));
           user.setUserType(rs.getString(2).charAt(0));
           user.setUserName(rs.getString(3));
+          user.setUserRealName(rs.getString(4));
+          user.setUserSurname(rs.getString(5));
 
           u.add(user);
         }while(rs.next());
@@ -330,7 +334,7 @@ public class DBOperations {
   /*-------------------------Operaciones de proyectos-------------------------*/
   /*Obtener todos los proyectos*/
   public ArrayList<ConacytProyect> conacytProyects() {
-    p = new ArrayList<ConacytProyect>();
+    p = new ArrayList<>();
 
     try{
       ConacytProyect pr;
@@ -492,7 +496,7 @@ public class DBOperations {
   /*--------------------------Operaciones de ingresos-------------------------*/
   /*Obtener todos los ingresos de un proyecto*/
   public ArrayList<ConacytIncome> conacytIncomes(int proyectNumber) {
-    i = new ArrayList<ConacytIncome>();
+    i = new ArrayList<>();
 
     try {
       sql = "CALL getConacytIncomes(?);";
@@ -590,7 +594,7 @@ public class DBOperations {
   /*-------------------------Operaciones de egresos---------------------------*/
   /*Obtener todos los egresos de un proyecto*/
   public ArrayList<ConacytOutcome> conacytOutcomes(int proyectNumber){
-    o = new ArrayList<ConacytOutcome>();
+    o = new ArrayList<>();
 
     try {
       sql = "CALL getConacytOutcomes(?);";

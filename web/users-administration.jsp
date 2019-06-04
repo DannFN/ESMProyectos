@@ -11,19 +11,15 @@
     <title>Administración de usuarios</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
-
     <link rel="stylesheet" type="text/css" href="css/w3/w3.css">
-    
     <link rel="stylesheet" type="text/css" href="css/native/w3-overwrited.css">
     <link rel="stylesheet" type="text/css" href="fontawesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="css/native/all.css">
     <link rel="stylesheet" type="text/css" href="css/native/responsive-users-tables.css">
-
     <link rel="stylesheet" type="text/css" href="css/w3/w3-theme.css">
     <link rel="stylesheet" type="text/css" href="css/w3/w3-metro-colors.css">
     <link rel="stylesheet" type="text/css" href="css/w3/w3-flat-colors.css">
     <link rel="stylesheet" type="text/css" href="css/w3/w3-win8-colors.css">
-    
     <script type="text/javascript" src="javascript/additionals/jquery.js"></script>
     <script type="text/javascript" src="javascript/w3/w3.js"></script>
     <script type="text/javascript" src="javascript/native/ajax.js"></script>
@@ -51,11 +47,11 @@
         </div>
 
         <div class="w3-col l1 m1 s2 w3-center">
-          <button class="w3-button w3-theme-d2 w3-hover-theme w3-round-small native-button-navbar w3-hide-small" onclick="showCloseNavBlock('actions-bar')">
+          <button class="w3-button w3-theme-d2 w3-hover-theme w3-round-small w3-hide-small native-button-navbar" onclick="showCloseNavBlock('actions-bar')">
             <i class="fa fa-bars fa-lg"></i>
           </button>
 
-          <button class="w3-button w3-theme-d2 w3-hover-theme w3-round-small native-button-navbar w3-hide-large w3-hide-medium" onclick="showCloseNavBlock('actions-bar'); showCloseNavBlock('actions-bar-mobile')">
+          <button class="w3-button w3-theme-d2 w3-hover-theme w3-round-small w3-hide-large w3-hide-medium native-button-navbar" onclick="showCloseNavBlock('actions-bar'); showCloseNavBlock('actions-bar-mobile')">
             <i class="fa fa-bars fa-lg"></i>
           </button>
         </div>
@@ -63,18 +59,15 @@
 
       <!--barra de acciones-->
       <div id="actions-bar" class="w3-bar w3-theme-d3 w3-hide">
-        <button class="w3-bar-item w3-button w3-hover-theme w3-hide-small native-button-navbar" onclick="showModal('modal1')">
+        <a href="#add-user-smoth" class="w3-bar-item w3-button w3-hover-theme w3-hide-small native-button-navbar" onclick="showCloseMultipleRows('add-user-form')">
           <i class="fa fa-plus"></i> Añadir usuario
-        </button>
-
+        </a>
         <button class="w3-bar-item w3-button w3-hover-theme w3-hide-small native-button-navbar" onclick="showModal('modal2')">
-          <i class="fa fa-edit"></i> Cambiar mi contraseña
+          <i class="fa fa-edit"></i> Actualizar mi contraseña
         </button>
-        
         <a href="proyects-administration.jsp" class="w3-bar-item w3-button w3-hover-theme w3-hide-small native-button-navbar">
           <i class="fa fa-plus"></i> Administrar proyectos
         </a>
-
         <form action="LogOut" method="post" class="w3-right">
           <button type="submit" class="w3-bar-item w3-button w3-hover-theme w3-hide-small native-button-navbar">
             Salir <i class="fas fa-sign-out-alt"></i>
@@ -86,15 +79,12 @@
           <button class="w3-bar-item w3-button w3-hover-theme native-button-navbar" onclick="showModal('modal1')">
             <i class="fa fa-plus fa-fw"></i> Añadir usuario
           </button>
-          
           <button class="w3-bar-item w3-button w3-hover-theme native-button-navbar" onclick="showModal('modal2')">
-            <i class="fa fa-edit"></i> Cambiar mi contraseña
+            <i class="fa fa-edit"></i> Actualizar mi contraseña
           </button>
-
           <a href="proyects-administration.jsp" class="w3-bar-item w3-button w3-hover-theme native-button-navbar">
             <i class="fa fa-plus"></i> Administrar proyectos
           </a>
-
           <form action="LogOut" method="post">
             <button type="submit" class="w3-bar-item w3-button w3-hover-theme native-button-navbar">
               <i class="fas fa-sign-out-alt fa-fw"></i> Salir
@@ -110,7 +100,7 @@
       </div>
 
       <!--manejador de éxito-->
-      <div id="success-handler" class="w3-bar w3-container w3-padding w3-win8-green w3-hide">
+      <div id="success-handler" class="w3-bar w3-container w3-padding w3-flat-emerald w3-hide">
         <span class="w3-bar-item">Operación exitosa</span>
         <button class="w3-bar-item w3-button w3-hover-green w3-round-small w3-right" onclick="showCloseNavBlock('success-handler')"><i class="fas fa-times"></i></button>
       </div>
@@ -122,7 +112,7 @@
         <div class="w3-container w3-padding-32 w3-text-white native-banner">
           <span class="w3-hide-small native-banner-text-large">Administración de Usuarios</span> 
           <br>
-          <span class="w3-hide-large w3-hide-medium native-banner-text-small">Vista General de Proyectos</span> 
+          <span class="w3-hide-large w3-hide-medium native-banner-text-small">Vista General de Usuarios</span> 
           <br class="w3-hide-large w3-hide-medium">
           Sesión de administrador actual: Nombre de Usuario del Administrador
         </div>
@@ -142,22 +132,30 @@
         <table class="w3-card">
           <thead>
             <tr class="w3-metro-dark-blue">
-              <th colspan="5" class="w3-container w3-padding-16 w3-large">Lista de Usuarios</th> 
+              <th colspan="7" class="w3-container w3-padding-16 w3-large">Lista de Usuarios</th> 
             </tr>
 
             <tr class="w3-metro-blue">
               <td class="w3-center w3-xlarge">N°</td>
               <td><b>Usuario</b></td>
-              <td>Nivel de acceso</td>
-              <td colspan="2">&nbsp;</td>
+              <td>Nombre</td>
+              <td>Apellido</td>
+              <td colspan="3">Nivel de acceso</td>
             </tr>
           </thead>
           
           <tbody id="users-table">
+            <!--fila de usuario-->
             <tr class="native-td-data">
               <td class="w3-center w3-hide-medium w3-hide-small"><b>1</b></td>
               <td>
                 <input type="text" id="username-1" value="Administrador maestro" class="w3-input w3-border w3-round-small" required>
+              </td>
+              <td>
+                <input type="text" id="user-real-name-1" value="Brenda" class="w3-input w3-border w3-round-small" required>
+              </td>
+              <td>
+                <input type="text" id="user-surname-1" value="Juárez" class="w3-input w3-border w3-round-small" required>
               </td>
               <td>
                 <select id="accesslevel-1" class="w3-input w3-border w3-round-small" required>
@@ -168,9 +166,20 @@
                 </select>
               </td>
               <td class="w3-center">
-                <button class="w3-button w3-metro-dark-blue w3-hover-blue w3-round-small w3-medium">
+                <button class="w3-button w3-metro-dark-blue w3-hover-blue w3-round-small w3-medium w3-hide-medium w3-hide-small">
                   <i class="fas fa-save fa-fw"></i> Guardar
                 </button>
+                <div class="w3-hide-large">
+                  <button class="w3-button w3-metro-dark-blue w3-round-small w3-small">
+                    <i class="fas fa-save fa-fw"></i> Guardar
+                  </button>  
+                  <button class="w3-button w3-blue w3-round-small w3-small">
+                    <i class="fas fa-edit fa-x1"></i> Contraseña
+                  </button>
+                  <button class="w3-button w3-win8-magenta w3-round-small w3-small">
+                    <i class="fas fa-trash-alt fa-x1"></i> Eliminar
+                  </button>
+                </div>
               </td>
               <td class="w3-center">
                 <div class="w3-dropdown-click w3-hide-medium w3-hide-small">
@@ -191,6 +200,54 @@
                       </button>
                     </div>
                   </div>
+                </div>
+              </td>
+            </tr>
+            
+            <!--añadir usuario directamente-->
+            <tr id="add-user-smoth" class="w3-hide add-user-form">
+              <td colspan="7" class="w3-center w3-padding-16"><b class="w3-text-purple w3-large">Añadir Usuario</b></td>
+            </tr>
+            
+            <tr class="w3-white w3-hide add-user-form">
+              <td colspan="2" >
+                <label for="add-user-real-name">Nombre</label>
+                <input type="text" id="add-user-real-name" class="w3-input w3-border w3-round-small" required>
+              </td>
+              <td>
+                <label for="add-user-surname">Apellido</label>
+                <input type="text" id="add-user-surname" class="w3-input w3-border w3-round-small" required>
+              </td>
+              <td>
+                <label for="add-user-username">Usuario</label>
+                <input type="text" id="add-user-username" class="w3-input w3-border w3-round-small" required>
+              </td>
+              <td>
+                <label for="add-user-access-level">Nivel de acceso</label>
+                <select id="add-user-access-level" class="w3-input w3-border w3-round-small" required>
+                  <option disabled hidden value="" selected>Seleccionar</option>
+                  <option value="1">Administración Proyectos</option>
+                  <option value="2">Consulta de Proyectos</option>
+                  <option value="1">Administración de proyectos y usuarios</option>
+                </select>
+              </td>
+              
+              <td colspan="2">
+                <label for="add-user-password">Contraseña</label>
+                <input type="password" id="add-user-password" class="w3-input w3-border w3-round-small" required>
+              </td>
+            </tr>
+            
+            <tr class="w3-white w3-hide add-user-form">
+              <td colspan="7" class="w3-padding w3-center">
+                <div>
+                  <button class="w3-button w3-flat-belize-hole w3-hover-blue w3-round-small">
+                    Añadir Usuario <i class="fas fa-plus fa-x1"></i>
+                  </button>
+
+                  <button class="w3-button w3-flat-pomegranate w3-hover-red w3-round-small" onclick="showCloseMultipleRows('add-user-form')">
+                    Cancelar <i class="fas fa-times fa-x1"></i>
+                  </button>
                 </div>
               </td>
             </tr>
@@ -215,27 +272,35 @@
           <div class="w3-container w3-padding-16">
             <div class="w3-row">
               <div class="w3-col l6 w3-padding">
-                <label for="add-user-name">Nombre de Usuario</label>
-                <input type="number" id="add-conacyt-proyect-number" class="w3-input w3-border w3-round-small" required>
+                <label for="add-user-real-name-modal">Nombre</label>
+                <input type="text" id="add-user-real-name-modal" class="w3-input w3-border w3-round-small" required>
               </div>
               
               <div class="w3-col l6 w3-padding">
-                <label for="add-user-access-level">Nivel de acceso</label>
-                <select id="add-user-access-level" class="w3-input w3-border w3-round-small" required>
+                <label for="add-user-surname-modal">Apellido</label>
+                <input type="text" id="add-user-surname-modal" class="w3-input w3-border w3-round-small" required>
+              </div>
+              
+              <div class="w3-col l6 w3-padding">
+                <label for="add-user-username-modal">Usuario</label>
+                <input type="text" id="add-user-username-modal" class="w3-input w3-border w3-round-small" required>
+              </div>
+              
+              <div class="w3-col l6 w3-padding">
+                <label for="add-user-access-level-modal">Nivel de acceso</label>
+                <select id="add-user-access-level-modal" class="w3-input w3-border w3-round-small" required>
                   <option disabled hidden value="" selected>Seleccionar</option>
+                  <option value="1">Administración Proyectos</option>
+                  <option value="2">Consulta de Proyectos</option>
+                  <option value="1">Administración de proyectos y usuarios</option>
                 </select>
               </div>
             </div>
             
             <div class="w3-row">
               <div class="w3-col l6 w3-padding">
-                <label for="add-user-password">Contraseña</label>
-                <input type="password" id="add-user-password" class="w3-input w3-border w3-round-small" required>
-              </div>
-              
-              <div class="w3-col l6 w3-padding">
-                <label for="add-user-password-confirmation">Confirmar contraseña</label>
-                <input type="password" id="add-user-password-confirmation" class="w3-input w3-border w3-round-small" required>
+                <label for="add-user-password-modal">Contraseña</label>
+                <input type="password" id="add-user-password-modal" class="w3-input w3-border w3-round-small" required>
               </div>
               
               <div class="w3-col l12 w3-padding">
@@ -266,6 +331,11 @@
               <div class="w3-col l6 w3-padding">
                 <label for="change-user-confirm-password">Nueva contraseña</label>
                 <input type="password" id="change-user-confirm-password" class="w3-input w3-border w3-round-small" required>
+              </div>
+              
+              <div class="w3-col l12 w3-padding">
+                <button class="w3-button w3-flat-green-sea w3-hover-green w3-round-small w3-left" onclick="addCProyect()">Actualizar</button> 
+                <button class="w3-button w3-metro-dark-red w3-hover-red w3-round-small w3-right" onclick="closeModal('modal2')">Cancelar</button>
               </div>
             </div>
           </div>

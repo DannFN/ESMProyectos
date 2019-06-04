@@ -59,7 +59,9 @@ tr:nth-of-type(even) {
 
 	/*Etiquetar la información*/
 	.native-td-data td:nth-of-type(2):before { content: "Usuario: "; font-weight: bold; color: #616161 }
-	.native-td-data td:nth-of-type(3):before { content: "Nivel:"; font-weight: bold; color: #616161 }
-	.native-td-data td:nth-of-type(4) { padding: 0; padding-top: 5px; padding-bottom: 10px }
+ .native-td-data td:nth-of-type(3):before { content: "Nombre: "; font-weight: bold; color: #616161 }
+ .native-td-data td:nth-of-type(4):before { content: "Apellido: "; font-weight: bold; color: #616161 }
+	.native-td-data td:nth-of-type(5):before { content: "Nivel:"; font-weight: bold; color: #616161 }
+	.native-td-data td:nth-of-type(6) { padding: 0; padding-top: 5px; padding-bottom: 10px }
 }
 

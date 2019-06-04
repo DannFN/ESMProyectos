@@ -42,28 +42,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Administración de proyectos</title>
+    <title>Detalles del proyecto</title>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <meta content="width=device-width, initial-scale=1" name="viewport">
-
       <link rel="stylesheet" type="text/css" href="css/w3/w3.css">
       <link rel="stylesheet" type="text/css" href="css/native/w3-overwrited.css">
       <link rel="stylesheet" type="text/css" href="fontawesome/css/all.css">
       <link rel="stylesheet" type="text/css" href="css/native/all.css">
       <link rel="stylesheet" type="text/css" href="css/native/responsive-incomes-outcomes-tables.css">
-
       <link rel="stylesheet" type="text/css" href="css/w3/w3-theme.css">
       <link rel="stylesheet" type="text/css" href="css/w3/w3-metro-colors.css">
       <link rel="stylesheet" type="text/css" href="css/w3/w3-flat-colors.css">
       <link rel="stylesheet" type="text/css" href="css/w3/w3-win8-colors.css">
-      
       <script type="text/javascript" src="javascript/additionals/jquery.js"></script>
       <script type="text/javascript" src="javascript/w3/w3.js"></script>
       <script type="text/javascript" src="javascript/native/scripts.js"></script>
       <script type="text/javascript" src="javascript/native/validations.js"></script>
-      <script>
-        window.onscroll = function() { stickyHeader('sticky-header'); };
-      </script>
   </head>
 
   <body ondrag="return false" ondrop="return false" class="w3-light-grey">
@@ -105,13 +99,13 @@
           <i class="far fa-edit"></i> Editar datos del proyecto
         </button>
         
-        <button class="w3-bar-item w3-button w3-hover-theme w3-hide-small native-button-navbar" onclick="showCloseMultipleRows('add-income-form')">
+        <a href="#add-income-smoth" class="w3-bar-item w3-button w3-hover-theme w3-hide-small native-button-navbar" onclick="showCloseMultipleRows('add-income-form')">
           <i class="fa fa-plus"></i> Añadir ingreso
-        </button>
+        </a>
         
-        <button class="w3-bar-item w3-button w3-hover-theme w3-hide-small native-button-navbar" onclick="showCloseMultipleRows('add-outcome-form')">
+        <a href="#add-outcome-smoth" class="w3-bar-item w3-button w3-hover-theme w3-hide-small native-button-navbar" onclick="showCloseMultipleRows('add-outcome-form')">
           <i class="fa fa-plus"></i> Añadir egreso
-        </button>
+        </a>
         
         <form action="LogOut" method="post" class="w3-right">
           <button type="submit" class="w3-bar-item w3-button w3-hover-theme w3-hide-small native-button-navbar">
@@ -121,15 +115,15 @@
         
         <!--barra de acciones mobile-->
         <div id="actions-bar-mobile" class="w3-bar-block w3-hide w3-hide-large w3-hide-medium">
-          <button class="w3-bar-item w3-button w3-hover-theme native-button-navbar">
+          <button class="w3-bar-item w3-button w3-hover-theme native-button-navbar" onclick="showModal('modal3')">
             <i class="far fa-edit fa-fw"></i> Editar datos del proyecto
           </button>
           
-          <button class="w3-bar-item w3-button w3-hover-theme native-button-navbar" onclick="showModal('modal1') ">
+          <button class="w3-bar-item w3-button w3-hover-theme native-button-navbar" onclick="showModal('modal1')">
             <i class="fa fa-plus fa-fw"></i> Añadir ingreso
           </button>
 
-          <button class="w3-bar-item w3-button w3-hover-theme native-button-navbar">
+          <button class="w3-bar-item w3-button w3-hover-theme native-button-navbar" onclick="showModal('modal2')">
             <i class="fa fa-plus fa-fw"></i> Añadir egreso
           </button>
           
@@ -142,13 +136,15 @@
       </div>
       
       <!--manejador de error-->
-      <div id="error-handler" class="w3-container w3-padding w3-win8-magenta w3-hide">
-        No se pudo procesar la solicitud
+      <div id="error-handler" class="w3-bar w3-container w3-padding w3-win8-magenta w3-hide">
+        <span class="w3-bar-item">No se pudo procesar la solicitud, vuelve a intentarlo más tarde</span>
+        <button class="w3-bar-item w3-button w3-hover-red w3-round-small w3-right" onclick="showCloseNavBlock('error-handler')"><i class="fas fa-times"></i></button>
       </div>
 
       <!--manejador de éxito-->
-      <div id="succes-handler" class="w3-container w3-padding w3-win8-green w3-hide">
-        Operación exitosa
+      <div id="success-handler" class="w3-bar w3-container w3-padding w3-flat-emerald w3-hide">
+        <span class="w3-bar-item">Operación exitosa</span>
+        <button class="w3-bar-item w3-button w3-hover-green w3-round-small w3-right" onclick="showCloseNavBlock('success-handler')"><i class="fas fa-times"></i></button>
       </div>
     </div>
     
@@ -160,6 +156,31 @@
           <span class="w3-hide-large w3-hide-medium native-banner-text-small">Proyecto N°: Nombre del Proyecto</span> 
           <br>
           Titular: Titular del proyecto
+        </div>
+      </div>
+      <div class="w3-theme">
+        <div class="w3-row-padding w3-container w3-padding-16">
+          <div class="w3-col l4 m4">
+            <strong>
+              <small>Total de ingresos</small>
+              <br>
+              <i class="fas fa-arrow-down w3-large w3-text-green"></i> <i class="fas fa-plus w3-small w3-text-green"></i> $100,000,000.00
+            </strong>
+          </div>
+          <div class="w3-col l4 m4">
+            <strong>
+              <small>Total de egresos</small>
+              <br>
+              <i class="fas fa-arrow-up w3-large w3-text-red"></i> <i class="fas fa-minus w3-small w3-text-green"></i> $100,000,000.00
+            </strong>
+          </div>
+          <div class="w3-col l4 m4">
+            <strong>
+              <small>Saldo restante</small>
+              <br>
+              <i class="fas fa-hand-holding-usd w3-large"></i> $100,000,000.00
+            </strong>
+          </div>
         </div>
       </div>
     </div>
@@ -183,33 +204,7 @@
 
           <!--contenedor ingresos-->
           <div class="w3-container w3-white w3-padding-32">
-            <div class="w3-row w3-padding-16">
-              <div class="w3-col l7 m4 w3-hide-small">
-                <!--vacio-->
-                &nbsp;
-              </div>
-              
-              <div class="w3-col l5 m8 w3-large w3-hide-small">
-                <span class="w3-large w3-text-dark-grey">Total de ingresos:</span>
-                <span class="w3-text-green">
-                  <b>+ $100,000,000.00</b>
-                  <small> MXN</small>
-                </span>
-              </div>
-
-              <div class="w3-col s12 w3-center w3-hide-large w3-hide-medium">
-                <div class="w3-large w3-text-dark-grey">
-                  Total de ingresos:
-                </div>
-                
-                <div class="w3-text-green">
-                  <b>+ $100,000,000.00</b>
-                  <small> MXN</small>
-                </div>
-              </div>
-            </div>
-
-            <div class="w3-padding-16">
+            <div>
               <!--tabla de ingresos de primera administración-->
               <table>
                 <thead>
@@ -229,6 +224,7 @@
                 </thead>
 
                 <tbody>
+                  <!--sin ingresos-->
                   <tr class="w3-hide"><!--TODO retirar hide-->
                     <td colspan="5" class="w3-center w3-text-grey w3-padding-64">
                       No hay ingresos que mostrar, No hay ingresos que mostrar, comienza añadiendo uno haciendo click sobre el botón &nbsp;
@@ -277,7 +273,7 @@
                   </tr>
                   
                   <!--agregar ingreso directamente-->
-                  <tr class="w3-hide add-income-form">
+                  <tr id="add-income-smoth" class="w3-hide add-income-form">
                     <td colspan="5" class="w3-center w3-padding-16"><b class="w3-text-purple w3-large">Añadir Ingreso</b></td>
                   </tr>
                   
@@ -343,34 +339,9 @@
             <i class="fas fa-arrow-up fa-1x"></i> Egresos
           </div>
           
-          <div class="w3-container w3-white w3-padding-32">
-            <div class="w3-row w3-padding-16">
-              <div class="w3-col l7 m4 w3-hide-small">
-                <!--vacio-->
-                &nbsp;
-              </div>
-              
-              <div class="w3-col l5 m8 w3-large w3-hide-small">
-                <span class="w3-large w3-text-dark-grey">Total de egresos:</span>
-                <span class="w3-text-red">
-                  <b>- $100,000,000.00</b>
-                  <small> MXN</small>
-                </span>
-              </div>
-
-              <div class="w3-col s12 w3-center w3-hide-large w3-hide-medium">
-                <div class="w3-large w3-text-dark-grey">
-                  Total de egresos:
-                </div>
-                
-                <div class="w3-text-red">
-                  <b>- $100,000,000.00</b>
-                  <small> MXN</small>
-                </div>
-              </div>
-            </div>
-            
-            <div class="w3-padding-16">
+          <!--contenedor egresos-->
+          <div class="w3-container w3-white w3-padding-32">            
+            <div>
               <!--tabla de egresos-->
               <table>
                 <thead>
@@ -393,6 +364,7 @@
                 </thead>
                 
                 <tbody>
+                  <!--sin egresos-->
                   <tr class="w3-hide"><!--TODO retirar hide-->
                     <td colspan="5" class="w3-center w3-text-grey w3-padding-64">
                       No hay egresos que mostrar, comienza añadiendo uno haciendo click sobre el botón &nbsp;
@@ -436,6 +408,7 @@
                     </td>
                   </tr>
                   
+                  <!--resultados no encontrados-->
                   <tr class="w3-hide not-found-tr">
                     <td colspan="5" class="w3-padding-64 w3-center w3-text-grey">
                       No hay egresos coincidentes con la busqueda
@@ -443,7 +416,7 @@
                   </tr>
                   
                   <!--añadir egreso directamente-->
-                  <tr class="w3-hide add-outcome-form">
+                  <tr id="add-outcome-smoth" class="w3-hide add-outcome-form">
                     <td colspan="8" class="w3-center w3-padding-16"><b class="w3-text-purple w3-large">Añadir Egreso</b></td>
                   </tr>
                   
@@ -533,11 +506,11 @@
           <div class="w3-container w3-green">
             <h6>Añadir ingreso</h6>
           </div>
-          <div id="sip-proyect-edit-container" class="w3-padding-16">            
+          <div id="conacyt-add-income-container" class="w3-padding-16">            
             <div class="w3-row">
               <div class="w3-col w3-padding">
-                <label for="conacyt-income-administration-modal" class="w3-text-grey">Administración</label>
-                <select id="conacyt-income-administration-modal" class="w3-input w3-border w3-round-small" required>
+                <label for="conacyt-add-income-administration-modal" class="w3-text-grey">Administración</label>
+                <select id="conacyt-add-income-administration-modal" class="w3-input w3-border w3-round-small" required>
                   <option disabled hidden value="" selected>Seleccionar</option>
                   <option value="1">Primera administación</option>
                   <option value="2">Segunda administración</option>
@@ -545,35 +518,124 @@
                 </select>
               </div>
               <div class="w3-col w3-padding">
-                <label for="conacyt-income-concept-modal" class="w3-text-grey">Concepto</label>
-                <input type="text" id="conacyt-income-concept-modal" class="w3-input w3-border w3-round-small" required>
+                <label for="conacyt-add-income-concept-modal" class="w3-text-grey">Concepto</label>
+                <input type="text" id="conacyt-add-income-concept-modal" class="w3-input w3-border w3-round-small" required>
               </div>
               <div class="w3-col w3-padding">
-                <label for="conacyt-income-expense-category-modal" class="w3-text-grey">Categoria de gasto</label>
-                <select id="conacyt-income-expense-category-modal" class="w3-input w3-border w3-round-small" required>
+                <label for="conacyt-add-income-expense-category-modal" class="w3-text-grey">Categoria de gasto</label>
+                <select id="conacyt-add-income-expense-category-modal" class="w3-input w3-border w3-round-small" required>
                   <option disabled hidden value="" selected>Seleccionar</option>
                   <option value="1">GINVE</option>
                   <option value="2">GCORR</option>
                 </select>
               </div>
               <div class="w3-col w3-padding">
-                <label for="conacyt-income-expense-subcategory-modal" class="w3-text-grey">Subcategoria de gasto</label>
-                <select id="conacyt-income-expense-subcategory-modal" class="w3-input w3-border w3-round-small" required>
+                <label for="conacyt-add-income-expense-subcategory-modal" class="w3-text-grey">Subcategoria de gasto</label>
+                <select id="conacyt-add-income-expense-subcategory-modal" class="w3-input w3-border w3-round-small" required>
                   <option disabled hidden value="" selected>Seleccionar</option>
                   <option value="405">405</option>
                   <option value="200">200</option>
                 </select>
               </div>              
               <div class="w3-col w3-padding">
-                <label for="conacyt-income-amount-modal" class="w3-text-grey">Importe</label>
-                <input type="number" id="conacyt-income-amount-modal" class="w3-input w3-border w3-round-small" required>
+                <label for="conacyt-add-income-amount-modal" class="w3-text-grey">Importe</label>
+                <input type="number" id="conacyt-add-income-amount-modal" class="w3-input w3-border w3-round-small" required>
+              </div>
+              <div class="w3-col l12 w3-padding">
+                <button class="w3-button w3-flat-green-sea w3-hover-green w3-round-small w3-left">Añadir</button> 
+                <button class="w3-button w3-metro-dark-red w3-hover-red w3-round-small w3-right" onclick="closeModal('modal1')">Cancelar</button>
               </div>
             </div>            
           </div>
         </div>
       </div>
     </div>
-
+    
+    <!--modal 2-->
+    <div id="modal2" class="w3-modal">
+      <div class="w3-modal-content" style="margin: 16px auto">
+        <div class="w3-white">
+          <span onclick="closeModal('modal2')" class="w3-button w3-display-topright w3-round-small w3-flat-pomegranate w3-hover-red" style="margin: 5px"><b>&times;</b></span>
+          <div class="w3-container w3-metro-dark-red">
+            <h6>Añadir egreso</h6>
+          </div>
+          <div id="sip-proyect-edit-container" class="w3-padding-16">            
+            <div class="w3-row">
+              <div class="w3-col w3-padding">
+                <label for="conacyt-outcome-concept-modal" class="w3-text-grey">Concepto</label>
+                <input type="text" id="conacyt-outcome-concept-modal" class="w3-input w3-border w3-round-small" required>
+              </div>
+              <div class="w3-col w3-padding">
+                <label for="conacyt-outcome-expense-category-modal" class="w3-text-grey">Categoria de gasto</label>
+                <select id="conacyt-outcome-expense-category-modal" class="w3-input w3-border w3-round-small" required>
+                  <option disabled hidden value="" selected>Seleccionar</option>
+                  <option value="1">GINVE</option>
+                  <option value="2">GCORR</option>
+                </select>
+              </div>
+              <div class="w3-col w3-padding">
+                <label for="conacyt-outcome-operation-type-modal" class="w3-text-grey">Tipo de operación</label>
+                <select id="conacyt-outcome-operation-type-modal" class="w3-input w3-border w3-round-small" required>
+                  <option disabled hidden value="" selected>Seleccionar</option>
+                  <option value="1">Compra</option>
+                  <option value="2">Reembolso</option>
+                </select>
+              </div>
+              <div class="w3-col w3-padding">
+                <label for="conacyt-outcome-order-date-modal" class="w3-text-grey">Fecha de pedido</label>
+                <input type="date" id="conacyt-outcome-order-date-modal" class="w3-input w3-border w3-round-small" required>
+              </div>              
+              <div class="w3-col w3-padding">
+                <label for="conacyt-outcome-order-number-modal" class="w3-text-grey">Número de pedido</label>
+                <input type="text" id="conacyt-outcome-order-number-modal" class="w3-input w3-border w3-round-small" required>
+              </div>
+              <div class="w3-col w3-padding">
+                <label for="conacyt-outcome-transfer-date-modal" class="w3-text-grey">Fecha de trasferecia</label>
+                <input type="date" id="conacyt-outcome-transfer-date-modal" class="w3-input w3-border w3-round-small" required>
+              </div>   
+              <div class="w3-col w3-padding">
+                <label for="conacyt-outcome-transfer-number-modal" class="w3-text-grey">Número de transferencia</label>
+                <input type="text" id="conacyt-outcome-transfer-number-modal" class="w3-input w3-border w3-round-small" required>
+              </div>
+              <div class="w3-col w3-padding">
+                <label for="conacyt-outcome-starting-number-modal" class="w3-text-grey">Número de partida</label>
+                <input type="text" id="conacyt-outcome-starting-number-modal" class="w3-input w3-border w3-round-small" required>
+              </div>
+              <div class="w3-col w3-padding">
+                <label for="conacyt-outcome-invoice-number-modal" class="w3-text-grey">Número de factura</label>
+                <input type="text" id="conacyt-outcome-invoice-number-modal" class="w3-input w3-border w3-round-small" required>
+              </div>
+              <div class="w3-col w3-padding">
+                <label for="conacyt-outcome-policy-number-modal" class="w3-text-grey">Número de poliza</label>
+                <input type="text" id="conacyt-outcome-policy-number-modal" class="w3-input w3-border w3-round-small" required>
+              </div>
+              <div class="w3-col w3-padding">
+                <label for="conacyt-add-income-amount-modal" class="w3-text-grey">Importe</label>
+                <input type="number" id="conacyt-add-income-amount-modal" class="w3-input w3-border w3-round-small" required>
+              </div>
+              <div class="w3-col l12 w3-padding">
+                <button class="w3-button w3-flat-green-sea w3-hover-green w3-round-small w3-left">Añadir</button> 
+                <button class="w3-button w3-metro-dark-red w3-hover-red w3-round-small w3-right" onclick="closeModal('modal2')">Cancelar</button>
+              </div>
+            </div>            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!--modal 3-->
+    <div id="modal3" class="w3-modal">
+      <div class="w3-modal-content" style="margin: 16px auto">
+        <div class="w3-white">
+          <span onclick="closeModal('modal3')" class="w3-button w3-display-topright w3-round-small w3-theme-d2 w3-hover-theme" style="margin: 5px"><b>&times;</b></span>
+          <div class="w3-container w3-theme">
+            <h6>Editar información</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+          
+          
     <!--pie de página-->
     <footer class="w3-padding-16 w3-cell-row w3-metro-darken">
       <div class="w3-container w3-cell w3-cell-middle">

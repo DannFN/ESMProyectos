@@ -5,11 +5,11 @@
         <servlet-class>Controlador.Servlets.LogIn</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AddProyect</servlet-name>
+        <servlet-name>AddCProyect</servlet-name>
         <servlet-class>Controlador.Servlets.AddCProyect</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DeleteProyect</servlet-name>
+        <servlet-name>DeleteCProyect</servlet-name>
         <servlet-class>Controlador.Servlets.DeleteCProyect</servlet-class>
     </servlet>
     <servlet>
@@ -17,36 +17,44 @@
         <servlet-class>Controlador.Servlets.LogOut</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>EditProyectGet</servlet-name>
+        <servlet-name>EditCProyectGet</servlet-name>
         <servlet-class>Controlador.Servlets.EditCProyectGet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>EditProyectDo</servlet-name>
+        <servlet-name>EditCProyectDo</servlet-name>
         <servlet-class>Controlador.Servlets.EditCProyectDo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddUser</servlet-name>
+        <servlet-class>Controlador.Servlets.AddUser</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LogIn</servlet-name>
         <url-pattern>/LogIn</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AddProyect</servlet-name>
-        <url-pattern>/AddProyect</url-pattern>
+        <servlet-name>AddCProyect</servlet-name>
+        <url-pattern>/AddCProyect</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DeleteProyect</servlet-name>
-        <url-pattern>/DeleteProyect</url-pattern>
+        <servlet-name>DeleteCProyect</servlet-name>
+        <url-pattern>/DeleteCProyect</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LogOut</servlet-name>
         <url-pattern>/LogOut</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>EditProyectGet</servlet-name>
-        <url-pattern>/EditProyectGet</url-pattern>
+        <servlet-name>EditCProyectGet</servlet-name>
+        <url-pattern>/EditCProyectGet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>EditProyectDo</servlet-name>
-        <url-pattern>/EditProyectDo</url-pattern>
+        <servlet-name>EditCProyectDo</servlet-name>
+        <url-pattern>/EditCProyectDo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddUser</servlet-name>
+        <url-pattern>/AddUser</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

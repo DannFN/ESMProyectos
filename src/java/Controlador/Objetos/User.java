@@ -9,20 +9,34 @@ public class User {
   private char userType;
   private String userName;
   private String userPass;
+  private String userRealName;
+  private String userSurname;
 
   public User() {
     userId = 0;
     userType = ' ';
     userName = "";
     userPass = "";
+    userRealName = "";
+    userSurname = "";
   }
 
-  public User(int userId, char userType, String userName, String userPass) {
+  public User(int userId, char userType, String userName, String userPass, String userRealName, String userSurname) {
     this.userId = userId;
     this.userType = userType;
     this.userName = userName;
     this.userPass = userPass;
+    this.userRealName = userRealName;
+    this.userSurname = userSurname;
   }  
+
+  public User(char userType, String userName, String userPass, String userRealName, String userSurname) {
+    this.userType = userType;
+    this.userName = userName;
+    this.userPass = userPass;
+    this.userRealName = userRealName;
+    this.userSurname = userSurname;
+  }
 
   public int getUserId() {
     return userId;
@@ -54,5 +68,21 @@ public class User {
 
   public void setUserPass(String userPass) {
     this.userPass = userPass;
+  }
+
+  public String getUserRealName() {
+    return userRealName;
+  }
+
+  public void setUserRealName(String userRealName) {
+    this.userRealName = userRealName;
+  }
+
+  public String getUserSurname() {
+    return userSurname;
+  }
+
+  public void setUserSurname(String userSurname) {
+    this.userSurname = userSurname;
   }
 }
