@@ -228,23 +228,23 @@
                       <div>
                         <input type="number" id="conacyt-proyect-number-edit-1" value="1" hidden readonly required>
                         <button class="w3-bar-item w3-button" onclick="showModal('modal3'); editCProyectGet('conacyt-proyect-number-edit-1');">
-                          <i class="fas fa-trash-alt fa-fw"></i> Editar 
+                          <i class="fas fa-edit fa-fw"></i> Editar 
                         </button>
                       </div>
                       <div>
                         <input type="number" id="conacyt-proyect-number-delete-1" value="1" hidden readonly required>
                         <button class="w3-bar-item w3-button" onclick="deleteCProyect('conacyt-proyect-number-delete-1')">
-                          <i class="fas fa-edit fa-fw"></i> Eliminar
+                          <i class="fas fa-trash-alt fa-fw"></i> Eliminar
                         </button>
                       </div>
                     </div>
                   </div>
                   <div class="w3-center w3-hide-large">
                     <button class="w3-button w3-blue w3-round-small w3-small" onclick="showModal('modal3'); editCProyectGet('conacyt-proyect-number-edit-1');">
-                      <i class="fas fa-trash-alt fa-x1"></i> Editar
+                      <i class="fas fa-edit fa-x1"></i> Editar
                     </button>
                     <button class="w3-button w3-win8-magenta w3-round-small w3-small" onclick="deleteCProyect('conacyt-proyect-number-delete-1')">
-                      <i class="fas fa-edit fa-x1"></i> Eliminar
+                      <i class="fas fa-trash-alt fa-x1"></i> Eliminar
                     </button>
                     <form action="conacyt-proyect-details.jsp" method="get" style="display: inline-block">
                       <input type="number" name="proyect-number" value="1" hidden readonly required>

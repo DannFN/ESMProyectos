@@ -44,7 +44,7 @@ public class AddUser extends HttpServlet {
      u = new User(userType, userUsername, userPassword, userRealName, userSurname);
       
       if(dbo.addUser(u) > 0){
-        u = dbo.user(userSurname);
+        u = dbo.user(userUsername);
         
         out.println(" <tr id=\"user-container-"+ u.getUserId() + "\" class=\"native-td-data\">\n" +
                     "   <td class=\"w3-center w3-hide-medium w3-hide-small\"><b>" + u.getUserId() + "</b></td>\n" +
@@ -59,6 +59,7 @@ public class AddUser extends HttpServlet {
                     "   </td>\n" +
                     "   <td>\n" +
                     "     <select id=\"accesslevel-" + u.getUserId() + "\" class=\"w3-input w3-border w3-round-small\" required>\n");
+        
         switch(u.getUserType()){
           case 'W': {
             out.println("       <option value=\"W\" selected>Administración Proyectos</option>\n" + 

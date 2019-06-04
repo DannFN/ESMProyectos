@@ -5,8 +5,8 @@ function addCProyect() {
   var var1 = $('#add-conacyt-proyect-name').val();
   var var2 = $('#add-conacyt-proyect-titular').val();
   
-  var successHandler = $('#success-handler');
-  var errorHandler = $('#success-handler');
+  var successHandler = document.getElementById('success-handler');
+  var errorHandler = document.getElementById('error-handler');
 
   $.post('AddCProyect', 
   {
@@ -51,8 +51,8 @@ function editCProyectDo(conacytPar0, conacytPar1, conacytPar2) {
   var var2 = $('#edit-conacyt-proyect-name').val();
   var var3 = $('#edit-conacyt-proyect-titular').val();
   
-  var successHandler = $('#success-handler');
-  var errorHandler = $('#success-handler');
+  var successHandler = document.getElementById('success-handler');
+  var errorHandler = document.getElementById('error-handler');
   
   $.post('EditCProyectDo', 
   {
@@ -84,8 +84,8 @@ function deleteCProyect(conacytPar) {
   var con = confirm("¿Estás seguro de que deseas eliminar este registro? Esta acción no se podra deshacer");
   var var0 = $('#' + conacytPar).val();
   
-  var successHandler = $('#success-handler');
-  var errorHandler = $('#success-handler');
+  var successHandler = document.getElementById('success-handler');
+  var errorHandler = document.getElementById('error-handler');
   
   if(con === true) {
     $.post('DeleteCProyect', 
@@ -116,8 +116,8 @@ function addUser1() {
   var var3 = $('#add-user-access-level').val();
   var var4 = $('#add-user-password').val();
   
-  var successHandler = $('#success-handler');
-  var errorHandler = $('#success-handler');
+  var successHandler = document.getElementById('success-handler');
+  var errorHandler = document.getElementById('error-handler');
 
   $.post('AddUser', 
   {
@@ -139,4 +139,35 @@ function addUser1() {
       }
     }
   });
+}
+
+function editUser(userPar0, userPar1, userPar2, userPar3, userPar4) {
+  var var0 = userPar0;
+  var var1 = $("#" + userPar1).val();
+  var var2 = $("#" + userPar2).val();
+  var var3 = $("#" + userPar3).val();
+  var var4 = $("#" + userPar4).val();
+  
+  var successHandler = document.getElementById('success-handler');
+  var errorHandler = document.getElementById('error-handler');
+  
+  $.post('AddUser', 
+  {
+    user_id : var0,
+    user_username : var1,
+    user_real_name : var2,
+    user_surname : var3,
+    user_access_level : var4
+  }, 
+  function(responseText, statusText) {
+    if(statusText === 'success' && responseText !== 'Internal server error') {
+      if(successHandler.className.indexOf('w3-show') === -1){
+        successHandler.classList.add('w3-show');
+      }
+    }else {
+      if(errorHandler.className.indexOf('w3-show') === -1){
+        errorHandler.classList.add('w3-show');
+      }
+    }
+  });  
 }
