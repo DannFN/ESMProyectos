@@ -82,7 +82,7 @@ function editCProyectDo(conacytPar0, conacytPar1, conacytPar2) {
 
 function deleteCProyect(conacytPar) {
   var con = confirm("¿Estás seguro de que deseas eliminar este registro? Esta acción no se podra deshacer");
-  var var0 = $('#' + conacytPar).val();
+  var var0 = conacytPar;
   
   var successHandler = document.getElementById('success-handler');
   var errorHandler = document.getElementById('error-handler');
@@ -170,4 +170,8 @@ function editUser(userPar0, userPar1, userPar2, userPar3, userPar4) {
       }
     }
   });  
+}
+
+function deleteUser() {
+  
 }

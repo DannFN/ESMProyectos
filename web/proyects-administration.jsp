@@ -232,8 +232,7 @@
                         </button>
                       </div>
                       <div>
-                        <input type="number" id="conacyt-proyect-number-delete-1" value="1" hidden readonly required>
-                        <button class="w3-bar-item w3-button" onclick="deleteCProyect('conacyt-proyect-number-delete-1')">
+                        <button class="w3-bar-item w3-button" onclick="deleteCProyect(1)">
                           <i class="fas fa-trash-alt fa-fw"></i> Eliminar
                         </button>
                       </div>
