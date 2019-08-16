@@ -3,7 +3,7 @@ document.onselectstart = function() { return false; };*/
 
 function numYLet(e) {
 	tecla = (document.all) ? e.keyCode : e.which;
-	if (tecla === 8) return true;
+        (Tecla == 8)? return true; return false;
 
 	patron = /[0-9A-Za-zñÑÁÉÍÓÚáéíóú]/;
 	tec = String.fromCharCode(tecla);
